@@ -10,13 +10,18 @@
   body {
     background-color: var(--pp-canvas);
     color: var(--pp-ink);
-    font-family: var(--font-geist-sans), var(--font-bengali), ui-sans-serif, system-ui, sans-serif;
-    font-feature-settings: "ss01", "cv11";
+    font-family: var(--font-sans);
   }
 
   /* Bengali needs more vertical room for matras and conjuncts. */
   :lang(bn) {
     line-height: 1.7;
+  }
+
+  /* Display serif: Playfair (Latin) + Noto Serif Bengali. Only at large sizes (≥28px). */
+  h1,
+  h2 {
+    text-wrap: balance;
   }
 
   ::selection {
@@ -27,6 +32,7 @@
   :focus-visible {
     outline: 2px solid var(--pp-focus);
     outline-offset: 2px;
+    border-radius: var(--radius-sm);
   }
 
   /* Figures in tables, prices and unit codes line up. */
@@ -45,4 +51,67 @@
       scroll-behavior: auto !important;
     }
   }
+}
+
+/* Small letter-spaced label with a leading rule: "—— FEATURED PROJECTS". */
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--pp-accent);
+  &::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+/* Faint drafting grid — sections that echo floor-plan / blueprint paper. */
+@utility blueprint {
+  background-image:
+    linear-gradient(to right, rgb(107 112 92 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(107 112 92 / 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Diagonal hatch — "blocked" units and unavailable areas (status never by colour alone). */
+@utility hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgb(140 138 130 / 0.35) 0 1px,
+    transparent 1px 6px
+  );
+}
+
+/* ── motion: small, quick, architectural (no bounce). Disabled by prefers-reduced-motion above. ── */
+@keyframes pp-slide-in-right {
+  from { transform: translateX(16px); opacity: 0; }
+}
+@keyframes pp-slide-in-left {
+  from { transform: translateX(-16px); opacity: 0; }
+}
+@keyframes pp-fade {
+  from { opacity: 0; }
+}
+@keyframes pp-rise {
+  from { transform: translateY(8px); opacity: 0; }
+}
+
+dialog.drawer[open] {
+  animation: pp-slide-in-right 260ms var(--ease-out-quint);
+}
+dialog.drawer[open][data-side="left"] {
+  animation-name: pp-slide-in-left;
+}
+dialog.drawer[open]::backdrop {
+  animation: pp-fade 200ms ease-out;
+}
+
+.toast-in {
+  animation: pp-rise 220ms var(--ease-out-quint);
 }

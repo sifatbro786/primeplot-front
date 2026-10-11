@@ -1,0 +1,462 @@
+{
+  "meta": {
+    "title": "PrimePlot",
+    "description": "Real estate showcase, CRM and sales management."
+  },
+  "common": {
+    "close": "Close",
+    "dismiss": "Dismiss",
+    "cancel": "Cancel",
+    "save": "Save",
+    "retry": "Try again",
+    "language": "Language",
+    "sampleImage": "Sample image",
+    "requestId": "Request ID",
+    "optional": "Optional",
+    "loading": "Loading…",
+    "checkingSession": "Checking your session…",
+    "range": "{from}–{to} of {total}",
+    "prev": "Previous page",
+    "next": "Next page"
+  },
+  "unitStatus": {
+    "available": "Available",
+    "held": "On hold",
+    "booked": "Booked",
+    "allotted": "Allotted",
+    "registered": "Registered",
+    "handed_over": "Handed over",
+    "cancelled": "Cancelled",
+    "blocked": "Blocked"
+  },
+  "errors": {
+    "NETWORK_ERROR": "Can't reach the server. Check your connection.",
+    "SERVER_UNAVAILABLE": "The server is not responding. Please try again shortly.",
+    "RATE_LIMITED": "Too many attempts. Please wait a moment.",
+    "VALIDATION_ERROR": "Please check the highlighted fields.",
+    "FORBIDDEN": "You don't have permission to do this.",
+    "NOT_FOUND": "Not found.",
+    "UNKNOWN": "Something went wrong."
+  },
+  "design": {
+    "eyebrow": "Design system",
+    "title": "Spaces planned with intention.",
+    "intro": "Every colour, typeface and component PrimePlot is built from. Check here first — then pages follow.",
+    "colors": "Colour",
+    "type": "Typography",
+    "numbers": "Numbers & money",
+    "controls": "Controls",
+    "status": "Unit status",
+    "feedback": "Feedback & states",
+    "media": "Imagery",
+    "projectCard": "Project row",
+    "table": "Table",
+    "displaySample": "Architecture that elevates life.",
+    "headingSample": "Unit inventory — Tower A",
+    "bodySample": "PrimePlot keeps every unit, lead and installment in one place, so your sales team always knows what is available and what is due.",
+    "buttons": "Buttons",
+    "inputs": "Inputs",
+    "projectName": "Shapla Residency",
+    "projectArea": "Bashundhara R/A, Block D",
+    "projectBlurb": "Fourteen-storey residential tower, south-facing units, two basements, rooftop garden.",
+    "handover": "Handover {year}",
+    "typology": "{beds} bed",
+    "from": "from",
+    "viewProject": "View project",
+    "openDrawer": "Open drawer",
+    "drawerTitle": "Lead — Rahim Uddin",
+    "drawerBody": "Drawers hold detail views (lead, unit, booking) without leaving the list.",
+    "toastSuccess": "Show success toast",
+    "toastError": "Show error toast",
+    "savedMsg": "Booking saved.",
+    "failedMsg": "Couldn't save. The unit was just booked by someone else.",
+    "emptyTitle": "No leads yet",
+    "emptyBody": "Leads from your website and Facebook ads will appear here.",
+    "errorTitle": "Couldn't load inventory",
+    "errorBody": "The server didn't respond. Your data is safe.",
+    "emailLabel": "Email",
+    "emailHint": "We'll send the receipt here.",
+    "phoneLabel": "Mobile number",
+    "phoneError": "Enter a valid Bangladeshi mobile number.",
+    "projectLabel": "Project",
+    "projectPlaceholder": "Choose a project",
+    "notesLabel": "Notes",
+    "agree": "Send SMS reminders",
+    "agreeHint": "T-7, T-0 and T+3 days around each installment.",
+    "searchPlaceholder": "Search unit, client, phone…",
+    "unit": "Unit",
+    "floor": "Floor",
+    "size": "Size",
+    "price": "Price",
+    "statusCol": "Status"
+  },
+  "auth": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "backToLogin": "Back to sign in",
+    "layout": {
+      "footer": "Secured connection · PrimePlot",
+      "eyebrow": "Real estate, organised",
+      "quote": "Every unit, lead and installment — in one quiet place."
+    },
+    "rules": {
+      "length": "At least 10 characters",
+      "match": "Both passwords match",
+      "weak": "This password is too easy to guess, or contains your name or email. Try a longer phrase."
+    },
+    "validation": {
+      "required": "Required",
+      "email": "Enter a valid email address",
+      "min": "At least {n} characters",
+      "max": "At most {n} characters",
+      "mismatch": "Passwords don't match"
+    },
+    "login": {
+      "metaTitle": "Sign in",
+      "eyebrow": "Welcome back",
+      "title": "Sign in",
+      "subtitle": "Use the email your administrator registered for you.",
+      "email": "Email",
+      "password": "Password",
+      "remember": "Keep me signed in",
+      "forgot": "Forgot password?",
+      "submit": "Sign in",
+      "invalid": "Incorrect email or password.",
+      "locked": "Too many failed attempts. Try again in {minutes} minutes, or reset your password.",
+      "disabled": "This account has been disabled. Contact your administrator.",
+      "notice": {
+        "expired": "Your session ended. Please sign in again.",
+        "reset": "Password updated. Sign in with your new password.",
+        "setup": "Your account is ready. Sign in to continue."
+      }
+    },
+    "forgot": {
+      "metaTitle": "Forgot password",
+      "eyebrow": "Account recovery",
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a link to set a new password.",
+      "email": "Email",
+      "submit": "Send reset link",
+      "back": "Back to sign in",
+      "sentTitle": "Check your email",
+      "sentBody": "If an account exists for {email}, a reset link is on its way. It works once and expires in 30 minutes.",
+      "sentHint": "Nothing after a few minutes? Check spam, or send it again.",
+      "resend": "Send again"
+    },
+    "reset": {
+      "metaTitle": "Set a new password",
+      "eyebrow": "Account recovery",
+      "title": "Choose a new password",
+      "subtitle": "You'll be signed out of every device after this.",
+      "password": "New password",
+      "confirm": "Confirm new password",
+      "submit": "Update password",
+      "invalidTitle": "This link can't be used",
+      "invalidBody": "It has expired, was already used, or a newer link was sent. Request a new one.",
+      "requestNew": "Request a new link"
+    },
+    "setup": {
+      "metaTitle": "Set up your account",
+      "eyebrow": "Welcome",
+      "title": "Set your password",
+      "subtitle": "Choose a password to activate your account.",
+      "password": "Password",
+      "confirm": "Confirm password",
+      "submit": "Activate account",
+      "invalidTitle": "This invitation can't be used",
+      "invalidBody": "It has expired or was already used. Ask your administrator to send a new invitation.",
+      "requestNew": "Request a new link"
+    }
+  },
+  "nav": {
+    "main": "Main navigation",
+    "overview": "Overview",
+    "projects": "Projects",
+    "units": "Inventory",
+    "leads": "Leads",
+    "pipeline": "Pipeline",
+    "bookings": "Bookings",
+    "accounts": "Accounts",
+    "reports": "Reports",
+    "users": "Team",
+    "audit": "Audit log",
+    "settings": "Settings",
+    "groups": {
+      "workspace": "Workspace",
+      "inventory": "Inventory",
+      "sales": "Sales",
+      "admin": "Administration"
+    }
+  },
+  "portalNav": {
+    "label": "Portal navigation",
+    "home": "Home",
+    "payments": "Payments",
+    "documents": "Documents",
+    "account": "Account"
+  },
+  "shell": {
+    "account": "My account",
+    "logout": "Sign out",
+    "switchLanguage": "Switch language (বাংলা / English)",
+    "commandPalette": "Command menu",
+    "searchPlaceholder": "Go to a page or run a command…",
+    "noResults": "No matches",
+    "search": "Search",
+    "openMenu": "Open menu",
+    "loadFailed": "Couldn't load your workspace",
+    "noAccessTitle": "You don't have access to this page",
+    "noAccessBody": "Ask an administrator if you need it for your work."
+  },
+  "roles": {
+    "admin": "Admin",
+    "sales_manager": "Sales manager",
+    "sales_executive": "Sales executive",
+    "client": "Client"
+  },
+  "account": {
+    "eyebrow": "Account",
+    "title": "Your account",
+    "profile": {
+      "title": "Profile",
+      "description": "How you appear to your team and on receipts.",
+      "email": "Email",
+      "emailHint": "Ask an admin to change your sign-in email.",
+      "name": "Full name",
+      "phone": "Mobile number",
+      "phoneHint": "Bangladeshi mobile, used for SMS reminders.",
+      "locale": "Language for emails & SMS",
+      "localeHint": "The app's own language is switched from the top bar.",
+      "save": "Save profile",
+      "saved": "Profile saved.",
+      "invalidPhone": "Enter a valid Bangladeshi mobile number."
+    },
+    "password": {
+      "title": "Password",
+      "description": "Changing it signs you out of every other device.",
+      "current": "Current password",
+      "new": "New password",
+      "confirm": "Confirm new password",
+      "submit": "Change password",
+      "changed": "Password changed. Other devices were signed out.",
+      "wrongCurrent": "Current password is incorrect.",
+      "unchanged": "Choose a password different from the current one."
+    },
+    "sessions": {
+      "title": "Where you're signed in",
+      "description": "Sign out of devices you don't recognise.",
+      "thisDevice": "This device",
+      "unknownDevice": "Unknown device",
+      "lastActive": "last active {when}",
+      "revoke": "Sign out",
+      "revoked": "Device signed out.",
+      "logoutAll": "Sign out everywhere",
+      "loadFailed": "Couldn't load sessions"
+    }
+  },
+  "comingSoon": {
+    "title": "{name} is on the way",
+    "phase": "This module is built in phase {phase}. The navigation is ready so your team can see what's coming.",
+    "generic": "This section isn't built yet.",
+    "back": "Back to start"
+  },
+  "overview": {
+    "welcome": "Good to see you, {name}.",
+    "intro": "Here's where your projects, leads and collections will come together. Start with the steps below.",
+    "setupTitle": "Getting set up",
+    "done": "Done",
+    "steps": {
+      "org": {
+        "title": "Complete your company profile",
+        "body": "Name, address, trade licence and REHAB number appear on receipts and allotment letters."
+      },
+      "team": {
+        "title": "Invite your team",
+        "body": "Add sales managers and executives — each gets an email to set a password."
+      },
+      "project": {
+        "title": "Add your first project",
+        "body": "Towers, floors and units, or a plot layout with sectors and roads."
+      },
+      "leads": {
+        "title": "Connect your lead sources",
+        "body": "Website forms and Facebook Lead Ads flow straight into the pipeline."
+      }
+    }
+  },
+  "portalHome": {
+    "welcome": "Welcome, {name}.",
+    "intro": "Your units, payment schedule, receipts and documents will appear here.",
+    "emptyTitle": "Nothing here yet",
+    "emptyBody": "Once your booking is recorded, you'll see your unit, dues and receipts on this page."
+  },
+  "team": {
+    "eyebrow": "Administration",
+    "title": "Team",
+    "description": "Everyone who can sign in — staff and clients. Roles decide what each person can see and do.",
+    "invite": "Invite member",
+    "searchPlaceholder": "Search name, email or phone",
+    "allRoles": "All roles",
+    "allStatuses": "All statuses",
+    "member": "Member",
+    "phone": "Phone",
+    "role": "Role",
+    "status": "Status",
+    "lastLogin": "Last sign-in",
+    "actions": "Actions",
+    "you": "(you)",
+    "never": "Never",
+    "edit": "Edit",
+    "statuses": {
+      "active": "Active",
+      "invited": "Invited",
+      "disabled": "Disabled"
+    },
+    "loadFailed": "Couldn't load the team",
+    "emptyTitle": "No members yet",
+    "emptyBody": "Invite your sales team to get started.",
+    "noMatches": "No one matches these filters",
+    "noMatchesBody": "Try a different name, role or status.",
+    "inviteTitle": "Invite a member",
+    "inviteDescription": "They'll get an email to set their password (link valid 72 hours).",
+    "editTitle": "Edit member",
+    "name": "Full name",
+    "email": "Email",
+    "emailHint": "They sign in with this address.",
+    "emailLocked": "The sign-in email can't be changed here.",
+    "language": "Language for emails & SMS",
+    "statusHint": "Disabling signs them out everywhere at once.",
+    "selfHint": "You can't change your own role.",
+    "sendInvite": "Send invitation",
+    "resend": "Resend invitation",
+    "invited": "Invitation sent to {email}.",
+    "updated": "Member updated.",
+    "roleHelp": {
+      "invite": "Admin: everything. Sales manager: all leads, inventory edits, bookings, receipts. Sales executive: own leads, holds, bookings. Client: the customer portal only.",
+      "edit": "Changing the role or status signs this person out on every device immediately."
+    },
+    "errors": {
+      "duplicate": "Someone with this email is already on the team.",
+      "phone": "Enter a valid Bangladeshi mobile number.",
+      "SELF_CHANGE": "You can't change your own role or status. Ask another admin.",
+      "LAST_ADMIN": "At least one active admin must remain.",
+      "INVITE_PENDING": "Invited members activate themselves from the email link.",
+      "ALREADY_ACTIVE": "This member has already activated their account."
+    }
+  },
+  "audit": {
+    "eyebrow": "Administration",
+    "title": "Audit log",
+    "description": "Who did what, and when. Entries can't be edited or deleted and are kept for one year.",
+    "area": "Area",
+    "allAreas": "Everything",
+    "from": "From",
+    "to": "To",
+    "areas": {
+      "auth": "Sign-in & security",
+      "user": "Team",
+      "org": "Company settings",
+      "media": "Files",
+      "system": "System"
+    },
+    "system": "System",
+    "anonymous": "Not signed in",
+    "unknown": "Unknown user",
+    "changedHidden": "changed (value hidden)",
+    "loadMore": "Load older entries",
+    "loadFailed": "Couldn't load the audit log",
+    "emptyTitle": "Nothing recorded for these filters",
+    "emptyBody": "Try a wider date range or another area.",
+    "actions": {
+      "auth": {
+        "login": "Signed in",
+        "logout": "Signed out",
+        "logout_all": "Signed out everywhere",
+        "account_locked": "Account locked after failed sign-ins",
+        "refresh_reuse_detected": "Session revoked — reused token detected",
+        "password_reset_requested": "Password reset requested",
+        "account_setup_requested": "Setup link re-sent",
+        "password_reset": "Password reset",
+        "account_setup": "Account activated",
+        "password_change": "Password changed"
+      },
+      "user": {
+        "create": "Member invited",
+        "update": "Member updated",
+        "profile_update": "Profile updated",
+        "invite_resent": "Invitation re-sent"
+      },
+      "org": {
+        "update": "Company settings updated"
+      },
+      "media": {
+        "upload": "File uploaded",
+        "delete": "File deleted"
+      },
+      "system": {
+        "seed": "Initial setup"
+      }
+    }
+  },
+  "settings": {
+    "eyebrow": "Administration",
+    "title": "Company settings",
+    "description": "Appears on receipts, allotment letters, emails and the public site.",
+    "save": "Save changes",
+    "discard": "Discard",
+    "unsaved": "You have unsaved changes",
+    "saved": "Settings saved.",
+    "loadFailed": "Couldn't load settings",
+    "identity": {
+      "title": "Identity",
+      "description": "Name and logo in both languages."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Shown to clients on documents and the website."
+    },
+    "legal": {
+      "title": "Registration",
+      "description": "Printed on money receipts and allotment letters."
+    },
+    "preferences": {
+      "title": "Preferences",
+      "description": "Defaults for new users and accounting periods."
+    },
+    "fields": {
+      "name": "Company name (English)",
+      "nameBn": "Company name (Bangla)",
+      "legalName": "Legal name",
+      "email": "Email",
+      "phone": "Phone",
+      "website": "Website",
+      "address": "Address (English)",
+      "addressBn": "Address (Bangla)",
+      "tradeLicenseNo": "Trade licence no.",
+      "rehabMemberNo": "REHAB membership no.",
+      "defaultLocale": "Default language",
+      "fiscalYearStartMonth": "Fiscal year starts in"
+    },
+    "hints": {
+      "legalName": "As registered, e.g. \"Shapla Developers Limited\".",
+      "defaultLocale": "For new team members and clients.",
+      "fiscalYear": "Receipt numbers restart each fiscal year. Bangladesh: July. Change only before the first receipt."
+    },
+    "logo": {
+      "label": "Logo",
+      "upload": "Upload logo",
+      "replace": "Replace",
+      "remove": "Remove logo",
+      "hint": "PNG, JPG or WebP, up to 15 MB. A transparent PNG works best.",
+      "errors": {
+        "UNSUPPORTED_MEDIA_TYPE": "Use a PNG, JPG or WebP image (SVG isn't supported).",
+        "FILE_TOO_LARGE": "The image is too large (max 15 MB).",
+        "INVALID_IMAGE": "This image file looks damaged."
+      }
+    },
+    "errors": {
+      "phone": "Enter a valid Bangladeshi mobile number.",
+      "website": "Enter a full address starting with https://"
+    }
+  }
+}

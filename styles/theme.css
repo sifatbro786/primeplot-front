@@ -1,59 +1,85 @@
 /*
  * PrimePlot design tokens — single source of truth for colour, type, radius, motion.
- *
- * ⚠ BRAND PALETTE IS TEMPORARY. Colours are not decided yet; everything below the
- *   "brand" block is semantic, so swapping the palette later = editing only :root values.
- *   Components must use semantic utilities (bg-canvas, text-ink, border-line, bg-accent…),
- *   never raw hex or Tailwind's default palette (bg-blue-500 etc.).
+ * Palette: "luxury earthy minimalist" (owner-approved 2026-10-12). Contrast ratios are noted
+ * against canvas #F9F8F6 (WCAG AA = 4.5 text, 3.0 UI/non-text).
+ * Components use semantic utilities (bg-canvas, text-ink, border-line, bg-primary…), never
+ * raw hex or Tailwind's default palette.
  */
 
 :root {
-  /* ── brand (TEMP — neutral warm paper + ink, placeholder accent) ── */
-  --pp-canvas: #f6f4ef; /* page background — warm paper */
-  --pp-surface: #fdfcf9; /* cards, panels */
-  --pp-surface-2: #eeebe3; /* sunken areas, table headers */
-  --pp-ink: #1c1b18; /* primary text */
-  --pp-ink-muted: #5c5a53; /* secondary text */
-  --pp-ink-subtle: #8a877e; /* hints, placeholders */
-  --pp-line: #dcd8cd; /* hairlines */
-  --pp-line-strong: #b9b4a6;
-  --pp-accent: #2f3e46; /* TEMP accent — replace when brand colour is chosen */
-  --pp-accent-ink: #fdfcf9; /* text on accent */
-  --pp-focus: #2f6fed;
+  /* ── surfaces ── */
+  --pp-canvas: #f9f8f6; /* page background — warm linen */
+  --pp-surface: #ffffff; /* cards, panels, tables */
+  --pp-surface-2: #f1efea; /* sunken areas, table headers, hover rows */
+  --pp-surface-3: #e9e6df; /* stats band, pressed states */
 
-  /* ── feedback ── */
-  --pp-success: #2e7d4f;
-  --pp-warning: #b7791f;
-  --pp-danger: #b3261e;
-  --pp-info: #2f6fed;
+  /* ── text ── */
+  --pp-ink: #1c1d1a; /* 15.9 */
+  --pp-ink-muted: #666861; /* 5.3 */
+  --pp-ink-subtle: #85877f; /* 3.5 — placeholders, meta (large/UI only) */
 
-  /* ── unit status (functional, used by inventory grid / floor plans / master plan).
-        Chosen to stay distinguishable for common colour-blindness; UI also pairs them
-        with labels/patterns, never colour alone. ── */
-  --pp-status-available: #2e7d4f;
-  --pp-status-held: #d29a1e;
-  --pp-status-booked: #2f6fed;
-  --pp-status-sold: #6b3fa0;
-  --pp-status-blocked: #7a7770;
+  /* ── lines ── */
+  --pp-line: #e5e3df; /* hairlines, card borders (decorative) */
+  --pp-line-strong: #8f8c82; /* 3.2 — form-control borders (WCAG 1.4.11) */
+
+  /* ── brand ── */
+  --pp-primary: #2d3228; /* muted olive charcoal — primary buttons, sidebar */
+  --pp-primary-hover: #3d4035;
+  --pp-primary-ink: #f9f8f6; /* 12.4 on primary */
+  --pp-accent: #6b705c; /* sage — links, active, eyebrows (4.8) */
+  --pp-accent-hover: #575c4a;
+  --pp-accent-ink: #ffffff; /* 5.1 on accent */
+  --pp-accent-soft: #f3f4ef; /* sage tint — selected rows, active nav (accent text on it 4.6) */
+  --pp-accent-on-dark: #a9ae96; /* sage marker on the primary sidebar */
+  --pp-focus: #2d3228;
+
+  /* ── feedback (fg = text/icon, bg = tinted fill) ── */
+  --pp-success: #3f7d58;
+  --pp-success-bg: #f2f7f3;
+  --pp-warning: #8a6a1c;
+  --pp-warning-bg: #faf6ea;
+  --pp-danger: #a63d2f;
+  --pp-danger-bg: #f7e6e2;
+  --pp-info: #3e6a8a;
+  --pp-info-bg: #eef3f7;
+
+  /* ── unit status (inventory grid, floor plans, master plan). Always paired with a label or
+        pattern — never colour alone. ── */
+  --pp-status-available: #3f7d58;
+  --pp-status-held: #8a6a1c;
+  --pp-status-booked: #3e6a8a;
+  --pp-status-sold: #7a4e3a; /* allotted / registered / handed over */
+  --pp-status-blocked: #8c8a82;
 }
 
 @theme inline {
   --color-canvas: var(--pp-canvas);
   --color-surface: var(--pp-surface);
   --color-surface-2: var(--pp-surface-2);
+  --color-surface-3: var(--pp-surface-3);
   --color-ink: var(--pp-ink);
   --color-ink-muted: var(--pp-ink-muted);
   --color-ink-subtle: var(--pp-ink-subtle);
   --color-line: var(--pp-line);
   --color-line-strong: var(--pp-line-strong);
+  --color-primary: var(--pp-primary);
+  --color-primary-hover: var(--pp-primary-hover);
+  --color-primary-ink: var(--pp-primary-ink);
   --color-accent: var(--pp-accent);
+  --color-accent-hover: var(--pp-accent-hover);
   --color-accent-ink: var(--pp-accent-ink);
+  --color-accent-soft: var(--pp-accent-soft);
+  --color-accent-on-dark: var(--pp-accent-on-dark);
   --color-focus: var(--pp-focus);
 
   --color-success: var(--pp-success);
+  --color-success-bg: var(--pp-success-bg);
   --color-warning: var(--pp-warning);
+  --color-warning-bg: var(--pp-warning-bg);
   --color-danger: var(--pp-danger);
+  --color-danger-bg: var(--pp-danger-bg);
   --color-info: var(--pp-info);
+  --color-info-bg: var(--pp-info-bg);
 
   --color-status-available: var(--pp-status-available);
   --color-status-held: var(--pp-status-held);
@@ -61,17 +87,19 @@
   --color-status-sold: var(--pp-status-sold);
   --color-status-blocked: var(--pp-status-blocked);
 
-  /* One stack for both scripts: Latin glyphs come from Geist, Bengali glyphs fall through
-     to Noto Sans Bengali automatically — mixed BN/EN text renders correctly. */
-  --font-sans: var(--font-geist-sans), var(--font-bengali), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), var(--font-bengali), ui-monospace, monospace;
-  --font-display: var(--font-sans); /* TEMP — display face decided with the brand */
+  /* Each stack carries a Latin face first and a Bengali face second: the browser picks per
+     glyph, so mixed BN/EN text renders in the right script automatically. */
+  --font-sans: var(--font-jakarta), var(--font-hind), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), var(--font-serif-bn), Georgia, serif;
+  --font-mono: var(--font-geist-mono), var(--font-hind), ui-monospace, monospace;
 
-  /* Drafting-style corners: tight, not pill-shaped. */
+  /* Architectural: crisp corners. No blobs. */
   --radius-xs: 1px;
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
+  --radius-sm: 2px; /* tags, images */
+  --radius-md: 4px; /* inputs, buttons */
+  --radius-lg: 6px; /* cards, drawers */
+
+  --tracking-eyebrow: 0.18em;
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);

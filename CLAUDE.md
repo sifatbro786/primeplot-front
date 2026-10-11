@@ -10,7 +10,8 @@
 ## Working rules
 - Next.js App Router, pure JavaScript (no TypeScript), Tailwind v4, React Compiler on.
 - API calls go only through `/api/*` (Next rewrites → backend), so cookies stay first-party.
-- Every user-facing string goes through i18n (`i18n/bn.json`, `i18n/en.json`). No hard-coded text.
+- Every user-facing string goes through i18n (`messages/bn.json`, `messages/en.json`, next-intl). No hard-coded text. Routes live under `app/[locale]/`; use `Link`/`useRouter` from `@/i18n/navigation`.
+- Design system: tokens in `styles/theme.css`, primitives in `components/ui/`, living style guide at `/[locale]/dev/design` (dev only). Use semantic utilities only.
 - Use token-driven styling. Avoid the generic AI-template look (default glassmorphism, gradient text, count-up stats).
 - Make targeted, minimal changes; no full-file rewrites.
 

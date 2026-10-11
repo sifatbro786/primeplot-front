@@ -1,3 +1,7 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.js');
+
 // Express API. Server-only (not NEXT_PUBLIC_) — the browser only ever sees /api/v1/* on this origin.
 const BACKEND_URL = (process.env.BACKEND_URL || 'http://localhost:5030').replace(/\/$/, '');
 
@@ -11,10 +15,12 @@ const nextConfig = {
     return [{ source: '/api/v1/:path*', destination: `${BACKEND_URL}/api/v1/:path*` }];
   },
 
+  // Images: backend media are already WebP variants (rendered `unoptimized`) and stock
+  // placeholders use the Unsplash/Pexels CDN loader — the Next optimizer is not involved.
+  // The patterns stay as a safety net for any plain <Image> pointing at these hosts.
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
-      // Placeholder stock photos until real media is uploaded (see lib/placeholders.js, F1).
       { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
       { protocol: 'https', hostname: 'images.pexels.com', pathname: '/photos/**' },
     ],
@@ -36,4 +42,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
