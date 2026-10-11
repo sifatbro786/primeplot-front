@@ -1,0 +1,78 @@
+/*
+ * PrimePlot design tokens — single source of truth for colour, type, radius, motion.
+ *
+ * ⚠ BRAND PALETTE IS TEMPORARY. Colours are not decided yet; everything below the
+ *   "brand" block is semantic, so swapping the palette later = editing only :root values.
+ *   Components must use semantic utilities (bg-canvas, text-ink, border-line, bg-accent…),
+ *   never raw hex or Tailwind's default palette (bg-blue-500 etc.).
+ */
+
+:root {
+  /* ── brand (TEMP — neutral warm paper + ink, placeholder accent) ── */
+  --pp-canvas: #f6f4ef; /* page background — warm paper */
+  --pp-surface: #fdfcf9; /* cards, panels */
+  --pp-surface-2: #eeebe3; /* sunken areas, table headers */
+  --pp-ink: #1c1b18; /* primary text */
+  --pp-ink-muted: #5c5a53; /* secondary text */
+  --pp-ink-subtle: #8a877e; /* hints, placeholders */
+  --pp-line: #dcd8cd; /* hairlines */
+  --pp-line-strong: #b9b4a6;
+  --pp-accent: #2f3e46; /* TEMP accent — replace when brand colour is chosen */
+  --pp-accent-ink: #fdfcf9; /* text on accent */
+  --pp-focus: #2f6fed;
+
+  /* ── feedback ── */
+  --pp-success: #2e7d4f;
+  --pp-warning: #b7791f;
+  --pp-danger: #b3261e;
+  --pp-info: #2f6fed;
+
+  /* ── unit status (functional, used by inventory grid / floor plans / master plan).
+        Chosen to stay distinguishable for common colour-blindness; UI also pairs them
+        with labels/patterns, never colour alone. ── */
+  --pp-status-available: #2e7d4f;
+  --pp-status-held: #d29a1e;
+  --pp-status-booked: #2f6fed;
+  --pp-status-sold: #6b3fa0;
+  --pp-status-blocked: #7a7770;
+}
+
+@theme inline {
+  --color-canvas: var(--pp-canvas);
+  --color-surface: var(--pp-surface);
+  --color-surface-2: var(--pp-surface-2);
+  --color-ink: var(--pp-ink);
+  --color-ink-muted: var(--pp-ink-muted);
+  --color-ink-subtle: var(--pp-ink-subtle);
+  --color-line: var(--pp-line);
+  --color-line-strong: var(--pp-line-strong);
+  --color-accent: var(--pp-accent);
+  --color-accent-ink: var(--pp-accent-ink);
+  --color-focus: var(--pp-focus);
+
+  --color-success: var(--pp-success);
+  --color-warning: var(--pp-warning);
+  --color-danger: var(--pp-danger);
+  --color-info: var(--pp-info);
+
+  --color-status-available: var(--pp-status-available);
+  --color-status-held: var(--pp-status-held);
+  --color-status-booked: var(--pp-status-booked);
+  --color-status-sold: var(--pp-status-sold);
+  --color-status-blocked: var(--pp-status-blocked);
+
+  /* One stack for both scripts: Latin glyphs come from Geist, Bengali glyphs fall through
+     to Noto Sans Bengali automatically — mixed BN/EN text renders correctly. */
+  --font-sans: var(--font-geist-sans), var(--font-bengali), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), var(--font-bengali), ui-monospace, monospace;
+  --font-display: var(--font-sans); /* TEMP — display face decided with the brand */
+
+  /* Drafting-style corners: tight, not pill-shaped. */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
