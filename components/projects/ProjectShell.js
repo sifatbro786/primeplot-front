@@ -15,7 +15,10 @@ import { StageTag } from "./StageTag";
 const TABS = [
   { key: "inventory", path: "" },
   { key: "details", path: "/details" },
+  { key: "plans", path: "/plans" },
   { key: "pricing", path: "/pricing" },
+  { key: "prices", path: "/prices" },
+  { key: "gallery", path: "/gallery" },
 ];
 
 /** Project workspace frame: title + tabs. Children render the active tab. */

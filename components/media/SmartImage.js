@@ -14,7 +14,8 @@ import { pickPlaceholder, placeholdersEnabled, stockLoader } from "@/lib/placeho
  *  3. if that fails too (offline, photo removed) → a drafted fallback, never a broken icon.
  *
  * Props: media?, variant ('thumb'|'card'|'full'), category, seed (entity id), alt, sizes,
- *        fill (default true — parent sets the aspect ratio), preload, sampleBadge (dashboard only).
+ *        fill (default true — parent sets the aspect ratio), fit ('cover'|'contain' — drawings
+ *        and plans use contain), preload, sampleBadge (dashboard only).
  */
 export function SmartImage({
   media,
@@ -24,6 +25,7 @@ export function SmartImage({
   alt = "",
   sizes = "(min-width: 1024px) 33vw, 100vw",
   fill = true,
+  fit = "cover",
   preload = false,
   sampleBadge = false,
   className,
@@ -45,7 +47,7 @@ export function SmartImage({
           sizes={sizes}
           preload={preload}
           onError={() => setFailed(true)}
-          className={cn("object-cover", imgClassName)}
+          className={cn(fit === "contain" ? "object-contain" : "object-cover", imgClassName)}
           {...(realSrc
             ? {
                 unoptimized: true,

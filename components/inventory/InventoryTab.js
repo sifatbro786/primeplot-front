@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Building2, Layers, Pencil, Plus, Rows3, Wand2 } from "lucide-react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { EmptyState, ErrorState, Skeleton } from "@/components/ui/States";
@@ -52,7 +52,8 @@ export function InventoryTab() {
   const { can } = useSession();
   const { data: project } = useProject(id);
   const blocks = project?.blocks ?? [];
-  const [picked, setPicked] = useState(null);
+  const search = useSearchParams();
+  const [picked, setPicked] = useState(() => search.get("block")); // plan viewer links here with ?block=
   const block = blocks.find((b) => b.id === picked) ?? blocks[0];
   const units = useBlockUnits(id, block?.id);
   const live = useLiveInventory(id);

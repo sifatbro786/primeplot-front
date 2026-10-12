@@ -11,6 +11,8 @@ export const keys = {
   project: (id) => ["project", id],
   units: (projectId, blockId) => ["project-units", projectId, blockId ?? "all"],
   unit: (id) => ["unit", id],
+  floorplans: (projectId) => ["floorplans", projectId],
+  floorplan: (id, floor) => ["floorplan", id, floor ?? "default"],
 };
 
 export function useProject(id) {
@@ -23,6 +25,29 @@ export function useBlockUnits(projectId, blockId) {
     queryKey: keys.units(projectId, blockId),
     queryFn: async () => (await apiRequest(`/projects/${projectId}/units`, { query: { blockId, limit: 1000 } })).data,
     enabled: Boolean(projectId && blockId),
+  });
+}
+
+/** Every unit of the project across blocks (plan editor pickers; ≤ 1000). */
+export function useAllUnits(projectId, { enabled = true } = {}) {
+  return useQuery({
+    queryKey: keys.units(projectId),
+    queryFn: async () => (await apiRequest(`/projects/${projectId}/units`, { query: { limit: 1000 } })).data,
+    enabled: Boolean(projectId) && enabled,
+  });
+}
+
+export function useFloorPlans(projectId) {
+  return useQuery({ queryKey: keys.floorplans(projectId), queryFn: () => api.get(`/projects/${projectId}/floorplans`), enabled: Boolean(projectId) });
+}
+
+/** One plan resolved for a floor (typical plans cover many floors; null = the plan's first). */
+export function useFloorPlan(id, floor) {
+  return useQuery({
+    queryKey: keys.floorplan(id, floor),
+    queryFn: () => api.get(`/floorplans/${id}`, { query: { floor: floor ?? undefined } }),
+    enabled: Boolean(id),
+    placeholderData: (prev) => (prev?.id === id ? prev : undefined), // keep the image while switching floors
   });
 }
 
@@ -44,6 +69,7 @@ export function useUnitCache() {
       });
       if (!found) qc.invalidateQueries({ queryKey: ["project-units", unit.projectId] }); // new unit or moved block
       qc.invalidateQueries({ queryKey: keys.project(unit.projectId) });
+      qc.invalidateQueries({ queryKey: ["floorplan"] }); // a plan may show this unit (code, price)
     },
     [qc],
   );
@@ -69,6 +95,11 @@ export function useLiveInventory(projectId) {
             }
           : u;
       qc.setQueriesData({ queryKey: ["project-units", projectId] }, (list) => (Array.isArray(list) ? list.map(patch) : list));
+      // Plan viewer: recolour the hotspot that shows this unit (no refetch).
+      qc.setQueriesData({ queryKey: ["floorplan"] }, (plan) => {
+        if (plan?.projectId !== projectId || !plan.hotspots?.some((h) => h.target?.unit?.id === d.unitId)) return plan;
+        return { ...plan, hotspots: plan.hotspots.map((h) => (h.target?.unit?.id === d.unitId ? { ...h, target: { ...h.target, unit: patch(h.target.unit) } } : h)) };
+      });
       qc.invalidateQueries({ queryKey: keys.unit(d.unitId) });
       qc.invalidateQueries({ queryKey: keys.project(projectId) });
     },
@@ -76,6 +107,7 @@ export function useLiveInventory(projectId) {
   );
   const onResync = useCallback(() => {
     qc.invalidateQueries({ queryKey: ["project-units", projectId] });
+    qc.invalidateQueries({ queryKey: ["floorplan"] });
     qc.invalidateQueries({ queryKey: keys.project(projectId) });
   }, [qc, projectId]);
   return useProjectLive(projectId, { onDelta, onResync });
