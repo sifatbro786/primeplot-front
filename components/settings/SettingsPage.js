@@ -19,6 +19,7 @@ import { api } from "@/lib/api/client";
 import { errorMessage, ME_KEY } from "@/lib/auth/session";
 
 const ORG_KEY = ["org"];
+const TRACKING_FIELDS = ["ga4MeasurementId", "metaPixelId"];
 const TEXT_FIELDS = ["name", "nameBn", "legalName", "email", "phone", "address", "addressBn", "website", "tradeLicenseNo", "rehabMemberNo"];
 
 function Section({ title, description, children }) {
@@ -115,14 +116,20 @@ function OrgForm({ org }) {
     logoMediaId: z.string().nullable(),
     defaultLocale: z.enum(["bn", "en"]),
     fiscalYearStartMonth: z.coerce.number().int().min(1).max(12),
+    // Same rules as the API (upper-cased there too).
+    ga4MeasurementId: z.union([z.literal(""), z.string().trim().regex(/^G-[A-Z0-9]{4,15}$/i, t("errors.ga4"))]),
+    metaPixelId: z.union([z.literal(""), z.string().trim().regex(/^\d{8,20}$/, t("errors.pixel"))]),
   });
 
-  const defaults = {
-    ...Object.fromEntries(TEXT_FIELDS.map((k) => [k, org[k] ?? ""])),
-    logoMediaId: org.logoMediaId ?? null,
-    defaultLocale: org.settings?.defaultLocale ?? "bn",
-    fiscalYearStartMonth: org.settings?.fiscalYearStartMonth ?? 7,
-  };
+  const formValues = (o) => ({
+    ...Object.fromEntries(TEXT_FIELDS.map((k) => [k, o[k] ?? ""])),
+    logoMediaId: o.logoMediaId ?? null,
+    defaultLocale: o.settings?.defaultLocale ?? "bn",
+    fiscalYearStartMonth: o.settings?.fiscalYearStartMonth ?? 7,
+    ...Object.fromEntries(TRACKING_FIELDS.map((k) => [k, o.analytics?.[k] ?? ""])),
+  });
+
+  const defaults = formValues(org);
 
   const {
     register,
@@ -142,16 +149,14 @@ function OrgForm({ org }) {
     if (dirtyFields.defaultLocale) settings.defaultLocale = v.defaultLocale;
     if (dirtyFields.fiscalYearStartMonth) settings.fiscalYearStartMonth = v.fiscalYearStartMonth;
     if (Object.keys(settings).length) patch.settings = settings;
+    const analytics = {};
+    for (const k of TRACKING_FIELDS) if (dirtyFields[k]) analytics[k] = v[k].trim() || null;
+    if (Object.keys(analytics).length) patch.analytics = analytics;
     try {
       const updated = await api.patch("/org", patch);
       qc.setQueryData(ORG_KEY, (old) => ({ ...old, ...updated }));
       qc.invalidateQueries({ queryKey: ME_KEY });
-      reset({
-        ...Object.fromEntries(TEXT_FIELDS.map((k) => [k, updated[k] ?? ""])),
-        logoMediaId: updated.logoMediaId ?? null,
-        defaultLocale: updated.settings?.defaultLocale ?? "bn",
-        fiscalYearStartMonth: updated.settings?.fiscalYearStartMonth ?? 7,
-      });
+      reset(formValues(updated));
       toast.success(t("saved"));
     } catch (err) {
       if (err?.code === "INVALID_PHONE") return setError("phone", { message: t("errors.phone") });
@@ -233,6 +238,17 @@ function OrgForm({ org }) {
                 </option>
               ))}
             </Select>
+          </Field>
+        </div>
+      </Section>
+
+      <Section title={t("analytics.title")} description={t("analytics.description")}>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field label={t("fields.ga4MeasurementId")} hint={t("hints.ga4")} error={errors.ga4MeasurementId?.message}>
+            <Input className="font-mono uppercase" placeholder="G-XXXXXXXXXX" autoComplete="off" spellCheck={false} {...register("ga4MeasurementId")} />
+          </Field>
+          <Field label={t("fields.metaPixelId")} hint={t("hints.pixel")} error={errors.metaPixelId?.message}>
+            <Input className="font-mono" inputMode="numeric" placeholder="123456789012345" autoComplete="off" spellCheck={false} {...register("metaPixelId")} />
           </Field>
         </div>
       </Section>

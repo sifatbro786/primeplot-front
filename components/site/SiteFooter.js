@@ -7,6 +7,7 @@ import { formatPhone, localizeDigits } from "@/lib/format";
 import { getSiteOrgOrNull } from "@/lib/public/api";
 import { pick, telHref } from "@/lib/public/site";
 import { Brand } from "./Brand";
+import { CookieSettingsButton } from "./CookieSettingsButton";
 
 async function currentYear() {
   "use cache";
@@ -23,6 +24,7 @@ async function FooterBody() {
   ]);
   const name = pick(org, "name", locale) || t("brandFallback");
   const address = pick(org, "address", locale);
+  const hasTracking = Boolean(org?.analytics?.ga4MeasurementId || org?.analytics?.metaPixelId);
   const licences = [
     org?.tradeLicenseNo && t("footer.tradeLicense", { no: org.tradeLicenseNo }),
     org?.rehabMemberNo && t("footer.rehab", { no: org.rehabMemberNo }),
@@ -105,11 +107,33 @@ async function FooterBody() {
       </div>
 
       <div className="border-t border-primary-ink/10">
-        <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-5 text-[11px] text-primary-ink/55 sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-3 px-4 pt-5 pb-24 text-[11px] text-primary-ink/55 sm:px-6 lg:px-8">
+          {/* pb-24: room for the floating WhatsApp button so it never covers these links */}
           <p>{t("footer.rights", { year: localizeDigits(year, locale), name })}</p>
-          <Link href="/login" className="hover:text-primary-ink hover:underline">
-            {t("footer.staffLogin")}
-          </Link>
+          <nav aria-label={t("footer.legal")}>
+            <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <li>
+                <Link href="/privacy" className="hover:text-primary-ink hover:underline">
+                  {t("footer.privacy")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="hover:text-primary-ink hover:underline">
+                  {t("footer.terms")}
+                </Link>
+              </li>
+              {hasTracking && (
+                <li>
+                  <CookieSettingsButton className="hover:text-primary-ink hover:underline" />
+                </li>
+              )}
+              <li>
+                <Link href="/login" className="hover:text-primary-ink hover:underline">
+                  {t("footer.staffLogin")}
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </>

@@ -6,6 +6,7 @@ import { formatAreaValue, formatBDT, formatBDTCompact, formatLand, formatNumber,
 import { absoluteUrl, jsonLd, pick } from "@/lib/public/site";
 import { floorShort, isSellable, sizeShort } from "@/lib/public/units";
 import { Breadcrumbs } from "./Breadcrumbs";
+import { CompareToggle } from "./CompareToggle";
 import { ContactBand } from "./ContactBand";
 import { LiveUnitStatus } from "./LiveUnitStatus";
 import { PaymentCalculator } from "./PaymentCalculator";
@@ -193,6 +194,7 @@ export async function UnitView({ unit, project, units }) {
                 <p className="mt-2 text-lg">{sellable ? t("priceOnRequest") : t("notForSale")}</p>
               )}
             </div>
+            <CompareToggle id={unit.id} label={`${title} · ${name}`} project={name} />
             {sellable ? (
               <PaymentCalculator price={unit.price} />
             ) : (

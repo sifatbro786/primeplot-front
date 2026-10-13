@@ -19,6 +19,8 @@ async function build() {
   const out = [...entry("/", { priority: 1 }), ...entry("/projects", { changeFrequency: "daily", priority: 0.9 }),
     ...entry("/about", { priority: 0.4 }),
     ...entry("/contact", { priority: 0.5 }),
+    ...entry("/privacy", { priority: 0.2 }),
+    ...entry("/terms", { priority: 0.2 }),
   ];
   const projects = await getPublishedProjects();
   for (const card of projects) {

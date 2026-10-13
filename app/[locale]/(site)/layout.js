@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { SiteDock } from "@/components/site/SiteDock";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { getSiteOrgOrNull } from "@/lib/public/api";
 import { pick, robotsMeta } from "@/lib/public/site";
@@ -16,7 +18,13 @@ export async function generateMetadata() {
   };
 }
 
-/** Public website chrome: header · page · footer. */
+/** Floating WhatsApp button, comparison tray and consent-gated tracking (IDs from Company settings). */
+async function Dock() {
+  const org = await getSiteOrgOrNull();
+  return <SiteDock phone={org?.phone ?? null} ga4Id={org?.analytics?.ga4MeasurementId ?? null} pixelId={org?.analytics?.metaPixelId ?? null} />;
+}
+
+/** Public website chrome: header · page · footer · floating dock. */
 export default async function SiteLayout({ children }) {
   const t = await getTranslations("site.header");
   return (
@@ -33,6 +41,9 @@ export default async function SiteLayout({ children }) {
         {children}
       </main>
       <SiteFooter />
+      <Suspense fallback={null}>
+        <Dock />
+      </Suspense>
     </div>
   );
 }

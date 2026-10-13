@@ -10,9 +10,10 @@ import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
 import { Input, Textarea } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
-import { usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { api } from "@/lib/api/client";
 import { cn } from "@/lib/cn";
+import { track } from "@/lib/analytics/track";
 import { LEADS_ENABLED, telHref, whatsappHref } from "@/lib/public/site";
 
 // BD mobile: 01XXXXXXXXX with an optional +88 / 88 prefix (the API normalizes to E.164).
@@ -78,6 +79,7 @@ export function LeadForm({ projects = [], defaultProject = "", phone, compact = 
     for (let attempt = 0; ; attempt++) {
       try {
         await api.post("/public/leads", body);
+        track("generate_lead", { form: "enquiry", ...(v.project && { project: v.project }) });
         setSent(true);
         return;
       } catch (err) {
@@ -160,7 +162,15 @@ export function LeadForm({ projects = [], defaultProject = "", phone, compact = 
           </label>
         </div>
         <div className={cn("flex flex-wrap items-center justify-between gap-3", !compact && "sm:col-span-2")}>
-          <p className="max-w-sm text-xs text-ink-subtle">{t("privacy")}</p>
+          <p className="max-w-sm text-xs text-ink-subtle">
+            {t.rich("privacy", {
+              link: (chunks) => (
+                <Link href="/privacy" className="underline underline-offset-2 hover:text-ink">
+                  {chunks}
+                </Link>
+              ),
+            })}
+          </p>
           <Button type="submit" size="lg" loading={isSubmitting}>
             {t("submit")}
           </Button>

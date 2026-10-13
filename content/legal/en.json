@@ -1,0 +1,199 @@
+{
+  "privacy": {
+    "metaTitle": "Privacy Policy",
+    "metaDescription": "How {company} collects, uses and protects your personal information.",
+    "eyebrow": "Legal",
+    "title": "Privacy Policy",
+    "intro": "This policy explains what personal information {company} collects through this website and our sales process, why we collect it, and the choices you have. We keep it short and in plain language.",
+    "toolsActive": "Tools in use on this site after you accept: {tools}.",
+    "toolsNone": "No analytics or advertising tools are switched on at the moment.",
+    "sections": [
+      {
+        "id": "who",
+        "h": "Who we are",
+        "p": [
+          "This website is run by {company}. When this policy says \"we\" or \"us\", it means {company}. Our contact details are at the end of this page."
+        ]
+      },
+      {
+        "id": "collect",
+        "h": "What we collect",
+        "p": [
+          "We only collect what we need to help you buy a home or plot:"
+        ],
+        "items": [
+          "Enquiries: your name, mobile number and, if you give them, your email address, the project you are interested in and your message.",
+          "Calls, WhatsApp and visits: what you tell our sales team, such as budget, preferred size and timing.",
+          "Facebook and Instagram lead forms: if you fill in one of our ad forms, Meta passes us the details you entered there.",
+          "If you book: the details needed for the booking form, allotment letter and money receipts, such as your National ID, address, nominee and payment records.",
+          "Technical data: basic logs (IP address, browser, pages visited) kept to protect the website from abuse."
+        ]
+      },
+      {
+        "id": "use",
+        "h": "How we use it",
+        "items": [
+          "To reply to your enquiry and send you information about the project you asked about.",
+          "To arrange site visits, prepare bookings, issue receipts and run your customer portal account.",
+          "To send installment reminders and service messages by SMS, email or phone.",
+          "To keep our accounts and meet legal and tax requirements.",
+          "To keep the website secure and understand, in aggregate, which pages are useful."
+        ],
+        "p": [
+          "We do not sell your personal information, and we do not use it for anything unrelated to buying or owning property with us."
+        ]
+      },
+      {
+        "id": "cookies",
+        "h": "Cookies and analytics",
+        "p": [
+          "Some cookies are needed for the site to work: your language choice, your login session (staff and customers) and your cookie choice itself. These are always on.",
+          "Analytics and advertising cookies (Google Analytics and Meta Pixel) are loaded only if you choose \"Accept\" in the cookie banner. They help us see which projects people look at and measure our advertising. You can change your choice at any time with the \"Cookie settings\" link at the bottom of every page."
+        ]
+      },
+      {
+        "id": "share",
+        "h": "Who we share it with",
+        "p": [
+          "We share personal information only when it is needed to serve you:"
+        ],
+        "items": [
+          "Service providers that work for us: website hosting, SMS and email delivery, and the payment gateway if you pay online.",
+          "Banks or financial institutions, only if you ask us to help with a home loan.",
+          "Government offices, courts or regulators, when the law requires it (for example, for registration of your property)."
+        ],
+        "p2": [
+          "These providers may only use your information to provide their service to us."
+        ]
+      },
+      {
+        "id": "keep",
+        "h": "How long we keep it",
+        "p": [
+          "Enquiries we could not convert are deleted or anonymised after two years. If you buy from us, we keep your records for as long as you own the property with us and afterwards for as long as accounting and property laws require."
+        ]
+      },
+      {
+        "id": "security",
+        "h": "How we protect it",
+        "p": [
+          "Access is limited to staff who need it, every login is protected, and important actions are recorded in an audit log. Documents such as receipts carry a QR code so anyone can check they are genuine. No system is perfectly secure, but we take reasonable steps and will tell you if a problem affects you."
+        ]
+      },
+      {
+        "id": "rights",
+        "h": "Your choices",
+        "items": [
+          "Ask for a copy of the information we hold about you, or ask us to correct it.",
+          "Ask us to delete your enquiry details if you no longer want to hear from us.",
+          "Stop promotional SMS or calls at any time by telling us — service messages about your own installments will continue while you are a customer.",
+          "Change your cookie choice with the \"Cookie settings\" link."
+        ],
+        "p": [
+          "Contact us using the details below. We may need to confirm your identity first."
+        ]
+      },
+      {
+        "id": "children",
+        "h": "Children",
+        "p": [
+          "This website is meant for adults. We do not knowingly collect information from anyone under 18."
+        ]
+      },
+      {
+        "id": "changes",
+        "h": "Changes to this policy",
+        "p": [
+          "If we change this policy, we will update the date at the top of this page. Important changes will also be shown on the website."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Terms of Use",
+    "metaDescription": "The terms that apply when you use the {company} website.",
+    "eyebrow": "Legal",
+    "title": "Terms of Use",
+    "intro": "These terms apply when you use this website. By using it, you agree to them. Please read them together with our Privacy Policy.",
+    "sections": [
+      {
+        "id": "info",
+        "h": "Information on this website",
+        "p": [
+          "We work to keep project details, availability and prices correct and up to date. Availability is shown live, but a unit can be booked by someone else at any moment, so it is only confirmed when we confirm it to you.",
+          "Prices, sizes, specifications, handover dates and payment plans may change. Images, 3D views and stock photos are for illustration only, and plans are not to scale. The figures in the signed documents are the ones that count."
+        ]
+      },
+      {
+        "id": "offer",
+        "h": "Not an offer or contract",
+        "p": [
+          "Nothing on this website is an offer to sell or a binding agreement. A purchase becomes binding only when the booking form or sale agreement is signed by both sides and the booking money is received against our official money receipt."
+        ]
+      },
+      {
+        "id": "calc",
+        "h": "Payment estimates",
+        "p": [
+          "The installment calculator gives an estimate to help you plan. It does not include every charge (such as registration, utility connections or taxes) and is not a loan offer. Your actual payment schedule is the one in your booking documents."
+        ]
+      },
+      {
+        "id": "enquiries",
+        "h": "Enquiries",
+        "p": [
+          "When you send an enquiry, please give correct details. By sending it, you agree that our team may contact you by phone, SMS, WhatsApp or email about it."
+        ]
+      },
+      {
+        "id": "payments",
+        "h": "Online payments and the customer portal",
+        "p": [
+          "If online payment is available, a payment counts only after it is confirmed by the payment gateway and a receipt appears in your portal. Keep your login details private; you are responsible for activity on your account."
+        ]
+      },
+      {
+        "id": "ip",
+        "h": "Content and trademarks",
+        "p": [
+          "The text, photos, plans, logos and design of this website belong to {company} or are used with permission. You may share links and view pages for personal use, but you may not copy or reuse them commercially without our written permission."
+        ]
+      },
+      {
+        "id": "use",
+        "h": "Fair use",
+        "p": [
+          "Do not try to break, overload or gain unauthorised access to the website, and do not collect data from it with automated tools."
+        ]
+      },
+      {
+        "id": "links",
+        "h": "Other websites",
+        "p": [
+          "Links to maps, WhatsApp, social networks or other sites are for convenience. We are not responsible for their content or how they handle your data."
+        ]
+      },
+      {
+        "id": "liability",
+        "h": "Limitation of liability",
+        "p": [
+          "The website is provided \"as is\". To the extent the law allows, {company} is not liable for losses caused by relying on website information alone or by the website being unavailable. Nothing here limits rights you have under Bangladeshi law."
+        ]
+      },
+      {
+        "id": "law",
+        "h": "Governing law",
+        "p": [
+          "These terms are governed by the laws of Bangladesh. Any dispute will be handled by the courts of Dhaka."
+        ]
+      },
+      {
+        "id": "changes",
+        "h": "Changes",
+        "p": [
+          "We may update these terms. The date at the top shows the latest version; continuing to use the website means you accept it."
+        ]
+      }
+    ]
+  }
+}

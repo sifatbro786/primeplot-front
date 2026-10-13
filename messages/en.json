@@ -435,12 +435,16 @@
       "tradeLicenseNo": "Trade licence no.",
       "rehabMemberNo": "REHAB membership no.",
       "defaultLocale": "Default language",
-      "fiscalYearStartMonth": "Fiscal year starts in"
+      "fiscalYearStartMonth": "Fiscal year starts in",
+      "ga4MeasurementId": "GA4 Measurement ID",
+      "metaPixelId": "Meta Pixel ID"
     },
     "hints": {
-      "legalName": "As registered, e.g. \"Shapla Developers Limited\".",
+      "legalName": "As registered, e.g. \"Shapla Developers Limited\". Used on the Privacy Policy and Terms pages (falls back to the company name).",
       "defaultLocale": "For new team members and clients.",
-      "fiscalYear": "Receipt numbers restart each fiscal year. Bangladesh: July. Change only before the first receipt."
+      "fiscalYear": "Receipt numbers restart each fiscal year. Bangladesh: July. Change only before the first receipt.",
+      "ga4": "Google Analytics › Admin › Data streams › Web — starts with \"G-\".",
+      "pixel": "Meta Events Manager › Data sources — digits only."
     },
     "logo": {
       "label": "Logo",
@@ -456,7 +460,13 @@
     },
     "errors": {
       "phone": "Enter a valid Bangladeshi mobile number.",
-      "website": "Enter a full address starting with https://"
+      "website": "Enter a full address starting with https://",
+      "ga4": "Enter an ID starting with \"G-\", e.g. G-AB12CD34EF.",
+      "pixel": "A Pixel ID is digits only (8–20)."
+    },
+    "analytics": {
+      "title": "Website analytics",
+      "description": "Loaded on the public site only after a visitor accepts cookies. Leave a field empty to turn it off. Takes effect on the website shortly after saving."
     }
   },
   "projects": {
@@ -1208,7 +1218,10 @@
       "contact": "Get in touch",
       "contactSoon": "Contact details coming soon.",
       "rights": "© {year} {name}. All rights reserved.",
-      "staffLogin": "Staff login"
+      "staffLogin": "Staff login",
+      "legal": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use"
     },
     "list": {
       "metaTitle": "Projects",
@@ -1526,7 +1539,7 @@
       "messagePlaceholder": "e.g. 3 bedrooms, south facing, handover by 2027",
       "optional": "Optional",
       "submit": "Send enquiry",
-      "privacy": "We use your number only to reply to this enquiry.",
+      "privacy": "We use your number only to reply to this enquiry. See our <link>Privacy Policy</link>.",
       "errName": "Please write your name",
       "errPhone": "Enter a valid Bangladesh mobile number",
       "errEmail": "Enter a valid email",
@@ -1587,6 +1600,65 @@
       "office": "Office",
       "soon": "Contact details are coming soon.",
       "formTitle": "Enquiry form"
+    },
+    "legal": {
+      "updated": "Last updated: {date}",
+      "contents": "On this page",
+      "questions": "Questions about this page? Contact us:",
+      "questionsNoContact": "Questions about this page? Use the contact page and we will reply.",
+      "consent": {
+        "title": "Cookies on this site",
+        "body": "We use a few cookies to see which projects people look at and to measure our ads (Google Analytics, Meta Pixel). They load only if you accept.",
+        "accept": "Accept",
+        "reject": "Only essential",
+        "more": "Privacy Policy",
+        "settings": "Cookie settings",
+        "label": "Cookie choice"
+      },
+      "whatsapp": "Chat on WhatsApp"
+    },
+    "compare": {
+      "metaTitle": "Compare homes",
+      "eyebrow": "Side by side",
+      "title": "Compare homes",
+      "intro": "Up to three homes or plots, side by side. Payment estimates use {down}% down and {months} monthly installments.",
+      "emptyTitle": "Pick at least two homes",
+      "emptyBody": "Open any home or plot and choose \"Add to compare\". Your picks stay in the bar at the bottom of the screen while you browse.",
+      "browse": "Browse projects",
+      "add": "Add to compare",
+      "added": "Added to compare",
+      "full": "You can compare up to 3 — remove one first.",
+      "trayLabel": "Homes to compare",
+      "remove": "Remove {label}",
+      "clear": "Clear",
+      "pickMore": "Pick one more",
+      "cta": "Compare {n}",
+      "removeCol": "Remove from comparison",
+      "view": "View details",
+      "rows": {
+        "project": "Project",
+        "status": "Status",
+        "type": "Type",
+        "size": "Size",
+        "land": "Land area",
+        "floor": "Floor",
+        "road": "Road",
+        "roadWidth": "Road width",
+        "facing": "Facing",
+        "corner": "Corner",
+        "parking": "Parking",
+        "price": "Price",
+        "down": "Down payment ({pct}%)",
+        "monthly": "Monthly × {months}"
+      },
+      "lowest": "Lowest",
+      "largest": "Largest",
+      "onRequest": "On request",
+      "yes": "Yes",
+      "no": "No",
+      "none": "None",
+      "notice": "Estimates only — the payment schedule in your booking documents is final. Some homes may have been booked since you added them.",
+      "count": "{n} picked"
     }
   }
 }

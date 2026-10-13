@@ -13,12 +13,12 @@ export async function generateMetadata({ params }) {
   const name = pick(project, "name", locale);
   const description =
     pick(project, "tagline", locale) || pick(project, "description", locale).slice(0, 160) || t("metaDescription", { name });
-  const image = project.cover?.urls?.full ?? project.cover?.urls?.card;
   return {
     title: name,
     description,
     alternates: alternatesFor(locale, `/projects/${project.slug}`),
-    openGraph: { title: name, description, type: "website", ...(image && { images: [{ url: image, alt: name }] }) },
+    // og:image comes from ./opengraph-image.js (share card with name + price).
+    openGraph: { title: name, description, type: "website" },
   };
 }
 
