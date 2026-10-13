@@ -181,13 +181,13 @@ export async function UnitView({ unit, project, units }) {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <div className="rounded-lg border border-line bg-surface p-5">
-              <p className="text-[10px] font-semibold caps text-ink-muted ">{t("price")}</p>
+            <div className="band-dark grain rounded-lg p-6">
+              <p className="caps text-[10px] font-semibold text-accent-on-dark">{t("price")}</p>
               {unit.price != null ? (
                 <>
                   <p className="mt-2 font-display text-4xl">{formatBDTCompact(unit.price, locale)}</p>
-                  <p className="mt-1 font-mono text-xs text-ink-muted">{formatBDT(unit.price, locale)}</p>
-                  <p className="mt-3 text-xs leading-relaxed text-ink-subtle">{t("priceNote")}</p>
+                  <p className="mt-1 font-mono text-xs text-primary-ink/70">{formatBDT(unit.price, locale)}</p>
+                  <p className="mt-3 text-xs leading-relaxed text-primary-ink/60">{t("priceNote")}</p>
                 </>
               ) : (
                 <p className="mt-2 text-lg">{sellable ? t("priceOnRequest") : t("notForSale")}</p>

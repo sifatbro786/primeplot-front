@@ -20,16 +20,24 @@ const PLACEHOLDER_SETS = {
   plot: ["plot-land", "plot-land", "city", "plot-land"],
 };
 
-function Section({ id, eyebrow, title, aside, children, className }) {
+// Full-bleed bands so the page alternates paper · sage · dark olive (owner: "too white").
+const TONES = {
+  paper: { band: "border-t border-sage-line/60", aside: "text-ink-muted" },
+  sage: { band: "grain border-y border-sage-line bg-sage-tint", aside: "text-ink-muted" },
+  dark: { band: "band-dark grain", aside: "text-primary-ink/70" },
+};
+
+function Section({ id, eyebrow, title, aside, children, tone = "paper", className }) {
+  const tn = TONES[tone];
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className={cn("scroll-mt-24 border-t border-line py-16 lg:py-20", className)}>
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,9fr)]">
+    <section id={id} aria-labelledby={`${id}-title`} className={cn("scroll-mt-24", tn.band, className)}>
+      <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] lg:px-8 lg:py-20">
         <div>
           <p className="eyebrow">{eyebrow}</p>
           <h2 id={`${id}-title`} className="mt-3 font-display text-3xl leading-tight">
             {title}
           </h2>
-          {aside && <div className="mt-4 text-sm leading-relaxed text-ink-muted">{aside}</div>}
+          {aside && <div className={cn("mt-4 text-sm leading-relaxed", tn.aside)}>{aside}</div>}
         </div>
         <div className="min-w-0">{children}</div>
       </div>
@@ -156,19 +164,18 @@ export async function ProjectView({ project, units }) {
       </header>
 
       {/* ── facts band ── */}
-      <div className="border-y border-line bg-line">
+      <div className="bg-primary-deep">
         <dl className="mx-auto grid w-full max-w-7xl grid-cols-2 gap-px sm:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(9.5rem,1fr))]">
           {facts.map((f) => (
-            <div key={f.k} className="bg-surface-3 px-4 py-6 sm:px-6">
-              <dt className="text-[10px] font-semibold caps text-ink-muted ">{f.k}</dt>
+            <div key={f.k} className="bg-primary px-4 py-6 text-primary-ink sm:px-6">
+              <dt className="caps text-[10px] font-semibold text-accent-on-dark">{f.k}</dt>
               <dd className="mt-2 font-display text-xl leading-snug">{f.v}</dd>
             </div>
           ))}
         </dl>
       </div>
 
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        {(description || project.highlights?.length > 0) && (
+      {(description || project.highlights?.length > 0) && (
           <Section id="overview" eyebrow={t("overviewEyebrow")} title={t("overviewTitle", { name })} className="border-t-0">
             <div className="grid gap-10 xl:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
               {description && (
@@ -191,9 +198,9 @@ export async function ProjectView({ project, units }) {
             </div>
           </Section>
         )}
-      </div>
 
-      <section aria-label={t("galleryTitle")} className="overflow-hidden border-t border-line py-16 lg:py-20">
+      {/* gallery on dark olive — photos read richer on a deep ground */}
+      <section aria-label={t("galleryTitle")} className="band-dark grain overflow-hidden py-16 lg:py-20">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
@@ -201,13 +208,13 @@ export async function ProjectView({ project, units }) {
               <h2 className="mt-3 font-display text-3xl">{t("galleryTitle")}</h2>
             </div>
           </div>
-          <Gallery items={gallery} label={t("galleryTitle")} />
+          <Gallery items={gallery} label={t("galleryTitle")} dark />
         </div>
       </section>
 
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <Section
           id="availability"
+          tone="sage"
           eyebrow={t("availabilityEyebrow")}
           title={t(isPlot ? "availabilityTitlePlot" : "availabilityTitle")}
           aside={t("availabilityIntro")}
@@ -280,8 +287,8 @@ export async function ProjectView({ project, units }) {
         )}
 
         {project.amenities?.length > 0 && (
-          <Section id="amenities" eyebrow={t("amenitiesEyebrow")} title={t("amenitiesTitle")}>
-            <Amenities codes={project.amenities} />
+          <Section id="amenities" tone="dark" eyebrow={t("amenitiesEyebrow")} title={t("amenitiesTitle")}>
+            <Amenities codes={project.amenities} dark />
           </Section>
         )}
 
@@ -307,7 +314,6 @@ export async function ProjectView({ project, units }) {
             <p className="blueprint rounded-lg border border-dashed border-line-strong/60 px-6 py-12 text-center text-sm text-ink-muted">{t("locationOnRequest")}</p>
           )}
         </Section>
-      </div>
 
       <ContactBand title={t("contactTitle", { name })} body={t("contactBody")} />
     </article>

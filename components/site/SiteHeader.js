@@ -14,7 +14,8 @@ export const SITE_NAV = [
   { href: "/projects", key: "projects" },
   { href: "/projects?type=apartment", key: "apartments" },
   { href: "/projects?type=plot", key: "plots" },
-  { href: "#contact", key: "contact" },
+  { href: "/about", key: "about" },
+  { href: "/contact", key: "contact" },
 ];
 
 async function HeaderBrand() {
@@ -43,7 +44,7 @@ export async function SiteHeader() {
   const t = await getTranslations("site");
   const items = SITE_NAV.map((n) => ({ ...n, label: t(`nav.${n.key}`) }));
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-canvas/95 backdrop-blur-[2px] supports-[backdrop-filter]:bg-canvas/85">
+    <header className="sticky top-0 z-40 border-b border-sage-line/70 bg-paper/95 backdrop-blur-[2px] supports-[backdrop-filter]:bg-paper/85">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-6 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="min-w-0 flex-1 rounded-sm lg:flex-none" aria-label={t("header.home")}>
           <Suspense fallback={<span className="text-[13px] font-semibold tracking-[0.28em] uppercase">{t("brandFallback")}</span>}>

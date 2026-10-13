@@ -17,7 +17,7 @@ export async function ContactBand({ title, body }) {
   ].filter(Boolean);
 
   return (
-    <section aria-labelledby="contact-band" className="blueprint border-y border-line bg-surface-3/60">
+    <section aria-labelledby="contact-band" className="grain border-y border-sage-line bg-sage-tint">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center lg:px-8">
         <div>
           <p className="eyebrow">{t("eyebrow")}</p>

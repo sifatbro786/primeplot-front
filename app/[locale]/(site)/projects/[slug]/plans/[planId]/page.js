@@ -71,7 +71,7 @@ async function PlanRoute({ params, searchParams }) {
             { label: pick(plan, "title", locale) },
           ]}
         />
-        <header className="mt-8 mb-8">
+        <header className="grain mt-8 mb-8 rounded-lg border border-sage-line bg-sage-tint px-6 py-8 sm:px-8">
           <p className="eyebrow">{name}</p>
           <h1 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">{pick(plan, "title", locale)}</h1>
           <p className="mt-3 text-sm text-ink-muted">{subtitle}</p>

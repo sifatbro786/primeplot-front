@@ -39,16 +39,16 @@ const ICONS = {
 };
 
 /** Hairline grid of amenities (icon + label). Unknown codes are skipped, not shown raw. */
-export function Amenities({ codes }) {
+export function Amenities({ codes, dark = false }) {
   const t = useTranslations("projects.amenities");
   const known = codes.filter((c) => c in ICONS);
   return (
-    <ul className="grid grid-cols-2 border-t border-l border-line sm:grid-cols-3 lg:grid-cols-4">
+    <ul className={`grid grid-cols-2 border-t border-l sm:grid-cols-3 lg:grid-cols-4 ${dark ? "border-white/12" : "border-line"}`}>
       {known.map((c) => {
         const Icon = ICONS[c] ?? Check;
         return (
-          <li key={c} className="flex items-center gap-3 border-r border-b border-line px-4 py-5">
-            <Icon aria-hidden className="size-5 shrink-0 text-accent" strokeWidth={1.25} />
+          <li key={c} className={`flex items-center gap-3 border-r border-b px-4 py-5 ${dark ? "border-white/12" : "border-line"}`}>
+            <Icon aria-hidden className={`size-5 shrink-0 ${dark ? "text-accent-on-dark" : "text-accent"}`} strokeWidth={1.25} />
             <span className="text-sm">{t(c)}</span>
           </li>
         );

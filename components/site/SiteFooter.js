@@ -61,6 +61,16 @@ async function FooterBody() {
                 {t("nav.plots")}
               </Link>
             </li>
+            <li>
+              <Link href="/about" className="text-primary-ink/85 hover:text-primary-ink hover:underline">
+                {t("nav.about")}
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="text-primary-ink/85 hover:text-primary-ink hover:underline">
+                {t("nav.contact")}
+              </Link>
+            </li>
           </ul>
         </nav>
 

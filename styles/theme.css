@@ -12,6 +12,11 @@
   --pp-surface: #ffffff; /* cards, panels, tables */
   --pp-surface-2: #f1efea; /* sunken areas, table headers, hover rows */
   --pp-surface-3: #e9e6df; /* stats band, pressed states */
+  /* public site (owner feedback 2026-10-13: "too white") — warmer page, tinted and dark bands */
+  --pp-paper: #f2ede3; /* warm sand page background; white cards sit on it */
+  --pp-sage-tint: #e3e6d8; /* sage band (ink on it 13.9, accent 4.0 → large/UI only) */
+  --pp-sage-line: #c9cdb8; /* hairlines on sage */
+  --pp-primary-deep: #23271f; /* deepest olive — dark bands under/around primary */
 
   /* ── text ── */
   --pp-ink: #1c1d1a; /* 15.9 */
@@ -57,6 +62,10 @@
   --color-surface: var(--pp-surface);
   --color-surface-2: var(--pp-surface-2);
   --color-surface-3: var(--pp-surface-3);
+  --color-paper: var(--pp-paper);
+  --color-sage-tint: var(--pp-sage-tint);
+  --color-sage-line: var(--pp-sage-line);
+  --color-primary-deep: var(--pp-primary-deep);
   --color-ink: var(--pp-ink);
   --color-ink-muted: var(--pp-ink-muted);
   --color-ink-subtle: var(--pp-ink-subtle);

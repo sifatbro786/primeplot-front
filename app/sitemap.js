@@ -16,7 +16,10 @@ function entry(path, extra = {}) {
 }
 
 async function build() {
-  const out = [...entry("/", { priority: 1 }), ...entry("/projects", { changeFrequency: "daily", priority: 0.9 })];
+  const out = [...entry("/", { priority: 1 }), ...entry("/projects", { changeFrequency: "daily", priority: 0.9 }),
+    ...entry("/about", { priority: 0.4 }),
+    ...entry("/contact", { priority: 0.5 }),
+  ];
   const projects = await getPublishedProjects();
   for (const card of projects) {
     const [project, units] = await Promise.all([getProject(card.slug), getProjectUnits(card.slug)]);
@@ -34,11 +37,7 @@ async function build() {
 
 export default async function sitemap() {
   if (!ALLOW_INDEXING) return []; // staging/dev: nothing to advertise
-  try {
-    return await build();
-  } catch {
-    // API down while building: render at request time instead of freezing a broken sitemap.
-    await connection();
-    return build();
-  }
+  // Never call the API during `next build` — the sitemap is rendered (and cached) on request.
+  if (process.env.NEXT_PHASE === "phase-production-build") await connection();
+  return build();
 }

@@ -27,7 +27,7 @@ export async function generateMetadata() {
 
 function ResultsSkeleton() {
   return (
-    <div className="mt-8">
+    <div className="relative -mt-7">
       <Skeleton className="h-16 w-full rounded-lg" />
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {[0, 1, 2].map((i) => (
@@ -39,7 +39,9 @@ function ResultsSkeleton() {
 }
 
 async function Results({ searchParams }) {
-  const [sp, locale, t, all] = await Promise.all([searchParams, getLocale(), getTranslations("site.list"), getPublishedProjects()]);
+  // Request data first: nothing below may run (or call the API) while the page is prerendered.
+  const sp = await searchParams;
+  const [locale, t, all] = await Promise.all([getLocale(), getTranslations("site.list"), getPublishedProjects()]);
   const filters = parseListingQuery(sp);
   const results = applyListing(all, filters);
   const plain = !hasActiveFilters(filters) && filters.sort === "featured" && filters.view === "grid";
@@ -49,7 +51,7 @@ async function Results({ searchParams }) {
   const located = results.filter((p) => p.location?.lat != null && p.location?.lng != null);
 
   return (
-    <div className="mt-8">
+    <div className="relative -mt-7">
       <ListingControls filters={filters} areas={areaOptions(all, locale)} count={results.length}>
         {all.length === 0 ? (
           <EmptyState icon={Building2} title={t("noneTitle")} description={t("noneBody")} className="mt-10" />
@@ -108,20 +110,24 @@ async function Results({ searchParams }) {
 export default async function ProjectsPage({ searchParams }) {
   const t = await getTranslations("site.list");
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 pt-14 pb-24 sm:px-6 lg:px-8 lg:pt-20">
-      <header className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
-        <div>
-          <p className="eyebrow">{t("eyebrow")}</p>
-          <h1 className="mt-5 font-display text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
-            {t.rich("title", { em: (c) => <em className="text-accent italic">{c}</em> })}
-          </h1>
+    <>
+      <header className="grain border-b border-sage-line bg-sage-tint">
+        <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 pt-14 pb-12 sm:px-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:px-8 lg:pt-20 lg:pb-16">
+          <div>
+            <p className="eyebrow">{t("eyebrow")}</p>
+            <h1 className="mt-5 font-display text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
+              {t.rich("title", { em: (c) => <em className="text-accent italic">{c}</em> })}
+            </h1>
+          </div>
+          <p className="max-w-md text-sm leading-relaxed text-ink-muted lg:justify-self-end">{t("intro")}</p>
         </div>
-        <p className="max-w-md text-sm leading-relaxed text-ink-muted lg:justify-self-end">{t("intro")}</p>
       </header>
 
-      <Suspense fallback={<ResultsSkeleton />}>
-        <Results searchParams={searchParams} />
-      </Suspense>
-    </div>
+      <div className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
+        <Suspense fallback={<ResultsSkeleton />}>
+          <Results searchParams={searchParams} />
+        </Suspense>
+      </div>
+    </>
   );
 }

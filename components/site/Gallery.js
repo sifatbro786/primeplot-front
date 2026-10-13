@@ -15,7 +15,7 @@ const pad = (n, locale) => localizeDigits(String(n).padStart(2, "0"), locale);
  * (Esc, focus trap, arrows). `items` = [{ media? , category, seed, alt }]; items without media
  * are stock placeholders and carry the "sample image" badge.
  */
-export function Gallery({ items, label }) {
+export function Gallery({ items, label, dark = false }) {
   const t = useTranslations("site.gallery");
   const locale = useLocale();
   const [viewport, embla] = useEmblaCarousel({ align: "start", loop: false, containScroll: "trimSnaps" });
@@ -75,12 +75,12 @@ export function Gallery({ items, label }) {
 
       {items.length > 1 && (
         <div className="mt-5 flex items-center justify-between">
-          <p className="font-mono text-xs text-ink-muted" aria-live="polite">
-            {pad(index + 1, locale)} <span className="text-ink-subtle">/ {pad(items.length, locale)}</span>
+          <p className={cn("font-mono text-xs", dark ? "text-primary-ink/80" : "text-ink-muted")} aria-live="polite">
+            {pad(index + 1, locale)} <span className={dark ? "text-primary-ink/50" : "text-ink-subtle"}>/ {pad(items.length, locale)}</span>
           </p>
           <div className="flex gap-2">
-            <ArrowButton onClick={() => embla?.scrollPrev()} disabled={!canPrev} label={t("prev")} icon={ChevronLeft} />
-            <ArrowButton onClick={() => embla?.scrollNext()} disabled={!canNext} label={t("next")} icon={ChevronRight} />
+            <ArrowButton dark={dark} onClick={() => embla?.scrollPrev()} disabled={!canPrev} label={t("prev")} icon={ChevronLeft} />
+            <ArrowButton dark={dark} onClick={() => embla?.scrollNext()} disabled={!canNext} label={t("next")} icon={ChevronRight} />
           </div>
         </div>
       )}

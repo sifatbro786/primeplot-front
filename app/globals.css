@@ -166,3 +166,35 @@ dialog.drawer[open]::backdrop {
 :lang(bn) .eyebrow {
   font-size: 0.8125rem;
 }
+
+/* Paper grain: a faint fractal-noise texture over any background colour (public site bands). */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.11 0 0 0 0 0.1 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Dark olive band: light text, sage eyebrows. */
+@utility band-dark {
+  background-color: var(--pp-primary);
+  color: var(--pp-primary-ink);
+  & .eyebrow {
+    color: var(--pp-accent-on-dark);
+  }
+}
+
+/* Small rotated "stamp" sticker (editorial accent, owner taste). */
+@utility stamp {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 9999px;
+  border: 1.5px dashed currentColor;
+  text-align: center;
+  line-height: 1.15;
+  transform: rotate(-8deg);
+}
+
+/* Public site: the warm paper and sage bands are darker than the dashboard canvas, so the two
+   small-text tokens step down one shade to keep WCAG AA (≥ 4.5) on paper, sage and white. */
+.site {
+  --pp-accent: #575c4a;
+  --pp-ink-muted: #5a5c55;
+}

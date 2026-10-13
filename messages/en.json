@@ -1190,6 +1190,7 @@
       "projects": "Projects",
       "apartments": "Apartments",
       "plots": "Plots & land",
+      "about": "About",
       "contact": "Contact"
     },
     "header": {
@@ -1460,6 +1461,132 @@
       "title": "This page isn't here",
       "body": "The link may be old, or the project is no longer on the website.",
       "cta": "See all projects"
+    },
+    "home": {
+      "metaTitle": "Apartments and plots with live availability",
+      "metaDescription": "{name}: apartments and land with live availability, itemised prices and floor plans you can open.",
+      "heroEyebrow": "Apartments & land",
+      "heroTitle": "A home, <em>seen clearly</em> before you buy.",
+      "heroBody": "Every project shows what is actually for sale today, with itemised prices and plans you can open — no guesswork, no surprises at booking.",
+      "heroPrimary": "Explore projects",
+      "heroSecondary": "Talk to us",
+      "pauseVideo": "Pause background video",
+      "playVideo": "Play background video",
+      "searchTitle": "Find a home that is still available",
+      "searchSubmit": "Show homes",
+      "stamp": "Live stock",
+      "statsNote": "Live figures from our inventory — they change the moment a home is reserved or booked.",
+      "featuredEyebrow": "Featured",
+      "featuredTitle": "Projects worth a visit",
+      "allProjects": "All projects",
+      "areasEyebrow": "Locations",
+      "areasTitle": "Where we build",
+      "areasBody": "Choose an area to see every project there and how many homes are still free.",
+      "areaProjects": "{count, plural, one {{n} project} other {{n} projects}}",
+      "areaAvailable": "{n} available",
+      "howEyebrow": "How buying works",
+      "howTitle": "Four steps, nothing hidden",
+      "how": {
+        "choose": {
+          "title": "Choose from live availability",
+          "body": "See which homes are free right now — by building, floor and size — and the price of each."
+        },
+        "visit": {
+          "title": "Visit the site",
+          "body": "We arrange a visit and hold the unit you like while you decide."
+        },
+        "book": {
+          "title": "Book at a written price",
+          "body": "Your booking shows every line of the price — base rate, floor, facing, parking and charges."
+        },
+        "pay": {
+          "title": "Pay in installments",
+          "body": "Follow your schedule and receipts online; every receipt and allotment letter carries a QR code you can verify."
+        }
+      },
+      "enquiryEyebrow": "Enquiry",
+      "enquiryTitle": "Tell us what you are looking for",
+      "enquiryBody": "Size, area, budget, timing — our sales team will reply with the homes that fit, and nothing that doesn't."
+    },
+    "stats": {
+      "projects": "Projects",
+      "available": "Homes available now",
+      "areas": "Areas",
+      "ready": "Ready or handed over"
+    },
+    "lead": {
+      "legend": "Enquiry",
+      "name": "Your name",
+      "phone": "Mobile number",
+      "phoneHint": "Bangladesh mobile, e.g. 01712345678",
+      "email": "Email",
+      "project": "Project",
+      "anyProject": "Any project",
+      "message": "Message",
+      "messagePlaceholder": "e.g. 3 bedrooms, south facing, handover by 2027",
+      "optional": "Optional",
+      "submit": "Send enquiry",
+      "privacy": "We use your number only to reply to this enquiry.",
+      "errName": "Please write your name",
+      "errPhone": "Enter a valid Bangladesh mobile number",
+      "errEmail": "Enter a valid email",
+      "failed": "We couldn't send this just now. Your details are still here — please try again, or call us.",
+      "sentTitle": "Thank you",
+      "sentBody": "We have your enquiry and will call you soon.",
+      "offTitle": "Online enquiries open soon",
+      "offBody": "Until then, call or WhatsApp us — we answer the same day.",
+      "call": "Call us",
+      "whatsapp": "WhatsApp"
+    },
+    "about": {
+      "metaTitle": "About us",
+      "metaDescription": "Who {name} is and how we sell homes and land: live availability, written prices and verifiable documents.",
+      "eyebrow": "About us",
+      "title": "{name} — <em>homes built on trust</em>",
+      "intro1": "{name} builds apartments and develops residential land for families who want to know exactly what they are buying.",
+      "intro2": "That is why our website shows live availability, itemised prices and real floor plans — the same information our sales team works from.",
+      "principlesEyebrow": "What we stand for",
+      "principlesTitle": "Four promises to every buyer",
+      "principles": {
+        "live": {
+          "title": "Availability you can see",
+          "body": "What you see as available is available. Reserved and sold homes are marked the moment it happens."
+        },
+        "price": {
+          "title": "Prices in writing",
+          "body": "Every price is itemised — base rate, floor rise, facing, parking and charges. No surprises at booking."
+        },
+        "verify": {
+          "title": "Documents you can verify",
+          "body": "Money receipts and allotment letters carry a QR code that anyone can check online."
+        },
+        "portal": {
+          "title": "Your own customer portal",
+          "body": "Installments, dues, receipts and documents — all in one place, in Bangla or English."
+        }
+      },
+      "credsEyebrow": "Registration",
+      "credsTitle": "Licences and membership",
+      "tradeLicense": "Trade licence",
+      "rehab": "REHAB membership",
+      "office": "Office",
+      "ctaTitle": "Come and see for yourself",
+      "ctaBody": "Visit a site with our team, or start by browsing",
+      "ctaLink": "all projects."
+    },
+    "contactPage": {
+      "metaTitle": "Contact",
+      "metaDescription": "Call, WhatsApp, email or visit {name}. Ask about prices, payment plans and site visits.",
+      "eyebrow": "Contact",
+      "title": "Talk to <em>our sales team</em>",
+      "intro": "Ask about prices, payment plans or a site visit. Calls and WhatsApp are answered the same day.",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "whatsappValue": "Message us",
+      "email": "Email",
+      "office": "Office",
+      "soon": "Contact details are coming soon.",
+      "formTitle": "Enquiry form"
     }
   }
 }
