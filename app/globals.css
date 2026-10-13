@@ -108,3 +108,61 @@ dialog.drawer[open]::backdrop {
 .toast-in {
   animation: pp-rise 220ms var(--ease-out-quint);
 }
+
+/* ── public site map (MapLibre markers/popups are plain DOM, styled here with the tokens) ── */
+.pp-map-marker {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--pp-surface);
+  border-radius: 2px;
+  background: var(--pp-primary);
+  box-shadow: 0 1px 4px rgb(28 29 26 / 0.35);
+  cursor: pointer;
+  transform-origin: bottom center;
+}
+.pp-map-marker:hover,
+.pp-map-marker:focus-visible {
+  background: var(--pp-accent);
+}
+.maplibregl-popup-content {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--pp-line);
+  padding: 12px 14px;
+  font-family: var(--font-sans);
+  box-shadow: 0 6px 24px rgb(28 29 26 / 0.12);
+}
+.pp-map-popup-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  color: var(--pp-ink);
+}
+.pp-map-popup-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--pp-ink-muted);
+}
+.pp-map-popup-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pp-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Small letter-spaced capitals for labels. Bangla has no capitals and letter-spacing breaks its
+   conjuncts/matras, so in bn the same labels are set plain, a touch larger. */
+@utility caps {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+:lang(bn) .caps,
+:lang(bn) .eyebrow {
+  letter-spacing: 0.01em;
+  font-size: 0.75rem;
+}
+:lang(bn) .eyebrow {
+  font-size: 0.8125rem;
+}

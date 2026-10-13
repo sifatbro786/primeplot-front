@@ -38,7 +38,16 @@ export function SmartImage({
   const src = realSrc ?? stockSrc;
 
   return (
-    <div className={cn("relative overflow-hidden bg-surface-2", className)}>
+    // cn() has no tailwind-merge: drop our defaults when the caller positions/paints the box itself
+    // (".relative" would otherwise beat a caller's "absolute inset-0" and collapse the image).
+    <div
+      className={cn(
+        !/\b(absolute|fixed)\b/.test(className ?? "") && "relative",
+        !/\bbg-/.test(className ?? "") && "bg-surface-2",
+        "overflow-hidden",
+        className,
+      )}
+    >
       {src && !failed ? (
         <Image
           src={src}

@@ -204,7 +204,9 @@ export function PlanCanvas({
         role="group"
         aria-label={ariaLabel}
         className={cn(
-          "block h-full w-full touch-none select-none",
+          "block h-full w-full select-none",
+          // Editing owns every touch; viewing keeps native pinch-zoom/scroll (public site, phones).
+          edit && "touch-none",
           edit && tool !== "select" && "cursor-crosshair",
         )}
         onPointerDown={onSvgDown}
