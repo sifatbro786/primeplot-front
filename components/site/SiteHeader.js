@@ -14,6 +14,7 @@ export const SITE_NAV = [
   { href: "/projects", key: "projects" },
   { href: "/projects?type=apartment", key: "apartments" },
   { href: "/projects?type=plot", key: "plots" },
+  { href: "/landowners", key: "landowners" },
   { href: "/about", key: "about" },
   { href: "/contact", key: "contact" },
 ];

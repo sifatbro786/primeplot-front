@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Menu, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { NotificationBell } from "@/components/crm/NotificationBell";
 import { LocaleSwitcher } from "@/components/i18n/LocaleSwitcher";
 import { Button } from "@/components/ui/Button";
 import { ErrorState } from "@/components/ui/States";
@@ -88,6 +89,7 @@ export function DashboardShell({ children }) {
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setPaletteOpen(true)} aria-label={ts("search")}>
             <Search className="size-4" />
           </Button>
+          {session.user && <NotificationBell />}
           <LocaleSwitcher className="hidden sm:inline-flex" />
           <UserMenu user={session.user} accountHref={ACCOUNT} />
         </header>

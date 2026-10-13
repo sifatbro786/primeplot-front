@@ -186,7 +186,10 @@
       "inventory": "Inventory",
       "sales": "Sales",
       "admin": "Administration"
-    }
+    },
+    "tasks": "My tasks",
+    "crmSettings": "CRM settings",
+    "integrations": "Integrations"
   },
   "portalNav": {
     "label": "Portal navigation",
@@ -1201,7 +1204,8 @@
       "apartments": "Apartments",
       "plots": "Plots & land",
       "about": "About",
-      "contact": "Contact"
+      "contact": "Contact",
+      "landowners": "Landowners"
     },
     "header": {
       "home": "Home page",
@@ -1659,6 +1663,832 @@
       "none": "None",
       "notice": "Estimates only — the payment schedule in your booking documents is final. Some homes may have been booked since you added them.",
       "count": "{n} picked"
+    },
+    "landowners": {
+      "metaTitle": "Develop your land with us",
+      "metaDescription": "Own land in or around Dhaka? Talk to {name} about a joint-venture development — clear terms, papers checked first.",
+      "eyebrow": "For landowners",
+      "title": "Your land, <em>developed</em> — on terms you understand",
+      "intro": "{name} builds on land owned by families and companies under a joint-venture agreement: you keep a share of the finished flats or plots, we fund and run the construction. Tell us about the plot — we will visit, check the papers with you and give a straight answer.",
+      "lookTitle": "What we look at",
+      "look": {
+        "size": {
+          "title": "Size",
+          "body": "the area in katha or decimal as written on the deed."
+        },
+        "road": {
+          "title": "Road",
+          "body": "how wide the road in front is — it decides how tall we can build."
+        },
+        "title": {
+          "title": "Papers",
+          "body": "deed, mutation (namjari) and up-to-date land tax receipts."
+        },
+        "location": {
+          "title": "Location",
+          "body": "the area, nearby roads and what is already built around it."
+        }
+      },
+      "callInstead": "Prefer to talk first? Call",
+      "formTitle": "Tell us about your land",
+      "stepsEyebrow": "How it works",
+      "stepsTitle": "Four steps from first call to agreement",
+      "steps": {
+        "tell": {
+          "title": "You tell us",
+          "body": "Send the form or call. A land officer calls you back to understand the plot and the owners."
+        },
+        "visit": {
+          "title": "We visit",
+          "body": "We see the land with you, check access, road width and the surroundings."
+        },
+        "papers": {
+          "title": "Papers checked",
+          "body": "Our lawyer goes through the deed, mutation and tax records before any number is discussed."
+        },
+        "agree": {
+          "title": "Agreement",
+          "body": "Share, timeline and handover are written down plainly. Approvals and construction follow."
+        }
+      },
+      "stepsNote": "Every proposal depends on the land, the papers and the approvals — nothing on this page is an offer.",
+      "form": {
+        "legend": "Landowner enquiry",
+        "aboutYou": "About you",
+        "aboutLand": "About the land",
+        "location": "Where is the land?",
+        "locationHint": "Area, road or mouza — whatever you know",
+        "area": "Land area",
+        "areaUnit": "Unit",
+        "katha": "katha",
+        "decimal": "decimal",
+        "road": "Road in front",
+        "ft": "ft",
+        "ownership": "Ownership",
+        "ownershipOptions": {
+          "sole": "Sole owner",
+          "joint": "Joint owners",
+          "inherited": "Inherited (heirs)",
+          "company": "Company",
+          "other": "Other"
+        },
+        "mutation": "Mutation (namjari)",
+        "mutationOptions": {
+          "done": "Done",
+          "pending": "In progress",
+          "not_started": "Not started",
+          "unknown": "Don't know"
+        },
+        "choose": "Choose…",
+        "share": "Share you have in mind",
+        "shareHint": "e.g. 50:50 — optional, we can discuss",
+        "messagePlaceholder": "Anything else — number of owners, current use, best time to call",
+        "submit": "Send details",
+        "sentTitle": "Thank you",
+        "sentBody": "We have your land details. Our land officer will call you soon.",
+        "errLocation": "Tell us where the land is",
+        "errNumber": "Enter a number"
+      }
+    }
+  },
+  "crm": {
+    "eyebrow": "Sales",
+    "newLead": "New lead",
+    "newLeadHint": "A walk-in, a phone call or a referral. Website and Facebook leads arrive by themselves.",
+    "create": "Add lead",
+    "created": "{name} added",
+    "unassigned": "Unassigned",
+    "enquiries": "Enquiries",
+    "openLead": "Open {name}",
+    "moveTo": "Move to",
+    "moveMenu": "Move {name} to another stage",
+    "movedWon": "{name} marked as won",
+    "followUpAt": "Next:",
+    "followUpOverdue": "Overdue:",
+    "loadMore": "Load more",
+    "status": {
+      "open": "Open",
+      "won": "Won",
+      "lost": "Lost"
+    },
+    "types": {
+      "buyer": "Buyer",
+      "landowner": "Landowner",
+      "buyerPipeline": "Buyers",
+      "landownerPipeline": "Landowners (JV)"
+    },
+    "sources": {
+      "website": "Website",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "manual": "Manual entry",
+      "walk_in": "Walk-in",
+      "phone": "Phone call",
+      "referral": "Referral",
+      "other": "Other"
+    },
+    "lostReasons": {
+      "price": "Price",
+      "location": "Location",
+      "not_interested": "Not interested",
+      "unreachable": "Unreachable",
+      "bought_elsewhere": "Bought elsewhere",
+      "budget": "Budget",
+      "timing": "Timing",
+      "invalid": "Invalid / spam",
+      "other": "Other"
+    },
+    "sla": {
+      "title": "First-response time",
+      "left": "{time} left",
+      "late": "{time} late",
+      "minutes": "{n}m",
+      "hoursMinutes": "{h}h {m}m",
+      "days": "{n}d"
+    },
+    "views": {
+      "label": "Views",
+      "all": "All leads",
+      "mine": "My leads",
+      "unassigned": "Unassigned",
+      "slaMissed": "Response overdue",
+      "today": "Follow-up today",
+      "overdue": "Follow-up overdue"
+    },
+    "filters": {
+      "search": "Name, phone or email",
+      "clearSearch": "Clear search",
+      "type": "Lead type",
+      "allTypes": "All types",
+      "stage": "Stage",
+      "allStages": "All stages",
+      "source": "Source",
+      "allSources": "All sources",
+      "owner": "Owner",
+      "anyOwner": "Any owner",
+      "me": "Me",
+      "unassigned": "Unassigned",
+      "project": "Project",
+      "anyProject": "Any project",
+      "clear": "Clear filters"
+    },
+    "leads": {
+      "title": "Leads",
+      "description": "Everyone who has enquired — from the website, Facebook, calls and walk-ins.",
+      "export": "Export CSV",
+      "loadFailed": "Couldn't load leads",
+      "noMatches": "No leads match",
+      "noMatchesBody": "Try another view or clear the filters.",
+      "emptyTitle": "No leads yet",
+      "emptyBody": "Website and Facebook enquiries will appear here. You can also add one by hand."
+    },
+    "cols": {
+      "lead": "Lead",
+      "stage": "Stage",
+      "owner": "Owner",
+      "interest": "Interest",
+      "next": "Response / next step",
+      "created": "Arrived"
+    },
+    "bulk": {
+      "selected": "{n} selected",
+      "assignTo": "Give to…",
+      "unassign": "Nobody (unassign)",
+      "apply": "Apply",
+      "clear": "Clear",
+      "done": "{n} leads updated",
+      "selectAll": "Select all",
+      "select": "Select {name}"
+    },
+    "pipeline": {
+      "title": "Pipeline",
+      "description": "Drag a card to move it. On a phone, use the ••• menu on each card."
+    },
+    "board": {
+      "loadFailed": "Couldn't load the board",
+      "emptyTitle": "Nothing in this pipeline yet",
+      "emptyBody": "New leads land in the first column.",
+      "loadMore": "Show more",
+      "columnEmpty": "No leads",
+      "columns": "Stages",
+      "dragHelp": "Press space or enter to pick up a card, then use the ••• menu to choose a stage.",
+      "kind": {
+        "won": "Won",
+        "lost": "Lost"
+      }
+    },
+    "errors": {
+      "STALE_BOARD": "The board changed while you were working — it has been reloaded.",
+      "STALE_VERSION": "Someone else changed this lead. It has been reloaded.",
+      "STALE_POSITION": "The board changed — reloaded.",
+      "DUPLICATE_LEAD": "This phone number already has an open lead.",
+      "LOST_REASON_REQUIRED": "Pick why the lead was lost.",
+      "INVALID_PHONE": "Enter a Bangladesh mobile, or an international number with +country code.",
+      "INVALID_ASSIGNEE": "Pick an active sales person.",
+      "UNKNOWN_PROJECT": "That project no longer exists.",
+      "UNKNOWN_UNIT": "That unit no longer exists.",
+      "UNIT_PROJECT_MISMATCH": "The unit isn't in that project.",
+      "LEAD_CLOSED": "This lead is closed — reopen it to add tasks.",
+      "TYPE_MISMATCH": "Only leads of the same type can be merged.",
+      "INVALID_PIPELINE": "A pipeline needs at least one open stage, exactly one won stage and at least one lost stage.",
+      "STAGE_IN_USE": "A stage that still has leads can't be removed — move them first.",
+      "STAGE_KIND_LOCKED": "A stage with leads can't change its kind.",
+      "UNKNOWN_STAGE": "That stage belongs to another pipeline.",
+      "INVALID_OFFICE_HOURS": "Office hours must end after they start.",
+      "AUTO_REPLY_TOO_LONG": "The auto-reply is longer than 6 SMS — shorten it.",
+      "FIELD_NOT_ALLOWED": "Land details are only for landowner leads.",
+      "META_NOT_CONFIGURED": "Meta isn't set up on the server yet (META_APP_SECRET / META_VERIFY_TOKEN).",
+      "META_TOKEN_INVALID": "Meta refused the token — it is wrong, expired or lacks permissions.",
+      "META_PAGE_NOT_FOUND": "Meta couldn't find that Page with this token.",
+      "META_PAGE_MISMATCH": "The token belongs to a different Page.",
+      "META_SUBSCRIBE_FAILED": "Couldn't subscribe to the Page's lead forms.",
+      "META_PAGE_TAKEN": "This Page is already connected to another account.",
+      "META_TOKEN_UNREADABLE": "The stored token can't be read any more — connect the Page again.",
+      "DUPLICATE_FORM": "A form appears twice.",
+      "SMS_TOO_LONG": "The message is too long."
+    },
+    "lost": {
+      "title": "Mark as lost",
+      "description": "Why was {name} lost?",
+      "reason": "Reason",
+      "pick": "Choose a reason",
+      "note": "Note",
+      "confirm": "Mark lost"
+    },
+    "form": {
+      "name": "Name",
+      "phone": "Mobile",
+      "phoneHint": "Bangladesh mobile, or +country code for buyers abroad",
+      "altPhone": "Second number",
+      "email": "Email",
+      "source": "Source",
+      "referrer": "Referred by",
+      "interest": "Interest",
+      "project": "Project",
+      "noProject": "Not decided",
+      "bedrooms": "Bedrooms",
+      "budgetMin": "Budget from",
+      "budgetMax": "Budget to",
+      "land": "Land",
+      "landLocation": "Location",
+      "landArea": "Area",
+      "landUnit": "Unit",
+      "katha": "katha",
+      "decimal": "decimal",
+      "roadWidth": "Road width",
+      "ft": "ft",
+      "ownership": "Ownership",
+      "ownershipOptions": {
+        "sole": "Sole owner",
+        "joint": "Joint owners",
+        "inherited": "Inherited (heirs)",
+        "company": "Company",
+        "other": "Other"
+      },
+      "mutation": "Mutation (namjari)",
+      "mutationOptions": {
+        "done": "Done",
+        "pending": "In progress",
+        "not_started": "Not started",
+        "unknown": "Don't know"
+      },
+      "expectedShare": "Expected share",
+      "expectedShareHint": "e.g. 50:50",
+      "message": "First message",
+      "tags": "Tags",
+      "tagsHint": "Comma-separated, e.g. vip, nrb",
+      "owner": "Owner",
+      "ownerHint": "Automatic = the round-robin in CRM settings.",
+      "ownerAuto": "Automatic (round-robin)",
+      "ownerNone": "Nobody yet"
+    },
+    "validation": {
+      "min": "At least {n} characters",
+      "phone": "Enter a valid mobile number",
+      "email": "Enter a valid email",
+      "money": "Enter an amount in taka",
+      "number": "Enter a number",
+      "tags": "Up to 20 tags of letters, digits, - or _",
+      "budgetOrder": "“To” must not be less than “from”"
+    },
+    "duplicate": {
+      "title": "Already a lead",
+      "body": "This number already has an open lead (owner: {owner}). Add your note there instead.",
+      "hidden": "This number already has an open lead owned by someone else. Ask your manager.",
+      "open": "Open that lead"
+    },
+    "drawer": {
+      "title": "Lead",
+      "notFound": "Lead not found",
+      "notFoundBody": "It may have been merged, deleted or given to someone else.",
+      "loadFailed": "Couldn't load this lead",
+      "assigned": "Owner updated",
+      "stale": "Someone else changed this lead — reloaded.",
+      "deleted": "Lead deleted",
+      "enquiries": "{n} enquiries",
+      "escalated": "Managers alerted",
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "more": "More actions",
+      "merge": "Merge a duplicate into this lead…",
+      "delete": "Delete lead",
+      "stage": "Stage",
+      "owner": "Owner",
+      "unassigned": "Unassigned",
+      "you": "you",
+      "sections": "Lead sections",
+      "tabs": {
+        "activity": "Activity",
+        "tasks": "Tasks",
+        "details": "Details"
+      },
+      "deleteTitle": "Delete this lead?",
+      "deleteBody": "{name} will be removed from every list. Open tasks are cancelled. This is recorded in the audit log."
+    },
+    "details": {
+      "saved": "Lead updated",
+      "stale": "Someone else changed this lead — the latest version is loaded. Check and save again.",
+      "edit": "Edit details",
+      "unit": "Unit",
+      "budget": "Budget",
+      "created": "Arrived",
+      "campaign": "Form / campaign",
+      "page": "Website page",
+      "firstResponse": "First response",
+      "noResponse": "Not yet",
+      "message": "First message",
+      "lostBecause": "Lost — {reason}"
+    },
+    "merge": {
+      "title": "Merge a duplicate",
+      "description": "Pick the other lead for {name}. It will be folded into this one.",
+      "search": "Search by name or phone",
+      "none": "No other open lead found",
+      "confirm": "Merge",
+      "done": "{name} merged",
+      "explain": "{source}'s timeline and tasks move to {target}, enquiry counts add up and empty fields are filled. {source} then disappears from lists."
+    },
+    "composer": {
+      "type": "What happened",
+      "outcome": "Call outcome",
+      "body": "Details",
+      "notePlaceholder": "Write a note…",
+      "bodyPlaceholder": "What was said (optional)",
+      "minutes": "Minutes",
+      "when": "When",
+      "whenHint": "Leave empty for now",
+      "addNote": "Add note",
+      "log": "Log it",
+      "logged": "Saved to the timeline"
+    },
+    "activityTypes": {
+      "note": "Note",
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "sms": "SMS",
+      "email": "Email",
+      "meeting": "Meeting",
+      "site_visit": "Site visit"
+    },
+    "callOutcomes": {
+      "connected": "Connected",
+      "no_answer": "No answer",
+      "busy": "Busy",
+      "switched_off": "Switched off",
+      "wrong_number": "Wrong number",
+      "call_back": "Call back later"
+    },
+    "timeline": {
+      "empty": "Nothing here yet.",
+      "older": "Show older",
+      "system": "System",
+      "duration": "{m} min",
+      "call": "{actor} logged a call",
+      "note": "{actor} added a note",
+      "sms": "{actor} logged an SMS",
+      "email": "{actor} logged an email",
+      "whatsapp": "{actor} logged a WhatsApp chat",
+      "meeting": "{actor} logged a meeting",
+      "site_visit": "{actor} logged a site visit",
+      "createdBy": "{actor} added this lead",
+      "created": "Arrived from {source}",
+      "source": {
+        "website": "Website",
+        "facebook": "Facebook",
+        "instagram": "Instagram",
+        "manual": "Manual entry",
+        "walk_in": "Walk-in",
+        "phone": "Phone call",
+        "referral": "Referral",
+        "other": "Other"
+      },
+      "enquiry": "Enquired again via {source}",
+      "stageChange": "{actor} moved it from {from} to {to}",
+      "lost": {
+        "price": "Price",
+        "location": "Location",
+        "not_interested": "Not interested",
+        "unreachable": "Unreachable",
+        "bought_elsewhere": "Bought elsewhere",
+        "budget": "Budget",
+        "timing": "Timing",
+        "invalid": "Invalid / spam",
+        "other": "Other"
+      },
+      "assigned": "{actor} gave it to {to}",
+      "assignedAuto": "Assigned to {to} automatically",
+      "unassigned": "{actor} removed the owner",
+      "merged": "Merged with {name}",
+      "taskCreated": "{actor} added a task",
+      "taskDone": "{actor} completed a task",
+      "updated": "{actor} edited {fields}",
+      "field": {
+        "name": "name",
+        "phone": "phone",
+        "altPhone": "second number",
+        "email": "email",
+        "source": "source",
+        "sourceDetail": "source details",
+        "interest": "interest",
+        "land": "land details",
+        "tags": "tags"
+      },
+      "autoReply": {
+        "sent": "Auto-reply SMS sent ({n} SMS)",
+        "failed": "Auto-reply SMS failed",
+        "skipped": "Auto-reply SMS not sent"
+      },
+      "slaEscalated": "First response overdue — {n} managers alerted",
+      "metaLead": "Arrived from Meta form “{form}”",
+      "outcome": {
+        "connected": "Connected",
+        "no_answer": "No answer",
+        "busy": "Busy",
+        "switched_off": "Switched off",
+        "wrong_number": "Wrong number",
+        "call_back": "Call back later"
+      },
+      "smsError": {
+        "UNSUPPORTED_DESTINATION": "Not a Bangladesh mobile — SMS not possible",
+        "EXPIRED": "Not sent in time",
+        "INVALID_NUMBER": "Invalid number",
+        "AUTH_FAILED": "SMS account / API key problem",
+        "SENDER_ID_INVALID": "Sender ID not approved",
+        "INSUFFICIENT_BALANCE": "No SMS balance",
+        "BALANCE_EXPIRED": "SMS balance expired",
+        "IP_NOT_WHITELISTED": "Server IP not whitelisted",
+        "MASKING_NEEDS_BANGLA": "Masking SMS must be in Bangla",
+        "PROVIDER_REJECTED": "Rejected by the provider",
+        "PROVIDER_DOWN": "Provider error",
+        "PROVIDER_UNREACHABLE": "Provider unreachable",
+        "PROVIDER_BAD_RESPONSE": "Unexpected provider reply",
+        "INTERNAL": "Internal error"
+      }
+    },
+    "tasks": {
+      "doneToast": "Task done",
+      "stale": "This task changed — reloaded.",
+      "complete": "Mark “{title}” done",
+      "overdue": "Overdue ·",
+      "cancel": "Cancel task",
+      "title": "What to do",
+      "titlePlaceholder": "e.g. Call back about the 3-bed unit",
+      "type": "Type",
+      "due": "Due",
+      "remind": "Remind me",
+      "owner": "For",
+      "ownerDefault": "The lead's owner",
+      "add": "Add task",
+      "added": "Task added",
+      "new": "New task",
+      "none": "No open tasks.",
+      "showDone": "Completed tasks",
+      "noneDone": "None yet.",
+      "types": {
+        "call": "Call",
+        "visit": "Site visit",
+        "meeting": "Meeting",
+        "follow_up": "Follow-up",
+        "other": "Other"
+      },
+      "remindOptions": {
+        "0": "At the due time",
+        "15": "15 minutes before",
+        "30": "30 minutes before",
+        "60": "1 hour before",
+        "120": "2 hours before",
+        "1440": "1 day before",
+        "none": "No reminder"
+      }
+    },
+    "myTasks": {
+      "eyebrow": "Sales",
+      "title": "My tasks",
+      "description": "Calls, visits and follow-ups due — oldest first.",
+      "count": {
+        "overdue": "overdue",
+        "today": "due today"
+      },
+      "due": "When",
+      "dueOptions": {
+        "overdue": "Overdue",
+        "today": "Today",
+        "upcoming": "Upcoming",
+        "all": "All open"
+      },
+      "scope": "Whose",
+      "scopeOptions": {
+        "mine": "Mine",
+        "all": "Everyone"
+      },
+      "loadFailed": "Couldn't load tasks",
+      "empty": {
+        "overdue": "Nothing overdue",
+        "today": "Nothing due today",
+        "upcoming": "Nothing coming up",
+        "all": "No open tasks"
+      },
+      "emptyBody": "Add tasks from a lead's Tasks tab.",
+      "more": "Show more"
+    },
+    "notifications": {
+      "label": "Notifications",
+      "labelUnread": "Notifications, {n} unread",
+      "title": "Notifications",
+      "markAll": "Mark all read",
+      "empty": "You're all caught up.",
+      "assigned": "{name} was given to you",
+      "enquiry": "{name} enquired again",
+      "unassigned": "New lead {name} needs an owner",
+      "taskDue": "Due: {title} — {name}",
+      "sla": "{name} is waiting past the response time",
+      "slaOwner": "{name} is waiting past the response time ({owner})",
+      "integration": "{integration} stopped working: {message}",
+      "integrations": {
+        "meta": "Facebook lead forms",
+        "sms": "SMS"
+      }
+    },
+    "settings": {
+      "eyebrow": "Administration",
+      "title": "CRM settings",
+      "description": "Pipeline stages, who gets new leads, the response clock and the customer auto-reply.",
+      "loadFailed": "Couldn't load the settings",
+      "saved": "Saved",
+      "stale": "Someone else changed these settings — reloaded. Check and save again.",
+      "stages": {
+        "title": "Pipeline stages",
+        "description": "The Kanban columns. New leads land in the first open stage.",
+        "pipeline": "Pipeline",
+        "up": "Move up",
+        "down": "Move down",
+        "name": "Name (English)",
+        "nameBn": "Name (Bangla)",
+        "kind": "Kind",
+        "kinds": {
+          "open": "Open",
+          "won": "Won",
+          "lost": "Lost"
+        },
+        "color": "Colour",
+        "colors": {
+          "neutral": "Grey",
+          "sage": "Sage",
+          "olive": "Olive",
+          "sand": "Sand",
+          "clay": "Clay",
+          "sky": "Sky",
+          "success": "Green",
+          "danger": "Red"
+        },
+        "leadsInStage": "Leads in this stage",
+        "inUse": "Has leads — move them first",
+        "remove": "Remove stage",
+        "rules": "3–15 stages: at least one open, exactly one won and at least one lost. Stages that hold leads can't be removed or change kind.",
+        "add": "Add stage",
+        "save": "Save stages",
+        "saved": "Stages saved"
+      },
+      "assignment": {
+        "title": "Who gets new leads",
+        "description": "Website and Facebook leads are given out automatically, or wait for a manager.",
+        "mode": "Assignment",
+        "modes": {
+          "round_robin": "Round-robin",
+          "manual": "Manager assigns"
+        },
+        "modeHelp": {
+          "round_robin": "Each new lead goes to the next active sales executive in turn.",
+          "manual": "New leads stay unassigned; managers are notified and give them out."
+        },
+        "teams": "Project teams",
+        "teamsHelp": "Optional: leads for a project rotate only inside its team.",
+        "project": "Project",
+        "pickProject": "Choose a project",
+        "removeTeam": "Remove team",
+        "addTeam": "Add team",
+        "save": "Save assignment"
+      },
+      "sla": {
+        "title": "First-response time",
+        "description": "How fast a new lead must be contacted. Managers are alerted when it's missed.",
+        "enabled": "Track first response",
+        "enabledHelp": "Counted in office hours only.",
+        "minutes": "Minutes",
+        "minutesRange": "5 to 1440",
+        "officeStart": "Office opens",
+        "officeEnd": "Office closes",
+        "weekend": "Days off",
+        "weekendHelp": "The clock pauses on these days.",
+        "days": {
+          "0": "Sun",
+          "1": "Mon",
+          "2": "Tue",
+          "3": "Wed",
+          "4": "Thu",
+          "5": "Fri",
+          "6": "Sat"
+        },
+        "save": "Save response time"
+      },
+      "autoReply": {
+        "title": "Customer auto-reply",
+        "description": "One SMS to a new website or Facebook lead — at most once per number a day.",
+        "enabled": "Send the auto-reply",
+        "enabledHelp": "Bangladesh mobiles only. Manual entries and repeat enquiries don't get it.",
+        "textBn": "Bangla text",
+        "textEn": "English text",
+        "insert": "Insert:",
+        "rules": "'{name}' becomes the lead's name, '{company}' your company name. Bangla SMS hold 70 characters (67 when split), English 160 (153). Keep it within 6 SMS.",
+        "save": "Save auto-reply",
+        "length": "{chars} characters · {segments} SMS · {encoding}",
+        "cost": "about ৳{taka}",
+        "tooLong": "too long",
+        "encoding": {
+          "gsm7": "plain text",
+          "ucs2": "Unicode"
+        }
+      }
+    },
+    "integrations": {
+      "eyebrow": "Administration",
+      "title": "Integrations",
+      "description": "Facebook / Instagram lead forms and SMS.",
+      "loadFailed": "Couldn't load the integrations",
+      "sms": {
+        "title": "SMS",
+        "live": "Sending",
+        "logOnly": "Log only",
+        "logHelp": "SMS_DRIVER is “log”: messages are written to the server log, nothing is sent. Set the provider keys in the server .env to go live.",
+        "driver": "Provider",
+        "drivers": {
+          "log": "Log (test)",
+          "bulksmsbd": "BulkSMSBD",
+          "sslwireless": "SSL Wireless"
+        },
+        "sender": "Sender ID",
+        "perSegment": "Per SMS",
+        "taka": "৳{n}",
+        "thisMonth": "This month",
+        "monthValue": "{count} sent · {segments} SMS · {cost}",
+        "failedThisMonth": "{n} failed this month — see the log below.",
+        "testTo": "Send a test to",
+        "testHint": "Bangladesh mobile",
+        "sendTest": "Send test",
+        "testQueued": "Test SMS queued"
+      },
+      "smsLog": {
+        "title": "SMS log",
+        "description": "Every SMS the system sent or tried to send.",
+        "status": "Status",
+        "allStatuses": "All statuses",
+        "statuses": {
+          "sent": "Sent",
+          "queued": "Queued",
+          "failed": "Failed",
+          "skipped": "Skipped"
+        },
+        "purpose": "Purpose",
+        "allPurposes": "All",
+        "purposes": {
+          "lead_auto_reply": "Auto-reply",
+          "test": "Test"
+        },
+        "loadFailed": "Couldn't load the SMS log",
+        "empty": "No SMS yet",
+        "emptyBody": "Auto-replies appear here once website or Facebook leads arrive.",
+        "when": "When",
+        "to": "To",
+        "message": "Message",
+        "segments": "SMS",
+        "more": "Show more",
+        "errors": {
+          "UNSUPPORTED_DESTINATION": "Not a Bangladesh mobile — SMS not possible",
+          "EXPIRED": "Not sent in time",
+          "INVALID_NUMBER": "Invalid number",
+          "AUTH_FAILED": "SMS account / API key problem",
+          "SENDER_ID_INVALID": "Sender ID not approved",
+          "INSUFFICIENT_BALANCE": "No SMS balance",
+          "BALANCE_EXPIRED": "SMS balance expired",
+          "IP_NOT_WHITELISTED": "Server IP not whitelisted",
+          "MASKING_NEEDS_BANGLA": "Masking SMS must be in Bangla",
+          "PROVIDER_REJECTED": "Rejected by the provider",
+          "PROVIDER_DOWN": "Provider error",
+          "PROVIDER_UNREACHABLE": "Provider unreachable",
+          "PROVIDER_BAD_RESPONSE": "Unexpected provider reply",
+          "INTERNAL": "Internal error"
+        }
+      },
+      "meta": {
+        "title": "Facebook & Instagram lead forms",
+        "notConfigured": "Not set up",
+        "notConnected": "No Page connected",
+        "active": "Connected",
+        "broken": "Needs attention",
+        "sync": "Sync now",
+        "disconnect": "Disconnect",
+        "configureHelp": "Add these to the server .env (from your Meta app), restart the API, then come back to connect the Page.",
+        "webhookLabel": "Webhook URL for the Meta app (Webhooks › Page › leadgen)",
+        "webhookHelp": "Use your public API address. Verify token = META_VERIFY_TOKEN. Graph {version}.",
+        "connected": "Page connected — importing the last 48 hours",
+        "cancel": "Cancel",
+        "replace": "Replace token",
+        "connect": "Connect Page",
+        "steps": {
+          "step1": "In Meta Business Settings, create a System User with access to the Page and the ad account.",
+          "step2": "Generate a token with leads_retrieval, pages_manage_metadata, pages_show_list, pages_read_engagement and ads_management.",
+          "step3": "Paste the Page ID and the token here. The token is stored encrypted and never shown again."
+        },
+        "pageId": "Page ID",
+        "token": "Access token",
+        "tokenHint": "System-user or Page token",
+        "page": "Page",
+        "tokenLabel": "Token",
+        "lastLead": "Last lead",
+        "never": "Never",
+        "lastCheck": "Last nightly check",
+        "checkSummary": "{checked} checked, {imported} recovered",
+        "last7": "Last 7 days: {imported} imported · {duplicate} repeat enquiries · {failed} failed.",
+        "replaceToken": "Replace token",
+        "formsTitle": "Lead forms",
+        "reconnect": "Connect again",
+        "errors": {
+          "META_TOKEN_INVALID": "The token stopped working (expired, revoked or missing permissions).",
+          "META_RATE_LIMITED": "Meta is rate-limiting requests — it will catch up.",
+          "META_UNREACHABLE": "Meta couldn't be reached.",
+          "META_GRAPH_ERROR": "Meta returned an error."
+        },
+        "syncQueued": "Sync started",
+        "syncAlready": "A sync is already running",
+        "disconnected": "Page disconnected",
+        "disconnectTitle": "Disconnect the Page?",
+        "disconnectBody": "New leads from {page} will stop arriving. Leads already imported stay."
+      },
+      "forms": {
+        "none": "This Page has no lead forms yet.",
+        "help": "Choose the pipeline (and project) for each form. Forms you leave as Buyer without a project need no setting.",
+        "pipeline": "Pipeline",
+        "project": "Project",
+        "noProject": "No project",
+        "save": "Save forms",
+        "saved": "Forms saved"
+      },
+      "metaLog": {
+        "title": "Import log",
+        "status": "Status",
+        "all": "All",
+        "statuses": {
+          "imported": "Imported",
+          "duplicate": "Repeat enquiry",
+          "failed": "Failed",
+          "received": "Waiting",
+          "processing": "Importing"
+        },
+        "loadFailed": "Couldn't load the import log",
+        "empty": "No leads from Meta yet.",
+        "when": "Submitted",
+        "lead": "Lead",
+        "viaLabel": "Via",
+        "via": {
+          "webhook": "Instant",
+          "reconcile": "Nightly check",
+          "retry": "Retry"
+        },
+        "actions": "Actions",
+        "openLead": "Open lead",
+        "retry": "Retry",
+        "retryQueued": "Retry queued",
+        "more": "Show more",
+        "errors": {
+          "NO_PHONE": "The form has no usable phone number",
+          "NOT_CONNECTED": "The Page isn't connected",
+          "META_TOKEN_INVALID": "Token stopped working",
+          "META_RATE_LIMITED": "Rate-limited by Meta",
+          "META_UNREACHABLE": "Meta unreachable",
+          "META_GRAPH_ERROR": "Meta error",
+          "INTAKE_FAILED": "Couldn't save the lead"
+        }
+      }
     }
   }
 }
