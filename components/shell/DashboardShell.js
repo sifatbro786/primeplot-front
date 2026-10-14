@@ -57,7 +57,7 @@ export function DashboardShell({ children }) {
 
   return (
     <div className="flex min-h-dvh flex-1">
-      <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 lg:block">{sidebar()}</aside>
+      <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 lg:block print:hidden">{sidebar()}</aside>
 
       <dialog
         ref={navRef}
@@ -71,7 +71,7 @@ export function DashboardShell({ children }) {
       </dialog>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-line bg-canvas/90 px-4 backdrop-blur-sm sm:px-6">
+        <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-line bg-canvas/90 px-4 backdrop-blur-sm sm:px-6 print:hidden">
           <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setNavOpen(true)} aria-label={ts("openMenu")}>
             <Menu className="size-5" />
           </Button>
@@ -94,7 +94,7 @@ export function DashboardShell({ children }) {
           <UserMenu user={session.user} accountHref={ACCOUNT} />
         </header>
 
-        <main className="flex-1 px-4 py-8 sm:px-8">
+        <main className="flex-1 px-4 py-8 sm:px-8 print:p-0">
           {session.isError ? (
             <ErrorState
               title={ts("loadFailed")}

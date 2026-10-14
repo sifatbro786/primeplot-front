@@ -190,7 +190,9 @@
     "tasks": "My tasks",
     "crmSettings": "CRM settings",
     "integrations": "Integrations",
-    "website": "Website"
+    "website": "Website",
+    "customers": "Customers",
+    "cheques": "Cheques"
   },
   "portalNav": {
     "label": "Portal navigation",
@@ -519,7 +521,8 @@
       "prices": "Price list",
       "gallery": "Gallery",
       "construction": "Construction",
-      "seo": "SEO"
+      "seo": "SEO",
+      "sales": "Sales"
     },
     "fields": {
       "kind": "Project type",
@@ -791,7 +794,9 @@
       "blockedOk": "Unit blocked — it's hidden from the website.",
       "reason": "Reason",
       "blockNoteHint": "Required for \"Other\".",
-      "confirmBlock": "Block unit"
+      "confirmBlock": "Block unit",
+      "book": "Book",
+      "openBooking": "Open booking"
     },
     "blockReasons": {
       "landowner_share": "Landowner's share",
@@ -1792,6 +1797,44 @@
     "preview": {
       "banner": "Preview — you are seeing unpublished changes.",
       "exit": "Exit preview"
+    },
+    "verify": {
+      "metaTitle": "Document check",
+      "eyebrow": "Document verification",
+      "valid": {
+        "title": "Genuine document",
+        "body": "This document was issued by the company and is still valid. The details below must match the paper in your hand."
+      },
+      "void": {
+        "title": "This document is void",
+        "body": "It was issued by the company but later cancelled: {reason}. Do not accept it."
+      },
+      "unknown": {
+        "title": "No such document",
+        "body": "This code does not match any document we issued. The paper may be forged or the link mistyped — contact the company."
+      },
+      "fields": {
+        "type": "Document",
+        "number": "Number",
+        "date": "Date",
+        "issuer": "Issued by",
+        "project": "Project",
+        "unit": "Unit",
+        "holder": "Holder",
+        "amount": "Amount",
+        "fingerprint": "Fingerprint"
+      },
+      "note": "For privacy the holder's name is partly hidden and no phone, NID or address is shown.",
+      "home": "Go to the website",
+      "types": {
+        "receipt": "Money receipt",
+        "booking_form": "Booking form",
+        "allotment_letter": "Allotment letter",
+        "statement": "Statement of account",
+        "cancellation_letter": "Cancellation letter",
+        "transfer_letter": "Transfer letter",
+        "cheque_ack": "Cheque acknowledgement"
+      }
     }
   },
   "crm": {
@@ -2046,7 +2089,8 @@
         "details": "Details"
       },
       "deleteTitle": "Delete this lead?",
-      "deleteBody": "{name} will be removed from every list. Open tasks are cancelled. This is recorded in the audit log."
+      "deleteBody": "{name} will be removed from every list. Open tasks are cancelled. This is recorded in the audit log.",
+      "book": "Book a unit"
     },
     "details": {
       "saved": "Lead updated",
@@ -2270,7 +2314,8 @@
       "integrations": {
         "meta": "Facebook lead forms",
         "sms": "SMS"
-      }
+      },
+      "chequeBounced": "Cheque {no} of {name} bounced ({booking})"
     },
     "settings": {
       "eyebrow": "Administration",
@@ -2894,6 +2939,1044 @@
       "brickwork": "Brickwork",
       "finishing": "Finishing",
       "handover": "Handover"
+    }
+  },
+  "sales": {
+    "errors": {
+      "PROJECT_CODE_REQUIRED": "This project has no short code yet. Set it in the project's Sales tab — booking and receipt numbers use it.",
+      "UNIT_HELD_BY_OTHER": "Someone else is holding this unit. Ask them (or a manager) to release it.",
+      "UNIT_STATE_CONFLICT": "This unit is no longer available. Pick another unit.",
+      "UNIT_NOT_AVAILABLE": "This unit is not available for booking.",
+      "PRICE_CHANGED": "The price changed while you were working (now {listTotal}). Check the new figures and confirm again.",
+      "PRICE_NOT_SET": "This unit has no price yet — set the project's rate card first.",
+      "DISCOUNT_LIMIT": "Your discount limit is {cap}% of the base price ({maxAmount}). Ask a manager for a bigger discount.",
+      "INVALID_DISCOUNT": "The discount is not valid for this price.",
+      "CUSTOM_SCHEDULE_NOT_ALLOWED": "Only managers can make a custom schedule.",
+      "WAIVE_NOT_ALLOWED": "Only managers can book without booking money.",
+      "BOOKING_MONEY_REQUIRED": "Booking money ({required}) is required to book.",
+      "BOOKING_MONEY_SHORT": "That is less than the booking money ({required}).",
+      "OVERPAYMENT": "That is more than the outstanding balance ({outstanding}).",
+      "INVALID_LEAD": "This lead can't be linked to the booking (not yours, or not a buyer lead).",
+      "PLAN_EXCEEDS_PRICE": "The plan's fixed parts add up to more than the price.",
+      "INVALID_PLAN": "This payment plan can't be used — check its parts.",
+      "SCHEDULE_TOTAL_MISMATCH": "The schedule must add up to the contract price exactly (difference {difference}).",
+      "INVALID_SCHEDULE": "The schedule is not valid — check the dates and the booking money row.",
+      "BOOKING_DATE_IN_FUTURE": "The booking date can't be in the future.",
+      "BOOKING_DATE_TOO_OLD": "The booking date is further back than the settings allow.",
+      "INVALID_BANK_ACCOUNT": "Choose an active company bank account.",
+      "INVALID_PHONE": "Enter a valid phone number.",
+      "BOOKING_NOT_ACTIVE": "This booking is cancelled.",
+      "BOOKING_BUSY": "Another payment is being saved on this booking. Try again in a moment.",
+      "RECEIPT_DATE_IN_FUTURE": "The receipt date can't be in the future.",
+      "RECEIPT_DATE_TOO_OLD": "The receipt date is further back than the settings allow.",
+      "RECEIPT_BEFORE_BOOKING": "The receipt date can't be before the booking date.",
+      "ALREADY_REVERSED": "This receipt was already reversed.",
+      "IDEMPOTENCY_KEY_REUSED": "This form was already used for another save. Check the booking list before trying again.",
+      "INVALID_IDEMPOTENCY_KEY": "Reload the page and try again.",
+      "STALE_VERSION": "Someone else changed this in the meantime. The latest version has been loaded — check and save again.",
+      "DUPLICATE_CHEQUE": "This cheque (same bank and number) is already in the register.",
+      "CHEQUE_STALE": "This cheque is dated more than 6 months ago — banks won't honour it.",
+      "INVALID_CHEQUE_DATE": "The cheque can't be dated before the booking.",
+      "INVALID_MEDIA": "One of the files is missing or not a private upload. Upload it again.",
+      "DUPLICATE": "A record with the same value already exists.",
+      "OPEN_CHEQUES": "Clear or return the open cheques of this booking first.",
+      "OVERDUE_DUES": "There are overdue dues ({overdue}). Collect them before transferring.",
+      "SAME_HOLDER": "The new holder is the current holder.",
+      "BOOKING_STAGE_CONFLICT": "Not possible at this stage of the booking.",
+      "DATE_IN_FUTURE": "The date can't be in the future.",
+      "DATE_TOO_EARLY": "The date can't be before the booking date.",
+      "CHEQUE_STATE_CONFLICT": "The cheque's status changed — reload and try again.",
+      "ITEM_PAID_LOCKED": "Something was already paid on this item — it can't be waived.",
+      "DEDUCTION_OVERRIDE_NOT_ALLOWED": "Only managers can change the cancellation deduction.",
+      "OVERRIDE_REASON_REQUIRED": "Give a reason for the changed deduction.",
+      "INVALID_DEDUCTION": "The deduction is more than what was paid.",
+      "BOOKING_NOT_CANCELLED": "Refunds are only for cancelled bookings.",
+      "REFUND_EXCEEDS_DUE": "That is more than the refund due ({refundDue}).",
+      "PDF_UNAVAILABLE": "PDF printing is not available on the server right now (Chrome missing). Use Print instead.",
+      "PROJECT_CODE_LOCKED": "Numbers were already issued with this code — it can no longer change."
+    },
+    "validation": {
+      "amount": "Enter an amount in taka (up to 2 decimals).",
+      "belowMin": "Less than the booking money.",
+      "aboveMax": "More than the outstanding balance.",
+      "required": "Required.",
+      "chequeNo": "4–20 digits or letters.",
+      "min2": "At least 2 characters.",
+      "nid": "NID is 10, 13 or 17 digits.",
+      "passport": "6–12 letters or digits.",
+      "tin": "TIN is 12 digits.",
+      "phone": "Enter a valid phone number.",
+      "email": "Enter a valid e-mail address.",
+      "percent": "A percentage from 0 to 100 (up to 2 decimals).",
+      "days366": "0 to 366 days.",
+      "days365": "0 to 365 days.",
+      "bounceFee": "At most ৳1,00,000.",
+      "accountNo": "4–40 digits, letters or dashes.",
+      "routingNo": "Routing number is 9 digits.",
+      "projectCode": "2–6 letters/digits, starting with a letter (e.g. LVR).",
+      "count240": "1 to 240 installments.",
+      "months36": "0 to 36 months.",
+      "milestoneKey": "Unique, lowercase a–z, 0–9 and _.",
+      "planExceeds": "On this sample the fixed parts leave nothing for the balance.",
+      "invalidPlan": "This plan is not valid yet.",
+      "balanceTwice": "With installments, the handover payment must be a percent or a fixed amount — the installments take the balance.",
+      "balanceNone": "Add installments, or let the handover payment take the balance.",
+      "share": "Whole number from 1 to 100.",
+      "shares100": "Nominee shares must add up to 100%.",
+      "oneBookingMoney": "Keep exactly one booking money row.",
+      "scheduleTotal": "The rows must add up to the contract price.",
+      "scheduleEmpty": "Add the schedule rows.",
+      "dueBeforeBooking": "A due date is before the booking date.",
+      "chooseUnit": "Choose a unit to book.",
+      "unitGone": "This unit can't be booked any more — choose another.",
+      "chooseCustomer": "Choose or add the applicant.",
+      "dateFuture": "The date can't be in the future.",
+      "dateTooOld": "The date is further back than the settings allow.",
+      "beforeBooking": "Can't be before the booking date.",
+      "choosePlan": "Choose a payment plan.",
+      "scheduleInvalid": "Fix the custom schedule: it must add up to the contract price exactly.",
+      "reason3": "Give a reason (at least 3 characters).",
+      "previewPending": "Wait for the price check to finish (or fix the problem shown) before continuing.",
+      "chequeBeforeBooking": "The cheque can't be dated before the booking."
+    },
+    "payment": {
+      "amount": "Amount",
+      "mode": "Paid by",
+      "modes": {
+        "cash": "Cash",
+        "bank_transfer": "Bank transfer",
+        "pay_order": "Pay order",
+        "cheque": "Cheque",
+        "online": "Online",
+        "slip": "Bank slip"
+      },
+      "bankAccount": "Received in",
+      "noBankAccounts": "No company bank account yet — add one under Accounts › Bank accounts.",
+      "chooseAccount": "Choose the company account",
+      "reference": "Transfer reference",
+      "instrumentNo": "Pay order no.",
+      "instrumentBank": "Issuing bank",
+      "instrumentDate": "Pay order date",
+      "chequeNo": "Cheque no.",
+      "bank": "Bank",
+      "branch": "Branch",
+      "chequeDate": "Cheque date",
+      "chequeDateHint": "A later date makes it a post-dated cheque (PDC).",
+      "note": "Note"
+    },
+    "stage": {
+      "booked": "Booked",
+      "allotted": "Allotted",
+      "registered": "Registered",
+      "handed_over": "Handed over",
+      "cancelled": "Cancelled"
+    },
+    "itemStatus": {
+      "paid": "Paid",
+      "partial": "Part paid",
+      "due": "Due today",
+      "overdue": "Overdue",
+      "upcoming": "Upcoming",
+      "not_called": "Not called"
+    },
+    "price": {
+      "listTotal": "List price",
+      "discount": "Discount",
+      "contractTotal": "Contract price"
+    },
+    "schedule": {
+      "item": "Item",
+      "due": "Due",
+      "amount": "Amount",
+      "paid": "Paid",
+      "status": "Status",
+      "charge": "charge",
+      "willPay": "This payment: {amount}",
+      "whenCalled": "When called",
+      "total": "Total"
+    },
+    "customSchedule": {
+      "seed": "Start from the plan",
+      "addRow": "Add row",
+      "type": "Type",
+      "label": "Label",
+      "labelAuto": "Automatic",
+      "removeRow": "Remove row",
+      "codes": {
+        "booking_money": "Booking money",
+        "down_payment": "Down payment",
+        "installment": "Installment",
+        "milestone": "Milestone",
+        "handover": "At handover"
+      },
+      "sum": "{sum} of {contract}",
+      "short": "{amount} short",
+      "over": "{amount} over",
+      "fixLast": "Put the difference on the last row",
+      "hint": "Booking money is due on the booking date. Leave a date empty for a payment that is called later (milestone, handover)."
+    },
+    "nominees": {
+      "name": "Name",
+      "relation": "Relation",
+      "relationPlaceholder": "e.g. Son",
+      "share": "Share",
+      "phone": "Phone",
+      "nid": "NID",
+      "remove": "Remove nominee",
+      "add": "Add nominee",
+      "sum": "Shares: {n}% of 100%",
+      "none": "No nominees."
+    },
+    "customers": {
+      "eyebrow": "Sales",
+      "title": "Customers",
+      "description": "Buyer profiles used on bookings, receipts and letters.",
+      "new": "New customer",
+      "loadFailed": "Couldn't load customers.",
+      "noMatches": "No customer matches this search.",
+      "emptyTitle": "No customers yet",
+      "emptyBody": "Customers are added when you book a unit, or here.",
+      "cols": {
+        "customer": "Customer",
+        "phone": "Phone",
+        "nid": "NID / passport",
+        "created": "Added"
+      },
+      "newTitle": "New customer",
+      "newDescription": "As written on the NID — this goes on the booking form and receipts.",
+      "editTitle": "Edit customer",
+      "saved": "Customer saved.",
+      "created": "Customer {no} added.",
+      "duplicateNid": "A customer with this NID already exists — search for them instead.",
+      "create": "Add customer",
+      "localeDefault": "Company default",
+      "sections": {
+        "identity": "Identity",
+        "contact": "Contact & address",
+        "papers": "Papers & notes"
+      },
+      "fields": {
+        "name": "Full name (English)",
+        "nameBn": "Full name (Bangla)",
+        "fatherName": "Father's name",
+        "motherName": "Mother's name",
+        "spouseName": "Spouse's name",
+        "dateOfBirth": "Date of birth",
+        "nid": "NID",
+        "passportNo": "Passport no.",
+        "tin": "TIN",
+        "nationality": "Nationality",
+        "phone": "Mobile",
+        "altPhone": "Other phone",
+        "email": "E-mail",
+        "locale": "Document language",
+        "presentAddress": "Present address",
+        "permanentAddress": "Permanent address",
+        "foreignAddress": "Address abroad",
+        "occupation": "Occupation",
+        "organization": "Organisation",
+        "notes": "Internal notes"
+      },
+      "hints": {
+        "nid": "Smart card 10 digits, old NID 13 or 17.",
+        "phone": "Bangladeshi or international (+44…) number.",
+        "email": "Receipts with the PDF are e-mailed here.",
+        "locale": "Language of the receipts and letters this customer gets.",
+        "foreignAddress": "For buyers living abroad (NRB)."
+      },
+      "notFound": "Customer not found",
+      "back": "All customers",
+      "edit": "Edit",
+      "bookingsTitle": "Bookings",
+      "noBookings": "No bookings yet.",
+      "noPapers": "No papers uploaded.",
+      "picker": {
+        "search": "Search by name, phone, NID or customer no.",
+        "new": "New customer",
+        "none": "No match. Add them as a new customer.",
+        "remove": "Remove"
+      },
+      "files": {
+        "unavailable": "Not available to you",
+        "file": "File",
+        "remove": "Remove file",
+        "addPhoto": "Add photo",
+        "replacePhoto": "Replace photo",
+        "removePhoto": "Remove photo",
+        "addDocuments": "Upload NID / papers",
+        "documentsHint": "NID, passport, photo pages — JPG, PNG, WebP or PDF, up to 10 files. Stored privately."
+      }
+    },
+    "bookings": {
+      "eyebrow": "Sales",
+      "title": "Bookings",
+      "description": "Every sale with its schedule, payments and balance.",
+      "new": "New booking",
+      "search": "Booking no., unit or customer",
+      "project": "Project",
+      "allProjects": "All projects",
+      "status": "Status",
+      "allStatuses": "Any status",
+      "statuses": {
+        "active": "Active",
+        "cancelled": "Cancelled"
+      },
+      "soldBy": "Sold by",
+      "allSellers": "Anyone",
+      "from": "Booked from",
+      "to": "Booked to",
+      "loadFailed": "Couldn't load bookings.",
+      "noMatches": "No booking matches these filters.",
+      "emptyTitle": "No bookings yet",
+      "emptyBody": "Book a unit from the inventory, a lead, or here.",
+      "cols": {
+        "booking": "Booking",
+        "unit": "Unit",
+        "customer": "Customer",
+        "contract": "Contract",
+        "outstanding": "Outstanding",
+        "overdue": "Overdue",
+        "stage": "Stage"
+      }
+    },
+    "booking": {
+      "notFound": "Booking not found",
+      "back": "All bookings",
+      "loadFailed": "Couldn't load this booking.",
+      "created": "Booking {no} saved.",
+      "createdReceipt": "Receipt {no} issued for the booking money.",
+      "createdCheque": "The cheque is in the register; the receipt is issued when it clears.",
+      "dismiss": "Dismiss",
+      "bookedOn": "booked {date}",
+      "soldBy": "sold by {name}",
+      "takePayment": "Take payment",
+      "position": "Account position",
+      "totals": {
+        "contract": "Contract",
+        "paid": "Paid",
+        "outstanding": "Outstanding",
+        "dueNow": "Due now",
+        "overdue": "Overdue",
+        "nextDue": "Next due"
+      },
+      "waived": "Booked without booking money — waived by {name}: “{reason}”",
+      "pendingCheques": "{n, plural, one {# cheque} other {# cheques}} ({amount}) waiting to clear — not counted as paid yet.",
+      "tabsLabel": "Booking sections",
+      "tabs": {
+        "schedule": "Schedule",
+        "receipts": "Receipts",
+        "ledger": "Ledger",
+        "details": "Details",
+        "documents": "Documents"
+      },
+      "parties": "Applicants",
+      "applicant": "Applicant",
+      "coApplicant": "Co-applicant",
+      "nomineesTitle": "Nominees",
+      "edit": "Edit",
+      "plan": "Payment plan",
+      "customPlan": "Custom schedule",
+      "bookingDate": "Booking date",
+      "createdAt": "Entered",
+      "lead": "Lead",
+      "openLead": "Open the lead",
+      "priceTitle": "Price (frozen at booking)",
+      "priceFrozen": "Later rate-card changes never touch a booked price.",
+      "editTitle": "Nominees & note",
+      "saved": "Booking updated.",
+      "note": "Note",
+      "printDocs": "Print documents",
+      "holdersTitle": "Previous holders",
+      "holderUntil": "until {date}",
+      "holderFee": "transfer fee {amount}",
+      "holderFeeWaived": "fee waived: {reason}"
+    },
+    "receipts": {
+      "valid": "Valid",
+      "reversed": "Reversed",
+      "none": "No receipts yet.",
+      "cols": {
+        "receipt": "Receipt",
+        "mode": "Mode",
+        "amount": "Amount",
+        "by": "Received by",
+        "status": "Status",
+        "cheque": "Cheque",
+        "chequeDate": "Cheque date"
+      },
+      "reverse": "Reverse",
+      "reverseTitle": "Reverse receipt {no}?",
+      "reverseBody": "{amount} comes off the paid items. The number stays used and the receipt stays on record, marked reversed.",
+      "reverseConfirm": "Reverse receipt",
+      "reason": "Reason",
+      "reversedOk": "Receipt {no} reversed.",
+      "chequesTitle": "Cheques",
+      "chequeStatus": {
+        "received": "Received",
+        "deposited": "Deposited",
+        "cleared": "Cleared",
+        "bounced": "Bounced",
+        "returned": "Returned"
+      },
+      "chequesHint": "A cheque becomes a numbered receipt when it clears; until then it is not counted as paid.",
+      "print": "Print"
+    },
+    "receiptForm": {
+      "title": "Take payment",
+      "dueNow": "Due now",
+      "overdue": "Overdue",
+      "outstanding": "Outstanding",
+      "date": "Receipt date",
+      "dateHint": "Today, or up to {days} days back.",
+      "allocation": "Where this payment goes",
+      "allocationHint": "Oldest unpaid items first; paying more pre-pays the next ones.",
+      "notCalled": "not called yet",
+      "settles": "paid in full",
+      "partly": "part paid",
+      "save": "Save receipt",
+      "saved": "Receipt {no} saved."
+    },
+    "ledger": {
+      "loadFailed": "Couldn't load the ledger.",
+      "ok": "Ledger and schedule agree.",
+      "mismatch": "Ledger and schedule disagree on {n} items — tell the admin.",
+      "none": "No money entries yet.",
+      "cols": {
+        "date": "Date",
+        "entry": "Entry",
+        "amount": "Amount",
+        "balance": "Paid to date",
+        "by": "By"
+      },
+      "types": {
+        "receipt": "Receipt",
+        "reversal": "Reversal",
+        "refund": "Refund"
+      }
+    },
+    "wizard": {
+      "back": "All bookings",
+      "eyebrow": "Sales",
+      "title": "New booking",
+      "description": "Unit, buyer, price and plan, booking money — saved in one go.",
+      "restored": "We kept the booking you were entering in this tab.",
+      "startOver": "Start over",
+      "stepsLabel": "Booking steps",
+      "steps": {
+        "unit": "Unit",
+        "buyer": "Buyer",
+        "price": "Price & plan",
+        "payment": "Booking money",
+        "review": "Review"
+      },
+      "titles": {
+        "unit": "Which unit?",
+        "buyer": "Who is buying?",
+        "price": "Price and payment plan",
+        "payment": "Booking money",
+        "review": "Check and confirm"
+      },
+      "summary": {
+        "unit": "Unit",
+        "buyer": "Buyer",
+        "contract": "Contract"
+      },
+      "stepOf": "Step {n} of {total}",
+      "prev": "Back",
+      "next": "Continue",
+      "confirm": "Confirm booking",
+      "confirmHint": "The unit, booking, schedule and receipt are saved together — all or nothing.",
+      "unit": {
+        "gone": "{code} can't be booked any more — it was just booked, held or blocked by someone else.",
+        "pickAnother": "Pick another unit",
+        "heldByOther": "Held by {name}. Booking it takes over their hold.",
+        "holdLeft": "Your hold ends in {min, plural, one {# minute} other {# minutes}} — finish the booking before then.",
+        "project": "Project",
+        "chooseProject": "Choose a project",
+        "search": "Find a unit",
+        "searchPlaceholder": "Unit code or plot no.",
+        "noCode": "This project has no short code yet — booking and receipt numbers need it.",
+        "setCode": "Set the code",
+        "count": "{n, plural, one {# unit} other {# units}} you can book",
+        "showAll": "Show sold and blocked too",
+        "none": "No unit is free to book in this project.",
+        "units": "Units",
+        "noPrice": "No price"
+      },
+      "buyer": {
+        "applicant": "Applicant",
+        "fromLead": "From the lead {name} — search for them, or add them as a new customer.",
+        "coApplicants": "Co-applicants",
+        "coApplicantsHint": "Up to 2, printed on the booking form with the applicant.",
+        "addCo": "Add co-applicant",
+        "nominees": "Nominees",
+        "nomineesHint": "Optional. Shares must add up to 100%."
+      },
+      "price": {
+        "bookingDate": "Booking date",
+        "bookingDateHint": "Today, or back-dated within the settings.",
+        "modeTemplate": "Plan template",
+        "modeCustom": "Custom schedule",
+        "planMode": "Schedule type",
+        "plan": "Payment plan",
+        "planSeed": "Plan to start from",
+        "noPlans": "No active plan — add one under Accounts",
+        "choosePlan": "Choose a plan",
+        "discount": "Discount",
+        "noCap": "No discount limit for you.",
+        "cap": "Your limit: {amount} ({pct}% of the base price).",
+        "discountHint": "Leave empty for none.",
+        "discountReason": "Discount reason",
+        "customTitle": "Custom schedule",
+        "previewTitle": "Price check",
+        "previewWaiting": "Choose a plan to see the price and the schedule."
+      },
+      "payment": {
+        "pay": "Take it now",
+        "waive": "Waive (manager)",
+        "later": "Take it later",
+        "due": "Booking money: {amount}",
+        "dated": "Dated the booking date, {date}",
+        "how": "Booking money",
+        "amountHint": "At least {amount}. More pre-pays the next items.",
+        "chequeHint": "Post-dated is fine; the receipt is issued when it clears.",
+        "chequeNote": "The cheque goes into the register with an acknowledgement. The numbered receipt is issued when it clears.",
+        "waiveReason": "Why is it waived?",
+        "waiveHint": "Recorded on the booking and in the audit log.",
+        "laterNote": "No booking money now — the settings allow booking without it."
+      },
+      "review": {
+        "unit": "Unit",
+        "applicant": "Applicant",
+        "bookingDate": "Booking date",
+        "bookingMoney": "Booking money",
+        "waived": "Waived",
+        "later": "Later",
+        "nominees": "Nominees",
+        "note": "Note",
+        "noteHint": "Internal — not printed."
+      }
+    },
+    "accounts": {
+      "eyebrow": "Accounts",
+      "title": "Accounts",
+      "description": "Payment plans, company bank accounts and money rules.",
+      "tabsLabel": "Accounts sections",
+      "tabs": {
+        "plans": "Payment plans",
+        "banks": "Bank accounts",
+        "settings": "Settings"
+      },
+      "settings": {
+        "loadFailed": "Couldn't load the accounts settings.",
+        "saved": "Settings saved.",
+        "readOnly": "Only an admin can change these settings.",
+        "unsaved": "You have unsaved changes",
+        "discard": "Discard",
+        "discount": {
+          "title": "Discount limits",
+          "body": "The most each role may give, as a share of the unit's base price. Above it the booking is refused.",
+          "executive": "Sales executive",
+          "manager": "Sales manager",
+          "hint": "Percent of the base price.",
+          "admin": "Admins have no limit."
+        },
+        "booking": {
+          "title": "Booking & receipts",
+          "body": "What a booking needs and how far back dates may go.",
+          "required": "Booking money is required",
+          "requiredHint": "Off: staff may book now and take the booking money later.",
+          "backdate": "Back-dating allowed (days)",
+          "backdateHint": "For bookings and receipts entered late. 0 = today only."
+        },
+        "cheque": {
+          "title": "Cheques",
+          "body": "Charged to the buyer when a cheque bounces.",
+          "bounceFee": "Bounce fee",
+          "bounceFeeHint": "0 = no fee. Can be changed per bounce."
+        },
+        "notify": {
+          "title": "Customer notices",
+          "body": "Sent automatically after a receipt is saved.",
+          "email": "E-mail the receipt PDF",
+          "emailHint": "To the customer's e-mail, if there is one.",
+          "sms": "Send a receipt SMS",
+          "smsHint": "Short confirmation with the amount and receipt number (SMS costs apply)."
+        }
+      },
+      "banks": {
+        "new": "Add account",
+        "intro": "Company accounts that receive transfers and cheque deposits. They appear on receipts.",
+        "loadFailed": "Couldn't load bank accounts.",
+        "emptyTitle": "No bank account yet",
+        "emptyBody": "Add the accounts where buyers transfer money.",
+        "cols": {
+          "account": "Account",
+          "number": "Account no.",
+          "branch": "Branch",
+          "status": "Status"
+        },
+        "active": "Active",
+        "inactive": "Inactive",
+        "newTitle": "Add bank account",
+        "editTitle": "Edit bank account",
+        "saved": "Bank account saved.",
+        "duplicate": "This account number is already added.",
+        "fields": {
+          "name": "Short name",
+          "bankName": "Bank",
+          "branch": "Branch",
+          "accountName": "Account name",
+          "accountNo": "Account no.",
+          "routingNo": "Routing no.",
+          "active": "Active"
+        },
+        "hints": {
+          "name": "e.g. “BRAC – Collection”.",
+          "active": "Inactive accounts can't be chosen for new receipts (old receipts keep them)."
+        }
+      }
+    },
+    "plans": {
+      "summary": {
+        "booking": "{v} booking",
+        "down": "{v} down in {days} days",
+        "installments": "{n} installments every {every} mo.",
+        "handover": "{v} at handover",
+        "handoverBalance": "balance at handover"
+      },
+      "new": "New plan",
+      "filterProject": "Show plans for",
+      "allPlans": "All plans",
+      "loadFailed": "Couldn't load payment plans.",
+      "emptyTitle": "No payment plan yet",
+      "emptyBody": "Plans turn a price into a schedule: booking money, down payment, installments, milestones, handover.",
+      "inactive": "Inactive",
+      "companyWide": "All projects",
+      "newTitle": "New payment plan",
+      "editTitle": "Edit payment plan",
+      "amountType": "Amount type",
+      "types": {
+        "percent": "Percent",
+        "fixed": "Fixed ৳"
+      },
+      "saved": "Plan saved. Existing bookings keep their own copy.",
+      "deleted": "Plan deleted.",
+      "sections": {
+        "about": "Plan",
+        "parts": "Parts of the payment"
+      },
+      "fields": {
+        "name": "Name",
+        "nameBn": "Name (Bangla)",
+        "description": "Description",
+        "project": "Project",
+        "sortOrder": "Order",
+        "active": "Active",
+        "bookingMoney": "Booking money",
+        "downPayment": "Down payment",
+        "amount": "Amount",
+        "dueAfterDays": "Due after (days)",
+        "installments": "Installments",
+        "count": "Number",
+        "everyMonths": "Every",
+        "firstAfter": "First after (months)",
+        "milestones": "Construction milestones",
+        "key": "Key",
+        "label": "Label",
+        "labelBn": "Label (Bangla)",
+        "handover": "Payment at handover"
+      },
+      "namePlaceholder": "e.g. 36 months, 20% down",
+      "hints": {
+        "project": "Company-wide plans show for every project.",
+        "active": "Inactive plans can't be chosen for new bookings.",
+        "installments": "Equal whole-taka amounts that take the balance; the last one absorbs the rounding.",
+        "firstAfter": "Empty = one period after booking.",
+        "milestones": "No due date until a manager calls them (e.g. roof casting)."
+      },
+      "every": "{n, plural, one {every month} other {every # months}}",
+      "addMilestone": "Add milestone",
+      "milestonePlaceholder": "e.g. Roof casting",
+      "removeMilestone": "Remove milestone",
+      "handoverTypes": {
+        "none": "None",
+        "percent": "Percent of the price",
+        "fixed": "Fixed amount",
+        "balance": "Whatever is left (balance)"
+      },
+      "sample": {
+        "title": "On a {amount} contract",
+        "fix": "Fix the highlighted fields to see the amounts.",
+        "booking_money": "Booking money",
+        "down_payment": "Down payment (after {days} days)",
+        "installment": "{n} installments, {every, plural, one {monthly} other {every # months}}",
+        "handover": "At handover",
+        "balance": "balance",
+        "last": "last: {amount}"
+      },
+      "delete": "Delete",
+      "confirmDelete": "Delete this plan"
+    },
+    "projectSales": {
+      "saved": "Sales settings saved.",
+      "codeTaken": "Another project already uses this code.",
+      "discard": "Discard",
+      "code": {
+        "title": "Project code",
+        "body": "A short code in every booking, receipt and refund number. Required before the first booking.",
+        "label": "Code",
+        "hint": "2–6 letters/digits, starting with a letter.",
+        "locked": "Locked: numbers were already issued with this code.",
+        "bookingNo": "Booking number",
+        "receiptNo": "Receipt number"
+      },
+      "policy": {
+        "title": "Sales policy",
+        "body": "Used on cancellations and transfers of this project's units.",
+        "deduction": "Kept on cancellation",
+        "deductionHint": "Percent of the amount paid (a manager can change it with a reason).",
+        "transferFee": "Transfer fee",
+        "transferFeeHint": "Charged to the new holder; 0 = free."
+      }
+    },
+    "warnings": {
+      "BOOKING_MONEY_UNPAID": "Note: the booking money is not fully paid yet.",
+      "DOWN_PAYMENT_UNPAID": "Note: the down payment is not fully paid yet.",
+      "DUES_OUTSTANDING": "Note: this booking still has dues outstanding."
+    },
+    "actions": {
+      "label": "Actions",
+      "date": "Date",
+      "dateHint": "Today, or an earlier date (not before the booking).",
+      "note": "Note",
+      "reason": "Reason",
+      "timeline": "Sale stages",
+      "deed": "deed {no}",
+      "statementMenu": "Statement of account",
+      "allot": {
+        "menu": "Allot the unit",
+        "title": "Allot the unit",
+        "body": "Issues the allotment letter. Unpaid booking money or down payment only warns.",
+        "confirm": "Allot",
+        "done": "Unit allotted — allotment letter issued."
+      },
+      "register": {
+        "menu": "Record registration",
+        "title": "Record the registration",
+        "body": "The deed was registered at the sub-registry office.",
+        "confirm": "Save registration",
+        "done": "Registration recorded.",
+        "deedNo": "Deed no.",
+        "office": "Sub-registry office"
+      },
+      "handover": {
+        "menu": "Hand over",
+        "title": "Hand over the unit",
+        "body": "The buyer received the keys / possession.",
+        "confirm": "Hand over",
+        "done": "Handover recorded."
+      },
+      "call": {
+        "menu": "Call",
+        "title": "Call “{item}”",
+        "body": "Give it a due date ({amount} remaining). Reminders and dues start counting from it.",
+        "dueDate": "Due date",
+        "confirm": "Call payment",
+        "done": "Payment called."
+      },
+      "waive": {
+        "menu": "Waive",
+        "title": "Waive “{item}”?",
+        "body": "{amount} comes off the schedule. Recorded in the audit log.",
+        "confirm": "Waive charge",
+        "done": "Charge waived."
+      },
+      "charge": {
+        "menu": "Add a charge",
+        "title": "Add a charge",
+        "body": "Outside the contract price — e.g. a delay charge or utility connection.",
+        "kind": "Kind",
+        "label": "Label",
+        "labelPlaceholder": "e.g. Delay charge — March",
+        "labelBn": "Label (Bangla)",
+        "amount": "Amount",
+        "dueDate": "Due date",
+        "confirm": "Add charge",
+        "done": "Charge added."
+      },
+      "chargeKinds": {
+        "delay": "Delay charge",
+        "utility": "Utility",
+        "registration": "Registration cost",
+        "other": "Other"
+      },
+      "cheque": {
+        "menu": "Receive a cheque",
+        "title": "Receive a cheque",
+        "body": "Outstanding {amount}. An acknowledgement is issued now; the receipt when it clears.",
+        "received": "Received on",
+        "confirm": "Add to register",
+        "done": "Cheque added to the register."
+      },
+      "cancel": {
+        "menu": "Cancel booking",
+        "title": "Cancel {no}?",
+        "body": "Check the settlement before confirming. This cannot be undone.",
+        "confirm": "Cancel booking",
+        "done": "Booking {no} cancelled — the unit is back on sale.",
+        "paid": "Paid so far",
+        "deductionPolicy": "Kept by policy ({pct}%)",
+        "deductionCustom": "Kept (changed)",
+        "refundable": "To refund",
+        "openCheques": "{n, plural, one {# open cheque} other {# open cheques}} — clear or return them first.",
+        "override": "Change the deduction",
+        "overrideHint": "Managers only; the reason is recorded.",
+        "deductionAmount": "Amount kept",
+        "overrideReason": "Why it is changed",
+        "reason": "Cancellation reason",
+        "effects": "The unit goes back on sale, the booking form and allotment letter become void and a cancellation letter is issued. Refunds are paid in parts afterwards.",
+        "panelTitle": "Cancelled on {date}",
+        "panel": {
+          "paid": "Paid",
+          "deduction": "Kept",
+          "refundable": "Refundable",
+          "refunded": "Refunded",
+          "refundDue": "Still to refund"
+        },
+        "overrideNote": "Deduction changed: {reason}"
+      },
+      "refund": {
+        "menu": "Pay a refund",
+        "title": "Pay a refund",
+        "body": "Refund due: {amount}. Can be paid in parts.",
+        "confirm": "Record refund",
+        "done": "Refund {ref} recorded.",
+        "amount": "Amount",
+        "mode": "Paid by",
+        "fromAccount": "From company account",
+        "instrumentNo": "Our cheque / pay order no.",
+        "tooMuch": "More than the refund due ({amount}).",
+        "needTransfer": "Choose the account and enter the transfer reference.",
+        "needInstrument": "Enter the cheque / pay order number."
+      },
+      "transfer": {
+        "menu": "Transfer to a new holder",
+        "title": "Transfer {no}",
+        "body": "Not possible with overdue dues or open cheques.",
+        "confirm": "Transfer",
+        "done": "Transferred to {name}.",
+        "from": "Current holder",
+        "to": "New holder",
+        "coApplicants": "Co-applicants of the new holder",
+        "addCo": "Add co-applicant",
+        "nominees": "Nominees",
+        "fee": "Transfer fee {amount} is added as a charge.",
+        "noFee": "This project has no transfer fee.",
+        "waive": "Waive the transfer fee",
+        "waiveReason": "Why it is waived",
+        "effects": "The old booking form / allotment letter become void and new ones are issued with a transfer letter. Earlier receipts keep the old name."
+      },
+      "reschedule": {
+        "menu": "Reschedule",
+        "title": "Reschedule {no}",
+        "body": "Change dates and amounts of unpaid items; the total stays the contract price. Charges are not touched.",
+        "confirm": "Save new schedule",
+        "done": "Schedule changed.",
+        "due": "Due",
+        "amount": "Amount",
+        "paidSoFar": "paid {amount}",
+        "locked": "Fully paid — locked",
+        "belowPaid": "“{item}” can't be less than what was already paid.",
+        "reason": "Reason",
+        "reasonHint": "Before and after go to the audit log."
+      }
+    },
+    "cheques": {
+      "eyebrow": "Accounts",
+      "title": "Cheques",
+      "description": "Every cheque and PDC: bank them on time, clear them into receipts, follow up bounces.",
+      "viewsLabel": "Cheque views",
+      "views": {
+        "open": "Open",
+        "received": "In hand",
+        "deposited": "Deposited",
+        "bounced": "Bounced",
+        "cleared": "Cleared",
+        "returned": "Returned",
+        "all": "All"
+      },
+      "search": "Cheque no.",
+      "project": "Project",
+      "allProjects": "All projects",
+      "from": "Cheque date from",
+      "to": "Cheque date to",
+      "loadFailed": "Couldn't load cheques.",
+      "emptyTitle": "No cheques here",
+      "emptyBody": "Cheques taken at booking or added on a booking appear here.",
+      "loadMore": "Load more",
+      "cols": {
+        "cheque": "Cheque",
+        "booking": "Booking",
+        "date": "Cheque date",
+        "amount": "Amount",
+        "status": "Status"
+      },
+      "pdc": "PDC",
+      "actionsLabel": "Cheque actions",
+      "needBank": "Choose the company account.",
+      "bankAccount": "Company account",
+      "chooseBank": "Choose the account",
+      "reason": "Reason",
+      "date": "Date",
+      "note": "Note",
+      "clearedReceipt": "Cheque cleared — receipt {no} issued.",
+      "deposit": {
+        "menu": "Deposit",
+        "title": "Deposit cheque {no}",
+        "confirm": "Mark deposited",
+        "done": "Cheque {no} deposited."
+      },
+      "redeposit": {
+        "menu": "Re-deposit"
+      },
+      "clear": {
+        "menu": "Mark cleared",
+        "title": "Cheque {no} cleared",
+        "body": "A numbered receipt is issued and the money is allocated to the schedule.",
+        "confirm": "Clear & issue receipt",
+        "done": "Cheque {no} cleared."
+      },
+      "bounce": {
+        "menu": "Mark bounced",
+        "title": "Cheque {no} bounced",
+        "confirm": "Mark bounced",
+        "done": "Cheque {no} marked bounced.",
+        "placeholder": "e.g. Insufficient funds",
+        "fee": "Bounce fee",
+        "feeHint": "Added to the buyer's schedule. 0 = none."
+      },
+      "return": {
+        "menu": "Return to buyer",
+        "title": "Return cheque {no}",
+        "confirm": "Return cheque",
+        "done": "Cheque {no} returned."
+      }
+    },
+    "documents": {
+      "title": "Document",
+      "intro": "Every paper issued for this booking. Void ones still open, marked VOID.",
+      "statement": "Issue statement",
+      "loadFailed": "Couldn't load the documents.",
+      "none": "No documents yet.",
+      "cols": {
+        "document": "Document",
+        "date": "Date",
+        "status": "Status"
+      },
+      "types": {
+        "receipt": "Money receipt",
+        "booking_form": "Booking form",
+        "allotment_letter": "Allotment letter",
+        "statement": "Statement of account",
+        "cancellation_letter": "Cancellation letter",
+        "transfer_letter": "Transfer letter",
+        "cheque_ack": "Cheque acknowledgement"
+      },
+      "open": "Open",
+      "downloadPdf": "Download PDF",
+      "openPdf": "Open PDF",
+      "print": "Print",
+      "valid": "Valid",
+      "void": "Void",
+      "pdfFailed": "Couldn't make the PDF.",
+      "notFound": "Document not found",
+      "backToBooking": "Back to the booking",
+      "issuedBy": "issued by {name}",
+      "language": "Document language",
+      "voidNote": "This document is void: {reason}. It verifies as invalid.",
+      "verifyLink": "QR / verification link",
+      "copy": "Copy",
+      "copied": "Link copied."
+    },
+    "reports": {
+      "eyebrow": "Accounts",
+      "title": "Reports",
+      "description": "Who owes what, what came in, and which cheques to bank.",
+      "print": "Print",
+      "tabsLabel": "Reports",
+      "tabs": {
+        "dues": "Dues & aging",
+        "collections": "Collections",
+        "pdcs": "PDC register"
+      },
+      "project": "Project",
+      "allProjects": "All projects",
+      "soldBy": "Sold by",
+      "anyone": "Anyone",
+      "from": "From",
+      "to": "To",
+      "csv": "CSV",
+      "loadFailed": "Couldn't load the report.",
+      "exportFailed": "Couldn't export the CSV.",
+      "dues": {
+        "asOf": "As of",
+        "includeNotOverdue": "Also bookings not overdue",
+        "bookings": "Bookings",
+        "outstanding": "Outstanding",
+        "overdue": "Overdue",
+        "buckets": {
+          "d1_30": "1–30 days",
+          "d31_60": "31–60 days",
+          "d61_90": "61–90 days",
+          "d90_plus": "Over 90 days"
+        },
+        "bucketsShort": {
+          "d1_30": "1–30",
+          "d31_60": "31–60",
+          "d61_90": "61–90",
+          "d90_plus": "90+"
+        },
+        "asOfNote": "As of {date}. Most overdue first.",
+        "none": "Nothing overdue.",
+        "cols": {
+          "booking": "Booking",
+          "customer": "Customer",
+          "overdue": "Overdue",
+          "outstanding": "Outstanding",
+          "oldest": "Oldest due"
+        }
+      },
+      "collections": {
+        "daily": "Daily",
+        "monthly": "Monthly",
+        "interval": "Group by",
+        "collected": "Collected",
+        "receipts": "Receipts",
+        "refunds": "Refunds",
+        "net": "Net",
+        "reversed": "Reversed receipts",
+        "range": "{from} – {to}, valid receipts by receipt date.",
+        "none": "No receipts in this period.",
+        "byPeriod": "By day / month",
+        "byMode": "By payment mode",
+        "byProject": "By project",
+        "cols": {
+          "group": "Group",
+          "count": "Receipts",
+          "amount": "Amount"
+        }
+      },
+      "pdcs": {
+        "dueNow": "To bank now",
+        "upcoming": "Upcoming",
+        "bounced": "Bounced",
+        "range": "Cheque dates {from} – {to}.",
+        "dueNowTitle": "Due to deposit (dated today or earlier)",
+        "upcomingTitle": "Upcoming post-dated cheques",
+        "bouncedTitle": "Bounced — needs follow-up",
+        "none": "None."
+      }
     }
   }
 }

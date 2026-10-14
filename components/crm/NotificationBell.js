@@ -34,6 +34,11 @@ export function useNotificationText() {
         return { text: d.assigneeName ? t("slaOwner", { name: d.name ?? "—", owner: d.assigneeName }) : t("sla", { name: d.name ?? "—" }), href: lead };
       case "integration.error":
         return { text: t("integration", { integration: ti.has(d.integration) ? ti(d.integration) : d.integration, message: d.message ?? "" }), href: "/dashboard/integrations" };
+      case "cheque.bounced":
+        return {
+          text: t("chequeBounced", { no: d.chequeNo ?? "—", name: d.customerName ?? "—", booking: d.bookingNo ?? "" }),
+          href: d.bookingId ? `/dashboard/bookings/${d.bookingId}?tab=receipts` : "/dashboard/cheques",
+        };
       default:
         return { text: n.type, href: null };
     }
@@ -152,7 +157,7 @@ export function NotificationBell() {
                       >
                         <span aria-hidden className={cn("mt-1.5 size-1.5 shrink-0 rounded-full", n.readAt ? "bg-transparent" : "bg-accent")} />
                         <span className="min-w-0 flex-1">
-                          <span className={cn("block text-sm leading-snug", n.type === "lead.sla_breached" || n.type === "integration.error" ? "text-danger" : "")}>{text}</span>
+                          <span className={cn("block text-sm leading-snug", ["lead.sla_breached", "integration.error", "cheque.bounced"].includes(n.type) ? "text-danger" : "")}>{text}</span>
                           <span className="mt-0.5 block text-[11px] text-ink-subtle">{formatDate(n.createdAt, locale, "datetime")}</span>
                         </span>
                       </button>

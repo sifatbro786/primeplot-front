@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Ellipsis, Merge, MessageCircle, Phone, Search, Trash2 } from "lucide-react";
+import { Ellipsis, FileSignature, Merge, MessageCircle, Phone, Search, Trash2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
@@ -16,6 +16,7 @@ import { Select } from "@/components/ui/Select";
 import { ErrorState, Skeleton } from "@/components/ui/States";
 import { Tag } from "@/components/ui/Tag";
 import { toast } from "@/components/ui/Toast";
+import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api/client";
 import { useSession } from "@/lib/auth/session";
 import { cn } from "@/lib/cn";
@@ -326,6 +327,12 @@ function LeadBody({ leadId, onClose }) {
         </Button>
         <span className="self-center font-mono text-sm text-ink-muted">{formatPhone(lead.phone, locale)}</span>
         <div className="flex-1" />
+        {lead.type === "buyer" && lead.status === "open" && can("bookings:create") && (
+          <Button as={Link} href={`/dashboard/bookings/new?leadId=${lead.id}`} size="sm" variant="accent">
+            <FileSignature aria-hidden className="size-3.5" />
+            {t("book")}
+          </Button>
+        )}
         {canAssign && canWrite && (
           <Menu
             trigger={(p) => (

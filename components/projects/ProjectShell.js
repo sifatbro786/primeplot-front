@@ -20,6 +20,7 @@ const TABS = [
   { key: "prices", path: "/prices" },
   { key: "gallery", path: "/gallery" },
   { key: "construction", path: "/construction" },
+  { key: "sales", path: "/sales" },
   { key: "seo", path: "/seo" },
 ];
 

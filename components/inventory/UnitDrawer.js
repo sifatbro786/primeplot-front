@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, Lock, Pencil, ShieldOff, Trash2, Unlock } from "lucide-react";
+import { Clock, FileSignature, FileText, Lock, Pencil, ShieldOff, Trash2, Unlock } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
@@ -13,6 +13,7 @@ import { ErrorState, Skeleton } from "@/components/ui/States";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { Table, TBody, TD, TR } from "@/components/ui/Table";
 import { toast } from "@/components/ui/Toast";
+import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api/client";
 import { errorMessage, useSession } from "@/lib/auth/session";
 import { formatBDT, formatDate, formatLand, formatNumber, formatSqftArea, areaUnitLabel } from "@/lib/format";
@@ -146,6 +147,18 @@ function StatusPanel({ unit, onChanged }) {
 
       {mode === null && (
         <div className="mt-4 flex flex-wrap gap-2">
+          {can("bookings:create") && (s === "available" || (s === "held" && (isHolder || can("units:write")))) && (
+            <Button as={Link} href={`/dashboard/bookings/new?unitId=${unit.id}&projectId=${unit.projectId}`} size="sm" variant="accent">
+              <FileSignature aria-hidden className="size-3.5" />
+              {t("book")}
+            </Button>
+          )}
+          {SOLD_STATUSES.includes(s) && can("bookings:read", "bookings:read_all") && (
+            <Button as={Link} href={`/dashboard/bookings?q=${encodeURIComponent(unit.code)}&projectId=${unit.projectId}`} size="sm" variant="secondary">
+              <FileText aria-hidden className="size-3.5" />
+              {t("openBooking")}
+            </Button>
+          )}
           {s === "available" && can("units:hold") && (
             <Button size="sm" onClick={() => setMode("hold")}>
               <Lock aria-hidden className="size-3.5" />
