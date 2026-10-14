@@ -19,6 +19,8 @@ const TABS = [
   { key: "pricing", path: "/pricing" },
   { key: "prices", path: "/prices" },
   { key: "gallery", path: "/gallery" },
+  { key: "construction", path: "/construction" },
+  { key: "seo", path: "/seo" },
 ];
 
 /** Project workspace frame: title + tabs. Children render the active tab. */

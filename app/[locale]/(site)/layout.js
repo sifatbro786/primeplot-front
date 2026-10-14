@@ -3,18 +3,24 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteDock } from "@/components/site/SiteDock";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import { getSiteOrgOrNull } from "@/lib/public/api";
-import { pick, robotsMeta } from "@/lib/public/site";
+import { PreviewBanner } from "@/components/site/PreviewBanner";
+import { getSiteOrgOrNull, getSiteSeoOrNull } from "@/lib/public/api";
+import { robotsFor, titleTemplate } from "@/lib/public/seo";
+import { pick } from "@/lib/public/site";
 
-// Every public page inherits the indexing switch (NEXT_PUBLIC_ALLOW_INDEXING) and is titled
-// "<page> · <developer's name>" (not the product name).
+// Every public page inherits the indexing switches (NEXT_PUBLIC_ALLOW_INDEXING + the dashboard's
+// site-wide switch) and the title template from Website › SEO ("%s | {company}" by default).
 export async function generateMetadata() {
-  const [locale, t, org] = await Promise.all([getLocale(), getTranslations("site"), getSiteOrgOrNull()]);
+  const [locale, t, org, site] = await Promise.all([getLocale(), getTranslations("site"), getSiteOrgOrNull(), getSiteSeoOrNull()]);
   const name = pick(org, "name", locale) || t("brandFallback");
+  const v = site?.settings?.verification ?? {};
   return {
-    title: { default: name, template: `%s · ${name}` },
-    robots: robotsMeta,
+    title: { default: name, template: titleTemplate(site, locale, name) },
+    robots: robotsFor({ site }),
     openGraph: { siteName: name, locale: locale === "bn" ? "bn_BD" : "en_US" },
+    ...((v.google || v.bing) && {
+      verification: { ...(v.google && { google: v.google }), ...(v.bing && { other: { "msvalidate.01": v.bing } }) },
+    }),
   };
 }
 
@@ -36,6 +42,7 @@ export default async function SiteLayout({ children }) {
       >
         {t("skip")}
       </a>
+      <PreviewBanner />
       <SiteHeader />
       <main id="main" className="flex-1">
         {children}

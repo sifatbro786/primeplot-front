@@ -5,12 +5,13 @@ import { LeadForm } from "@/components/site/LeadForm";
 import { Skeleton } from "@/components/ui/States";
 import { formatPhone } from "@/lib/format";
 import { getPublishedProjectsOrDefer, getSiteOrgOrNull } from "@/lib/public/api";
-import { alternatesFor, pick, telHref, whatsappHref } from "@/lib/public/site";
+import { buildMetadata } from "@/lib/public/seo";
+import { pick, telHref, whatsappHref } from "@/lib/public/site";
 
 export async function generateMetadata() {
   const [locale, t, ts, org] = await Promise.all([getLocale(), getTranslations("site.contactPage"), getTranslations("site"), getSiteOrgOrNull()]);
   const name = pick(org, "name", locale) || ts("brandFallback");
-  return { title: t("metaTitle"), description: t("metaDescription", { name }), alternates: alternatesFor(locale, "/contact") };
+  return buildMetadata({ key: "contact", locale, path: "/contact", company: name, title: t("metaTitle"), description: t("metaDescription", { name }) });
 }
 
 async function ContactBody() {

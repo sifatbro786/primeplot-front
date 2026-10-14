@@ -1,7 +1,8 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { formatDate, formatPhone, localizeDigits } from "@/lib/format";
 import { getSiteOrgOrNull } from "@/lib/public/api";
-import { alternatesFor, pick, telHref } from "@/lib/public/site";
+import { buildMetadata } from "@/lib/public/seo";
+import { pick, telHref } from "@/lib/public/site";
 
 /** Bump when the text in content/legal/*.json changes (shown as "Last updated"). */
 export const LEGAL_UPDATED = { privacy: "2026-10-13", terms: "2026-10-13" };
@@ -21,7 +22,7 @@ export async function legalMetadata(kind) {
   const locale = await getLocale();
   const [text, ts, org] = await Promise.all([loadText(locale, kind), getTranslations("site"), getSiteOrgOrNull()]);
   const company = companyOf(org, locale, ts("brandFallback"));
-  return { title: text.metaTitle, description: fill(text.metaDescription, { company }), alternates: alternatesFor(locale, `/${kind}`) };
+  return buildMetadata({ key: kind, locale, path: `/${kind}`, company, title: text.metaTitle, description: fill(text.metaDescription, { company }) });
 }
 
 /** Privacy Policy / Terms of Use — text from content/legal (BN/EN), company details from settings. */

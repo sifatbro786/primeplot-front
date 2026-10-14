@@ -189,7 +189,8 @@
     },
     "tasks": "My tasks",
     "crmSettings": "CRM settings",
-    "integrations": "Integrations"
+    "integrations": "Integrations",
+    "website": "Website"
   },
   "portalNav": {
     "label": "Portal navigation",
@@ -516,7 +517,9 @@
       "pricing": "Rate card",
       "plans": "Plans",
       "prices": "Price list",
-      "gallery": "Gallery"
+      "gallery": "Gallery",
+      "construction": "Construction",
+      "seo": "SEO"
     },
     "fields": {
       "kind": "Project type",
@@ -1371,7 +1374,10 @@
       "contactTitle": "Interested in {name}?",
       "contactBody": "Call or WhatsApp our sales team — prices, payment plans and site visits, answered by people who know the project.",
       "notFoundTitle": "Project not found",
-      "metaDescription": "{name} — homes, prices, floor plans and live availability."
+      "metaDescription": "{name} — homes, prices, floor plans and live availability.",
+      "constructionEyebrow": "On site",
+      "constructionTitle": "Construction progress",
+      "constructionAside": "Updates and photos from the project team, newest first."
     },
     "contact": {
       "eyebrow": "Talk to us",
@@ -1749,6 +1755,43 @@
         "errLocation": "Tell us where the land is",
         "errNumber": "Enter a number"
       }
+    },
+    "sections": {
+      "logoGroups": {
+        "approval": "Approvals",
+        "membership": "Memberships",
+        "bank": "Home-loan partners",
+        "partner": "Partners"
+      },
+      "construction": {
+        "complete": "Complete",
+        "percent": "{n}%",
+        "lastUpdate": "Last update: {date}",
+        "milestones": {
+          "site_preparation": "Site preparation",
+          "piling": "Piling",
+          "foundation": "Foundation",
+          "basement": "Basement",
+          "structure": "Structure",
+          "roof": "Roof casting",
+          "brickwork": "Brickwork",
+          "finishing": "Finishing",
+          "handover": "Handover"
+        }
+      },
+      "video": {
+        "title": "Video tour",
+        "play": "Play video: {title}"
+      },
+      "purpose": {
+        "mission": "Mission",
+        "vision": "Vision",
+        "values": "Our values"
+      }
+    },
+    "preview": {
+      "banner": "Preview — you are seeing unpublished changes.",
+      "exit": "Exit preview"
     }
   },
   "crm": {
@@ -2489,6 +2532,368 @@
           "INTAKE_FAILED": "Couldn't save the lead"
         }
       }
+    }
+  },
+  "website": {
+    "eyebrow": "Website",
+    "title": "Website content",
+    "description": "Edit the texts, photos and sections of your public website, and how pages appear in search results. Changes go live only when you publish.",
+    "siteSeoLink": "Site-wide SEO",
+    "siteSeo": {
+      "title": "Site-wide SEO",
+      "description": "Applies to every public page. Saved changes are live at once.",
+      "titlesHeading": "Titles & defaults",
+      "titleTemplate": "Title template",
+      "titleTemplateHint": "%s is replaced by the page title, '{company}' by your company name.",
+      "templateNeedsS": "The template must contain %s",
+      "example": "Example",
+      "examplePage": "Contact",
+      "defaultDescription": "Default description",
+      "defaultDescriptionHint": "Used by pages that have no description of their own.",
+      "defaultOgImage": "Default share image",
+      "defaultOgImageHint": "Used when a page has no share image. 1200×630 works best.",
+      "verificationHeading": "Search engine verification",
+      "verificationBody": "Prove you own the site so you can see search reports. Paste the meta tag or just its code.",
+      "pasteTag": "Paste the whole meta tag, or only the code inside content=\"…\".",
+      "socialHeading": "Social profiles",
+      "socialBody": "Linked from your company's search listing (Organization schema).",
+      "social": {
+        "facebook": "Facebook page",
+        "instagram": "Instagram",
+        "youtube": "YouTube channel",
+        "linkedin": "LinkedIn",
+        "tiktok": "TikTok",
+        "x": "X (Twitter)"
+      },
+      "indexingHeading": "Search engines",
+      "indexing": "Allow search engines to index the website",
+      "indexingHint": "Turn off while the site is being prepared. (On a test server the site is never indexed.)",
+      "indexingOff": "The whole website is hidden from search engines."
+    },
+    "back": "Website",
+    "loadFailed": "Couldn't load the website content",
+    "unknownPage": "This page doesn't exist",
+    "pages": {
+      "home": "Home",
+      "about": "About us",
+      "projects": "Projects",
+      "contact": "Contact",
+      "landowners": "For landowners",
+      "compare": "Compare homes",
+      "privacy": "Privacy policy",
+      "terms": "Terms of use"
+    },
+    "pagesDesc": {
+      "home": "Hero, why choose us, track record, testimonials, FAQ and more",
+      "about": "Story, mission, leadership, construction standards, awards"
+    },
+    "sectionsCount": "{n} sections",
+    "publishedOn": "published {date}",
+    "seoOnlyTitle": "Other pages — search appearance",
+    "seoOnlyBody": "These pages are built from your projects and settings; here you set how they look in search results.",
+    "neverPublished": "Not published yet",
+    "unpublishedChanges": "Unpublished changes",
+    "live": "Live",
+    "publishedBy": "Published {date} by {name}",
+    "history": "History",
+    "historyBody": "The last 20 published versions. Restoring one makes it the draft — publish to put it live.",
+    "noHistory": "Nothing published yet.",
+    "versionN": "Version {n}",
+    "restore": "Restore",
+    "restored": "Restored as the draft — publish to make it live",
+    "restoreLosesEdits": "You have unsaved edits. Restore anyway?",
+    "discard": "Discard changes",
+    "discarded": "Changes discarded",
+    "preview": "Preview",
+    "saveDraft": "Save draft",
+    "save": "Save",
+    "saved": "Saved",
+    "publish": "Publish",
+    "publishTitle": "Publish this page?",
+    "publishBody": "Visitors will see these changes within a minute.",
+    "publishNote": "Note (optional)",
+    "publishNoteHint": "What changed — shown in History.",
+    "publishNow": "Publish now",
+    "published": "Published — the website is updating",
+    "noChanges": "Nothing new to publish",
+    "cancel": "Cancel",
+    "stale": "Someone else changed this page. Reload to see the latest version (your unsaved edits will be lost).",
+    "reload": "Reload",
+    "tabsLabel": "Page editor",
+    "tabs": {
+      "content": "Content",
+      "seo": "SEO"
+    },
+    "pinned": "Fixed",
+    "autoContent": "Automatic",
+    "emptyHidden": "Empty — not shown",
+    "hidden": "Hidden",
+    "show": "Show",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "resetSection": "Reset to default text",
+    "itemN": "item {n}",
+    "auto": {
+      "stats": "The numbers are counted live from your inventory. You can edit the note below them.",
+      "featured": "Shows the projects marked “Featured” (or the newest). Edit only the heading here.",
+      "construction": "Shows the latest published construction update of each project (Projects › Construction).",
+      "areas": "Lists the areas of your published projects with available homes.",
+      "enquiry": "The enquiry form sends leads to the CRM. Edit only the heading here.",
+      "completed": "Shows projects whose stage is Ready or Completed."
+    },
+    "sections": {
+      "home": {
+        "hero": {
+          "title": "Hero",
+          "desc": "Top of the page: headline, text and two buttons"
+        },
+        "stats": {
+          "title": "Live figures",
+          "desc": "Projects, homes available, areas — counted from your inventory"
+        },
+        "featured": {
+          "title": "Featured projects",
+          "desc": "Heading above the featured projects"
+        },
+        "whyUs": {
+          "title": "Why choose us",
+          "desc": "Your strengths: approvals, quality, transparency, support"
+        },
+        "trackRecord": {
+          "title": "Track record",
+          "desc": "Real numbers: years, projects handed over, families, sq ft"
+        },
+        "construction": {
+          "title": "Construction progress",
+          "desc": "Latest site update of each ongoing project"
+        },
+        "areas": {
+          "title": "Locations",
+          "desc": "Areas you build in, with available homes"
+        },
+        "howItWorks": {
+          "title": "How buying works",
+          "desc": "The steps from choosing to paying"
+        },
+        "testimonials": {
+          "title": "Testimonials",
+          "desc": "Real customers’ words — hidden until you add one"
+        },
+        "landownerCta": {
+          "title": "For landowners",
+          "desc": "Joint-venture invitation linking to the landowner page"
+        },
+        "partners": {
+          "title": "Approvals & partners",
+          "desc": "RAJUK/REHAB, memberships and home-loan banks (logos)"
+        },
+        "video": {
+          "title": "Video tour",
+          "desc": "A YouTube walkthrough — hidden until you add a link"
+        },
+        "faq": {
+          "title": "FAQ",
+          "desc": "Questions buyers ask (also shown in Google results)"
+        },
+        "enquiry": {
+          "title": "Enquiry form",
+          "desc": "Heading next to the enquiry form"
+        }
+      },
+      "about": {
+        "intro": {
+          "title": "Introduction",
+          "desc": "Page heading, text and the main photo"
+        },
+        "stats": {
+          "title": "Live figures",
+          "desc": "Counted from your inventory"
+        },
+        "story": {
+          "title": "Our story",
+          "desc": "Company history and a timeline of milestones"
+        },
+        "missionVision": {
+          "title": "Mission & vision",
+          "desc": "Mission, vision and core values"
+        },
+        "principles": {
+          "title": "Promises to buyers",
+          "desc": "Four commitments on a dark band"
+        },
+        "leaderMessage": {
+          "title": "Chairman / MD message",
+          "desc": "Photo, message and signature — hidden until written"
+        },
+        "team": {
+          "title": "Leadership team",
+          "desc": "Photos, names and designations — hidden until added"
+        },
+        "quality": {
+          "title": "Construction standards",
+          "desc": "How you build: soil test, design, materials, supervision"
+        },
+        "completed": {
+          "title": "Completed projects",
+          "desc": "Ready and completed projects (automatic)"
+        },
+        "credentials": {
+          "title": "Licences & memberships",
+          "desc": "Trade licence and REHAB number from Settings, plus logos"
+        },
+        "awards": {
+          "title": "Awards",
+          "desc": "Recognition — hidden until added"
+        },
+        "csr": {
+          "title": "Community (CSR)",
+          "desc": "Social work — hidden until added"
+        },
+        "cta": {
+          "title": "Closing call to action",
+          "desc": "Last band with your contact details"
+        }
+      }
+    },
+    "fields": {
+      "eyebrow": "Small label above the title",
+      "title": "Title",
+      "body": "Text",
+      "note": "Note",
+      "label": "Button text",
+      "href": "Link",
+      "primary": "Main button",
+      "secondary": "Second button",
+      "items": "Items",
+      "icon": "Icon",
+      "value": "Number (e.g. 15+)",
+      "name": "Name",
+      "role": "Detail (e.g. flat owner, Lake View)",
+      "quote": "What they said",
+      "photoMediaId": "Photo",
+      "group": "Kind",
+      "group_approval": "Approval",
+      "group_membership": "Membership",
+      "group_bank": "Home-loan bank",
+      "group_partner": "Partner",
+      "logoMediaId": "Logo",
+      "url": "Website (optional)",
+      "youtubeUrl": "YouTube link",
+      "posterMediaId": "Cover image (optional)",
+      "q": "Question",
+      "a": "Answer",
+      "imageMediaId": "Image",
+      "milestones": "Milestones",
+      "year": "Year",
+      "mission": "Mission",
+      "vision": "Vision",
+      "values": "Values",
+      "designation": "Designation",
+      "message": "Message",
+      "signatureMediaId": "Signature (optional)",
+      "bio": "Short bio",
+      "by": "Given by",
+      "description": "Description",
+      "focusKeyword": "Focus keyword"
+    },
+    "hintEmph": "Put *stars* around words to highlight them. '{company}' becomes your company name.",
+    "hintParagraphs": "Leave an empty line between paragraphs. '{company}' becomes your company name.",
+    "hint_href": "A page of this site (e.g. /projects, /landowners) or a full https:// link.",
+    "hint_url": "Full https:// link.",
+    "hint_youtube": "Paste the video link from YouTube (youtube.com or youtu.be).",
+    "invalid_href": "Use a site path like /projects or an https:// link",
+    "invalid_url": "Use an https:// link",
+    "invalid_youtube": "That isn't a YouTube video link",
+    "chooseIcon": "Choose an icon",
+    "uploadImage": "Upload",
+    "replaceImage": "Replace",
+    "removeImage": "Remove",
+    "emptyList": "Nothing here yet.",
+    "untitledItem": "Item {n}",
+    "addItem": "Add",
+    "removeItem": "Remove",
+    "projectSeoBody": "How this project appears in Google and when shared. Leave empty to use the project name and tagline. The share image is the project card generated automatically.",
+    "seo": {
+      "title": "Search title",
+      "titleHint": "Shown as the blue link in search results. Aim for about 60 characters.",
+      "description": "Search description",
+      "descriptionHint": "The two lines under the title. Aim for 70–160 characters.",
+      "focusKeyword": "Focus keyword",
+      "focusKeywordHint": "The phrase people search for, e.g. “flat in Bashundhara”. Not shown on the site — used for the checks.",
+      "ogImage": "Share image",
+      "ogImageHint": "Shown when the page is shared on Facebook, WhatsApp, etc. 1200×630 works best.",
+      "noindex": "Hide this page from search engines",
+      "noindexHint": "Adds noindex — the page stays reachable by link.",
+      "preview": "Search result preview",
+      "previewLanguage": "Preview language",
+      "noTitle": "(automatic title)",
+      "noDescription": "(automatic description)",
+      "hiddenFromSearch": "Hidden from search engines",
+      "passed": "Done",
+      "notYet": "Not yet",
+      "addKeyword": "Add a focus keyword to see keyword checks.",
+      "checks": {
+        "titleLength": "Title length is 20–60 characters",
+        "descriptionLength": "Description length is 70–160 characters",
+        "kwTitle": "Keyword appears in the title",
+        "kwDescription": "Keyword appears in the description",
+        "kwHeading": "Keyword appears in the page heading",
+        "kwUrl": "Keyword appears in the address (optional)"
+      }
+    }
+  },
+  "construction": {
+    "intro": "Post construction progress with photos. Published updates appear on the project page and the home page.",
+    "new": "New update",
+    "newTitle": "New construction update",
+    "editTitle": "Edit update",
+    "edit": "Edit",
+    "loadFailed": "Couldn't load construction updates",
+    "empty": "No updates yet",
+    "emptyBody": "Post the first one — buyers like to see progress.",
+    "published": "Published",
+    "draft": "Draft",
+    "percentDone": "{n}% complete",
+    "photosN": "{n} photos",
+    "loadMore": "Load more",
+    "delete": "Delete",
+    "deleteTitle": "Delete this update?",
+    "deleteBody": "It will disappear from the website.",
+    "deleted": "Update deleted",
+    "date": "Date",
+    "futureDate": "The date can't be in the future",
+    "percent": "Overall progress",
+    "percentHint": "0–100, optional",
+    "percentInvalid": "A whole number from 0 to 100",
+    "milestone": "Stage",
+    "noMilestone": "—",
+    "block": "Building",
+    "wholeProject": "Whole project",
+    "titleField": "Title",
+    "bodyField": "Details",
+    "photos": "Photos",
+    "addPhotos": "Add photos",
+    "noPhotos": "No photos yet.",
+    "caption": "Caption",
+    "moveEarlier": "Move earlier",
+    "moveLater": "Move later",
+    "removePhoto": "Remove photo",
+    "publishNow": "Publish on the website",
+    "cancel": "Cancel",
+    "save": "Save",
+    "created": "Update posted",
+    "updated": "Update saved",
+    "stale": "Someone else changed this update. Close and open it again.",
+    "milestones": {
+      "site_preparation": "Site preparation",
+      "piling": "Piling",
+      "foundation": "Foundation",
+      "basement": "Basement",
+      "structure": "Structure",
+      "roof": "Roof casting",
+      "brickwork": "Brickwork",
+      "finishing": "Finishing",
+      "handover": "Handover"
     }
   }
 }

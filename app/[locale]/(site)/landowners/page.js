@@ -6,12 +6,13 @@ import { Reveal } from "@/components/site/Reveal";
 import { Skeleton } from "@/components/ui/States";
 import { formatPhone } from "@/lib/format";
 import { getSiteOrgOrNull } from "@/lib/public/api";
-import { alternatesFor, pick, telHref } from "@/lib/public/site";
+import { buildMetadata } from "@/lib/public/seo";
+import { pick, telHref } from "@/lib/public/site";
 
 export async function generateMetadata() {
   const [locale, t, ts, org] = await Promise.all([getLocale(), getTranslations("site.landowners"), getTranslations("site"), getSiteOrgOrNull()]);
   const name = pick(org, "name", locale) || ts("brandFallback");
-  return { title: t("metaTitle"), description: t("metaDescription", { name }), alternates: alternatesFor(locale, "/landowners") };
+  return buildMetadata({ key: "landowners", locale, path: "/landowners", company: name, title: t("metaTitle"), description: t("metaDescription", { name }) });
 }
 
 const STEPS = [

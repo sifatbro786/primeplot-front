@@ -7,7 +7,8 @@ import { FeaturedProjectRow, placeOf, ProjectCard } from "@/components/site/Proj
 import { SiteMapLazy } from "@/components/site/SiteMapLazy";
 import { getPublishedProjects, getSiteOrgOrNull } from "@/lib/public/api";
 import { applyListing, areaOptions, hasActiveFilters, parseListingQuery } from "@/lib/public/listing";
-import { alternatesFor, pick } from "@/lib/public/site";
+import { buildMetadata } from "@/lib/public/seo";
+import { pick } from "@/lib/public/site";
 
 export async function generateMetadata() {
   const [locale, t, ts, org] = await Promise.all([
@@ -17,12 +18,15 @@ export async function generateMetadata() {
     getSiteOrgOrNull(),
   ]);
   const name = pick(org, "name", locale) || ts("brandFallback");
-  return {
+  return buildMetadata({
+    key: "projects",
+    locale,
+    path: "/projects",
+    company: name,
     title: t("metaTitle"),
     description: t("metaDescription", { name }),
-    alternates: alternatesFor(locale, "/projects"),
-    openGraph: { title: t("metaTitle"), description: t("metaDescription", { name }), type: "website" },
-  };
+    openGraph: { type: "website" },
+  });
 }
 
 function ResultsSkeleton() {

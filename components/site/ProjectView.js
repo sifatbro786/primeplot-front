@@ -8,6 +8,7 @@ import { absoluteUrl, jsonLd, pick, pickPair, SITE_URL } from "@/lib/public/site
 import { rangeLabel, typeRows } from "@/lib/public/units";
 import { Amenities } from "./Amenities";
 import { Breadcrumbs } from "./Breadcrumbs";
+import { ConstructionTimeline } from "./ConstructionTimeline";
 import { ContactBand } from "./ContactBand";
 import { Gallery } from "./Gallery";
 import { placeOf } from "./ProjectCard";
@@ -46,7 +47,7 @@ function Section({ id, eyebrow, title, aside, children, tone = "paper", classNam
 }
 
 /** Project page body (data already loaded by the route). Server component; live parts are islands. */
-export async function ProjectView({ project, units }) {
+export async function ProjectView({ project, units, updates = [] }) {
   const locale = await getLocale();
   const t = await getTranslations("site.project");
   const tf = await getTranslations("site.facts");
@@ -289,6 +290,12 @@ export async function ProjectView({ project, units }) {
         {project.amenities?.length > 0 && (
           <Section id="amenities" tone="dark" eyebrow={t("amenitiesEyebrow")} title={t("amenitiesTitle")}>
             <Amenities codes={project.amenities} dark />
+          </Section>
+        )}
+
+        {updates.length > 0 && (
+          <Section id="construction" tone="sage" eyebrow={t("constructionEyebrow")} title={t("constructionTitle")} aside={t("constructionAside")}>
+            <ConstructionTimeline updates={updates} />
           </Section>
         )}
 

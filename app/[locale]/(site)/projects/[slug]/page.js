@@ -3,8 +3,9 @@ import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ProjectView } from "@/components/site/ProjectView";
 import { Skeleton } from "@/components/ui/States";
-import { getProject, getProjectUnits } from "@/lib/public/api";
-import { alternatesFor, pick } from "@/lib/public/site";
+import { getProject, getProjectUnits, getProjectUpdates } from "@/lib/public/api";
+import { buildMetadata } from "@/lib/public/seo";
+import { pick } from "@/lib/public/site";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -13,13 +14,16 @@ export async function generateMetadata({ params }) {
   const name = pick(project, "name", locale);
   const description =
     pick(project, "tagline", locale) || pick(project, "description", locale).slice(0, 160) || t("metaDescription", { name });
-  return {
+  // og:image: the project's SEO share image if set, else ./opengraph-image.js (name + price card).
+  return buildMetadata({
+    seo: project.seo ?? null,
+    locale,
+    path: `/projects/${project.slug}`,
+    company: name,
     title: name,
     description,
-    alternates: alternatesFor(locale, `/projects/${project.slug}`),
-    // og:image comes from ./opengraph-image.js (share card with name + price).
-    openGraph: { title: name, description, type: "website" },
-  };
+    openGraph: { type: "website" },
+  });
 }
 
 function ProjectSkeleton() {
@@ -40,9 +44,9 @@ function ProjectSkeleton() {
 
 async function ProjectRoute({ params }) {
   const { slug } = await params;
-  const [project, units] = await Promise.all([getProject(slug), getProjectUnits(slug)]);
+  const [project, units, updates] = await Promise.all([getProject(slug), getProjectUnits(slug), getProjectUpdates(slug)]);
   if (!project) notFound();
-  return <ProjectView project={project} units={units ?? []} />;
+  return <ProjectView project={project} units={units ?? []} updates={updates?.items ?? []} />;
 }
 
 export default function ProjectPage({ params }) {

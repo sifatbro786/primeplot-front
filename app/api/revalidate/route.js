@@ -13,7 +13,7 @@ import { revalidateTag } from "next/cache";
 const MAX_SKEW_SEC = 300;
 const MAX_BODY = 10_000;
 const MAX_TAGS = 50;
-const TAG_RE = /^(?:projects|org|project:[a-z0-9]+(?:-[a-z0-9]+)*)$/;
+const TAG_RE = /^(?:projects|org|site|project:[a-z0-9]+(?:-[a-z0-9]+)*)$/;
 
 const fail = (status, error) => Response.json({ ok: false, error }, { status });
 
