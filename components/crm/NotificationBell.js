@@ -10,7 +10,7 @@ import { useRouter } from "@/i18n/navigation";
 import { api, apiRequest } from "@/lib/api/client";
 import { cn } from "@/lib/cn";
 import { crmKeys } from "@/lib/crm/queries";
-import { formatDate } from "@/lib/format";
+import { formatBDT, formatDate } from "@/lib/format";
 import { useStaffEvent } from "@/lib/socket";
 import { useNum } from "./parts";
 
@@ -18,6 +18,8 @@ import { useNum } from "./parts";
 export function useNotificationText() {
   const t = useTranslations("crm.notifications");
   const ti = useTranslations("crm.notifications.integrations");
+  const locale = useLocale();
+  const money = (v) => (v == null ? "—" : formatBDT(v, locale));
   return (n) => {
     const d = n.data ?? {};
     const lead = d.leadId ? `/dashboard/leads?lead=${d.leadId}` : null;
@@ -39,6 +41,14 @@ export function useNotificationText() {
           text: t("chequeBounced", { no: d.chequeNo ?? "—", name: d.customerName ?? "—", booking: d.bookingNo ?? "" }),
           href: d.bookingId ? `/dashboard/bookings/${d.bookingId}?tab=receipts` : "/dashboard/cheques",
         };
+      case "payment_slip.submitted":
+        return { text: t("slipSubmitted", { name: d.customerName ?? "—", amount: money(d.amount), unit: d.unitCode ?? "" }), href: d.slipId ? `/dashboard/payment-slips?slip=${d.slipId}` : "/dashboard/payment-slips" };
+      case "profile_request.submitted":
+        return { text: t("profileRequest", { name: d.customerName ?? "—" }), href: d.requestId ? `/dashboard/profile-requests?request=${d.requestId}` : "/dashboard/profile-requests" };
+      case "online_payment.received":
+        return { text: t("onlinePaid", { name: d.customerName ?? "—", amount: money(d.amount), booking: d.bookingNo ?? "" }), href: d.bookingId ? `/dashboard/bookings/${d.bookingId}?tab=receipts` : null };
+      case "online_payment.review":
+        return { text: t("onlineReview", { name: d.customerName ?? "—", amount: money(d.amount) }), href: d.paymentId ? `/dashboard/online-payments?payment=${d.paymentId}` : "/dashboard/online-payments" };
       default:
         return { text: n.type, href: null };
     }
@@ -72,6 +82,13 @@ export function NotificationBell() {
       if (n.type?.startsWith("lead.") || n.type === "task.due") {
         qc.invalidateQueries({ queryKey: ["leads"] });
         qc.invalidateQueries({ queryKey: ["tasks"] });
+      }
+      // Portal queues (B5): keep an open queue page current.
+      if (n.type === "payment_slip.submitted") qc.invalidateQueries({ queryKey: ["payment-slips"] });
+      if (n.type === "profile_request.submitted") qc.invalidateQueries({ queryKey: ["profile-requests"] });
+      if (n.type?.startsWith("online_payment.")) {
+        qc.invalidateQueries({ queryKey: ["online-payments"] });
+        qc.invalidateQueries({ queryKey: ["bookings"] });
       }
     },
     { onReconnect: () => qc.invalidateQueries({ queryKey: ["notifications"] }) },

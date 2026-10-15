@@ -8,7 +8,10 @@ import { cn } from "@/lib/cn";
 import { isActive, PORTAL_NAV } from "@/lib/nav";
 import { UserMenu } from "./UserMenu";
 
-/** Customer portal: mobile-first. Top bar + bottom tab bar on phones, inline tabs on desktop. */
+/**
+ * Customer portal: mobile-first. Top bar + bottom tab bar on phones, inline tabs on desktop.
+ * `.portal` = the "passbook" look (warm paper, owner choice 2026-10-15).
+ */
 export function PortalShell({ children }) {
   const t = useTranslations("portalNav");
   const session = useSession();
@@ -16,8 +19,8 @@ export function PortalShell({ children }) {
   useSessionExpiryRedirect();
 
   return (
-    <div className="flex min-h-dvh flex-1 flex-col pb-16 md:pb-0">
-      <header className="sticky top-0 z-30 border-b border-line bg-canvas/90 backdrop-blur-sm">
+    <div className="portal grain flex min-h-dvh flex-1 flex-col pb-16 md:pb-0">
+      <header className="sticky top-0 z-30 border-b border-ink/10 bg-paper/95">
         <div className="mx-auto flex h-16 max-w-5xl items-center gap-6 px-4 sm:px-6">
           <Link href="/portal" className="min-w-0">
             <span className="block text-[11px] font-semibold tracking-[0.32em]">PRIMEPLOT</span>
@@ -48,7 +51,7 @@ export function PortalShell({ children }) {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6">{children}</main>
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-6 pb-10 sm:px-6 sm:pt-10">{children}</main>
 
       {/* Phone tab bar — thumb reach. */}
       <nav aria-label={t("label")} className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] md:hidden">

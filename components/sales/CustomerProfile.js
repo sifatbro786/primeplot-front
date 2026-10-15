@@ -12,6 +12,7 @@ import { useSession } from "@/lib/auth/session";
 import { formatPhone } from "@/lib/format";
 import { useSalesError } from "@/lib/sales/errors";
 import { useBookings, useCustomer } from "@/lib/sales/queries";
+import { PortalAccessCard } from "@/components/review/PortalAccessCard";
 import { CustomerDrawer } from "./CustomerDrawer";
 import { CustomerPhoto, FileList } from "./PrivateFiles";
 import { Fact, StageTag, localName, useDay, useMoney } from "./parts";
@@ -134,6 +135,7 @@ export function CustomerProfile() {
         </div>
 
         <aside className="space-y-8">
+          <PortalAccessCard customerId={c.id} />
           <section>
             <h3 className="mb-4 text-sm font-semibold">{t("sections.identity")}</h3>
             <dl className="space-y-4 rounded-lg border border-line bg-surface p-5">

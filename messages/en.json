@@ -109,39 +109,46 @@
       "email": "Enter a valid email address",
       "min": "At least {n} characters",
       "max": "At most {n} characters",
-      "mismatch": "Passwords don't match"
+      "mismatch": "Passwords don't match",
+      "identifier": "Enter a mobile number or an e-mail address"
     },
     "login": {
       "metaTitle": "Sign in",
       "eyebrow": "Welcome back",
       "title": "Sign in",
-      "subtitle": "Use the email your administrator registered for you.",
+      "subtitle": "Use your mobile number or the e-mail address we have for you.",
       "email": "Email",
       "password": "Password",
       "remember": "Keep me signed in",
       "forgot": "Forgot password?",
       "submit": "Sign in",
-      "invalid": "Incorrect email or password.",
+      "invalid": "Incorrect mobile number / e-mail or password.",
       "locked": "Too many failed attempts. Try again in {minutes} minutes, or reset your password.",
       "disabled": "This account has been disabled. Contact your administrator.",
       "notice": {
         "expired": "Your session ended. Please sign in again.",
         "reset": "Password updated. Sign in with your new password.",
         "setup": "Your account is ready. Sign in to continue."
-      }
+      },
+      "identifier": "Mobile number or e-mail",
+      "identifierHint": "e.g. 01712345678 or you@example.com"
     },
     "forgot": {
       "metaTitle": "Forgot password",
       "eyebrow": "Account recovery",
       "title": "Reset your password",
-      "subtitle": "Enter your email and we'll send you a link to set a new password.",
+      "subtitle": "Enter your mobile number or e-mail and we'll send you a link to set a new password.",
       "email": "Email",
       "submit": "Send reset link",
       "back": "Back to sign in",
       "sentTitle": "Check your email",
       "sentBody": "If an account exists for {email}, a reset link is on its way. It works once and expires in 30 minutes.",
       "sentHint": "Nothing after a few minutes? Check spam, or send it again.",
-      "resend": "Send again"
+      "resend": "Send again",
+      "identifier": "Mobile number or e-mail",
+      "sentTitleSms": "Check your messages",
+      "sentBodySms": "If an account uses {phone}, an SMS with a reset link is on its way. It works once and expires in 30 minutes.",
+      "sentHintSms": "No SMS after a few minutes? Send it again, or call the office."
     },
     "reset": {
       "metaTitle": "Set a new password",
@@ -164,8 +171,9 @@
       "confirm": "Confirm password",
       "submit": "Activate account",
       "invalidTitle": "This invitation can't be used",
-      "invalidBody": "It has expired or was already used. Ask your administrator to send a new invitation.",
-      "requestNew": "Request a new link"
+      "invalidBody": "It has expired or was already used. Ask the office (or your administrator) to send a new one.",
+      "requestNew": "Request a new link",
+      "clientHint": "From now on you sign in with this mobile number (or your e-mail) and the password you set here."
     }
   },
   "nav": {
@@ -185,14 +193,18 @@
       "workspace": "Workspace",
       "inventory": "Inventory",
       "sales": "Sales",
-      "admin": "Administration"
+      "admin": "Administration",
+      "portal": "Customer portal"
     },
     "tasks": "My tasks",
     "crmSettings": "CRM settings",
     "integrations": "Integrations",
     "website": "Website",
     "customers": "Customers",
-    "cheques": "Cheques"
+    "cheques": "Cheques",
+    "paymentSlips": "Bank slips",
+    "onlinePayments": "Online payments",
+    "profileRequests": "Profile requests"
   },
   "portalNav": {
     "label": "Portal navigation",
@@ -2315,7 +2327,11 @@
         "meta": "Facebook lead forms",
         "sms": "SMS"
       },
-      "chequeBounced": "Cheque {no} of {name} bounced ({booking})"
+      "chequeBounced": "Cheque {no} of {name} bounced ({booking})",
+      "slipSubmitted": "{name} sent a bank slip of {amount} ({unit})",
+      "profileRequest": "{name} asked to change their contact details",
+      "onlinePaid": "{name} paid {amount} online ({booking})",
+      "onlineReview": "Online payment of {amount} by {name} needs a check"
     },
     "settings": {
       "eyebrow": "Administration",
@@ -3977,6 +3993,582 @@
         "bouncedTitle": "Bounced — needs follow-up",
         "none": "None."
       }
+    }
+  },
+  "portal": {
+    "errors": {
+      "OVERPAYMENT": "That is more than what is left to pay ({max} can still be paid).",
+      "AMOUNT_TOO_SMALL": "The minimum online payment is {min}.",
+      "NOTHING_TO_PAY": "Nothing is left to pay online — slips you sent are still being checked.",
+      "TOO_MANY_OPEN_PAYMENTS": "You started several payments just now. Please wait a few minutes before trying again.",
+      "GATEWAY_ERROR": "The payment page could not be opened. Please try again shortly.",
+      "PAYMENT_DISABLED": "Online payment is not available right now.",
+      "BOOKING_NOT_ACTIVE": "This booking is no longer active.",
+      "TOO_MANY_PENDING_SLIPS": "Please wait until your earlier slips are checked.",
+      "INVALID_MEDIA": "Upload the slip again.",
+      "SLIP_FILE_REUSED": "This file was already sent with another slip.",
+      "SLIPS_DISABLED": "Slip upload is switched off. Please contact the office.",
+      "SLIP_NOT_PENDING": "This slip was already checked.",
+      "SLIP_DATE_FUTURE": "The payment date can't be in the future.",
+      "SLIP_BEFORE_BOOKING": "The payment date can't be before the booking.",
+      "PROFILE_REQUEST_PENDING": "You already have a request waiting. Withdraw it to send a new one.",
+      "NO_CHANGES": "Nothing was changed.",
+      "REQUEST_NOT_PENDING": "This request was already handled.",
+      "PORTAL_NOT_LINKED": "Your login is not linked to a buyer record. Please contact the office.",
+      "IDEMPOTENCY_KEY_REUSED": "Please close this and try again.",
+      "PDF_UNAVAILABLE": "The PDF can't be made right now — open the page and print it instead.",
+      "CLIENT_PROFILE_LOCKED": "Contact details change through a request on your profile."
+    },
+    "deed": {
+      "coApplicant": "Co-applicant",
+      "cancelled": "This booking was cancelled.",
+      "outstanding": "Left to pay",
+      "paid": "Paid so far",
+      "paidPct": "{pct}% paid",
+      "contract": "of {amount}"
+    },
+    "stages": {
+      "label": "Stages of your purchase",
+      "booked": "Booking",
+      "allotted": "Allotment",
+      "registered": "Registration",
+      "handed_over": "Handover",
+      "next": "Next"
+    },
+    "slipStatus": {
+      "pending": "Being checked",
+      "approved": "Approved",
+      "rejected": "Not accepted",
+      "withdrawn": "Withdrawn"
+    },
+    "payStatus": {
+      "initiated": "In progress",
+      "paid": "Paid",
+      "review": "Being checked",
+      "failed": "Failed",
+      "cancelled": "Cancelled",
+      "expired": "Expired",
+      "rejected": "Not accepted"
+    },
+    "home": {
+      "eyebrow": "Your passbook",
+      "welcome": "Welcome, {name}.",
+      "intro": "Your units, what is due and every taka you have paid — kept up to date by the office.",
+      "overdueTitle": "{amount} is overdue",
+      "overdueBody": "Pay online, or upload the bank slip if you have already paid.",
+      "overdueAction": "See what is due",
+      "unitsTitle": "My units",
+      "loadFailed": "Your units could not be loaded",
+      "emptyTitle": "No unit yet",
+      "emptyBody": "Once your booking is recorded, your unit, schedule and receipts appear here.",
+      "viewRecord": "View the record",
+      "nextDue": "Next: {amount} on {date}",
+      "noDateDue": "Balance due when called",
+      "allPaid": "Fully paid",
+      "soonTitle": "Coming up (30 days)",
+      "seeAll": "All payments",
+      "helpTitle": "Questions? {company} is here to help",
+      "helpBody": "Call or write to the office — mention your booking number."
+    },
+    "booking": {
+      "metaTitle": "My unit",
+      "notFound": "This booking was not found",
+      "back": "My units",
+      "loadFailed": "The booking could not be loaded",
+      "overdueLine": "{amount} is overdue.",
+      "nextLine": "Next installment: {amount} on {date}.",
+      "noDateLine": "The rest is due when the office calls it.",
+      "payNow": "Pay now",
+      "uploadSlip": "Paid at the bank? Upload slip",
+      "inProgress": "Payments being checked",
+      "slipPending": "Your slip of {amount} (paid {date}) is being checked.",
+      "paymentReview": "Your online payment of {amount} was received and is being checked.",
+      "slipRejected": "Your slip of {amount} was not accepted.",
+      "reason": "Reason: {reason}",
+      "cancelledOn": "Cancelled on {date}",
+      "cancel": {
+        "paid": "Paid",
+        "deduction": "Deduction",
+        "refundable": "Refundable",
+        "refunded": "Refunded"
+      },
+      "tabsLabel": "Booking sections",
+      "tabs": {
+        "ledger": "Installments",
+        "receipts": "Receipts",
+        "documents": "Documents",
+        "progress": "Construction"
+      }
+    },
+    "ledger": {
+      "overdueSince": "Overdue since {date}",
+      "whenCalled": "When called",
+      "partPaid": "{paid} paid",
+      "paidStamp": "Paid",
+      "total": "Total",
+      "paid": "Paid",
+      "outstanding": "Left to pay",
+      "plan": "Plan: {name}"
+    },
+    "receipts": {
+      "none": "No receipt yet",
+      "reversed": "Reversed",
+      "view": "View",
+      "pdf": "PDF"
+    },
+    "documents": {
+      "eyebrow": "Papers",
+      "title": "Documents",
+      "intro": "Money receipts, letters and statements issued to you. Each carries a QR code anyone can scan to check it is genuine.",
+      "none": "No document yet",
+      "noneBody": "Receipts and letters appear here as the office issues them.",
+      "download": "Download PDF",
+      "loadFailed": "Documents could not be loaded",
+      "notFound": "This document was not found",
+      "back": "All documents",
+      "backToUnit": "Back to {unit}",
+      "language": "Document language",
+      "print": "Print",
+      "verifyNote": "The QR code on this page opens a public check of the document.",
+      "viewerTitle": "Document",
+      "pdfUnavailable": "The PDF can't be made right now — use Print instead.",
+      "pdfFailed": "The PDF could not be downloaded."
+    },
+    "progress": {
+      "none": "No update yet",
+      "noneBody": "Construction news from the site appears here.",
+      "percent": "{pct}% complete"
+    },
+    "pay": {
+      "title": "Pay online",
+      "subtitle": "Unit {unit} · secure payment by SSLCommerz",
+      "cancel": "Cancel",
+      "pay": "Continue",
+      "payAmount": "Pay {amount}",
+      "what": "What would you like to pay?",
+      "options": {
+        "overdue": "Overdue amount",
+        "dueNow": "Everything due now",
+        "next": "Next installment",
+        "all": "The whole balance",
+        "other": "Another amount"
+      },
+      "amount": "Amount",
+      "limits": "Between {min} and {max}",
+      "enterAmount": "Enter the amount.",
+      "belowMin": "The minimum online payment is {min}.",
+      "aboveMax": "At most {max} can be paid now.",
+      "gatewayDown": "The payment page could not be opened. Please try again.",
+      "pendingSlips": "Slips of {amount} are still being checked and are kept aside from this balance.",
+      "howTitle": "How it works",
+      "howBody": "You'll go to the SSLCommerz page to pay by bKash, Nagad, Rocket, card or internet banking. When you come back the receipt is made automatically — you'll also get an SMS."
+    },
+    "slip": {
+      "title": "Upload a bank slip",
+      "subtitle": "Unit {unit} · the office checks it against the bank statement",
+      "cancel": "Cancel",
+      "submit": "Send for checking",
+      "channel": "How did you pay?",
+      "channels": {
+        "bank_transfer": "Transfer",
+        "cash_deposit": "Cash deposit",
+        "pay_order": "Pay order"
+      },
+      "paidInto": "Paid into",
+      "noBanks": "The company account details are not set yet — please ask the office.",
+      "copyAccount": "Copy account number",
+      "copied": "Copied",
+      "routing": "Routing {no}",
+      "file": "Slip photo or PDF",
+      "fileHint": "A clear photo or screenshot, or a PDF — up to {mb} MB.",
+      "tooLarge": "The file is larger than {mb} MB.",
+      "replace": "Replace",
+      "uploading": "Uploading…",
+      "pickFile": "Choose a photo or PDF",
+      "amount": "Amount paid",
+      "paidOn": "Payment date",
+      "payOrderNo": "Pay order number",
+      "reference": "Transaction / reference number",
+      "referenceHint": "As printed on the slip or shown in your bank app.",
+      "optional": "Optional",
+      "payerBank": "Your bank",
+      "note": "Note for the office",
+      "after": "After the office checks it, a money receipt is made and you get an SMS. Balance now: {amount}.",
+      "needFile": "Attach the slip.",
+      "needAmount": "Enter the amount.",
+      "needDate": "Enter the date.",
+      "futureDate": "The date can't be in the future.",
+      "beforeBooking": "The date can't be before the booking.",
+      "needAccount": "Choose the account you paid into.",
+      "needReference": "Enter the transaction number.",
+      "sent": "Slip sent. We'll let you know when it is checked."
+    },
+    "payments": {
+      "eyebrow": "Money",
+      "title": "Payments",
+      "intro": "What is due in the next 60 days, the slips you sent and your online payments.",
+      "duesTitle": "Due (next 60 days)",
+      "overdueTotal": "{amount} overdue",
+      "loadFailed": "Dues could not be loaded",
+      "nothingDue": "Nothing is due in the next 60 days.",
+      "payThis": "Pay / upload slip",
+      "slipsTitle": "Bank slips",
+      "noSlips": "You haven't sent a slip yet.",
+      "rejectedBecause": "Not accepted: {reason}",
+      "approvedReceipt": "Approved — receipt {no}",
+      "pendingNote": "The office checks it against the bank statement.",
+      "withdraw": "Withdraw",
+      "withdrawn": "Slip withdrawn",
+      "more": "Show more",
+      "onlineTitle": "Online payments"
+    },
+    "result": {
+      "metaTitle": "Payment",
+      "notFound": "This payment was not found",
+      "toPayments": "Payments",
+      "loadFailed": "The payment could not be loaded",
+      "initiated": {
+        "title": "Confirming with the bank…",
+        "body": "This usually takes a few seconds. Please keep this page open."
+      },
+      "initiated_fail": {
+        "title": "Checking what happened…",
+        "body": "The payment page reported a problem. We're confirming with SSLCommerz before showing the result."
+      },
+      "initiated_cancel": {
+        "title": "Checking what happened…",
+        "body": "The payment was cancelled on the payment page. We're confirming before closing it."
+      },
+      "initiated_late": {
+        "title": "Still waiting for the bank",
+        "body": "Nothing to do now: if money was taken, the receipt is made automatically within the hour and you'll get an SMS."
+      },
+      "paid": {
+        "title": "Payment received",
+        "body": "Thank you. Your receipt is ready and an SMS is on its way."
+      },
+      "review": {
+        "title": "Received — being checked",
+        "body": "The office is checking this payment. You'll get the receipt once it's confirmed."
+      },
+      "failed": {
+        "title": "Payment failed",
+        "body": "No money was taken. You can try again."
+      },
+      "cancelled": {
+        "title": "Payment cancelled",
+        "body": "No money was taken."
+      },
+      "expired": {
+        "title": "Payment not completed",
+        "body": "The payment wasn't finished in time. If money was taken, please call the office."
+      },
+      "rejected": {
+        "title": "Payment not accepted",
+        "body": "The office could not accept this payment; it will be refunded. Please call the office for details."
+      },
+      "fields": {
+        "tranId": "Transaction",
+        "method": "Paid with",
+        "receipt": "Receipt",
+        "time": "Time"
+      },
+      "seeReceipt": "See the receipt",
+      "toBooking": "Back to my unit",
+      "tryAgain": "Try again"
+    },
+    "profile": {
+      "title": "Buyer record",
+      "description": "Your details as the office has them. Contact details change by request; name and papers at the office.",
+      "loadFailed": "Your details could not be loaded",
+      "requestChange": "Request a change",
+      "fields": {
+        "phone": "Mobile",
+        "altPhone": "Other phone",
+        "email": "E-mail",
+        "presentAddress": "Present address",
+        "permanentAddress": "Permanent address",
+        "foreignAddress": "Address abroad",
+        "occupation": "Occupation",
+        "organization": "Organization",
+        "nid": "NID / passport"
+      },
+      "officeOnly": "Name, parents' names, NID / passport, date of birth and TIN are changed at the office with your papers.",
+      "pendingTitle": "Change requested on {date} — waiting for the office",
+      "withdraw": "Withdraw",
+      "withdrawn": "Request withdrawn",
+      "cleared": "(removed)",
+      "historyTitle": "Earlier requests",
+      "status": {
+        "pending": "Waiting",
+        "approved": "Approved",
+        "rejected": "Not accepted",
+        "withdrawn": "Withdrawn"
+      },
+      "rejectedBecause": "Reason: {reason}",
+      "languageTitle": "Language of SMS and e-mails",
+      "languageBody": "Reminders, receipts and notices are sent to you in this language.",
+      "languageSaved": "Language saved",
+      "drawerTitle": "Request a change",
+      "drawerBody": "Change what is different; the office checks and applies it.",
+      "cancel": "Cancel",
+      "send": "Send request ({n})",
+      "was": "Now: {value}",
+      "note": "Note for the office",
+      "optional": "Optional",
+      "noChanges": "Change at least one field.",
+      "phoneRequired": "A mobile number is needed.",
+      "invalidPhone": "Check the mobile number.",
+      "sent": "Request sent. You'll get an SMS when it's handled.",
+      "phoneNote": "If your mobile number changes, you will sign in with the new number."
+    }
+  },
+  "review": {
+    "errors": {
+      "OVERPAYMENT": "This is more than the booking's balance ({outstanding}). Correct the amount, or reject.",
+      "SLIP_NOT_PENDING": "This slip was already decided.",
+      "REQUEST_NOT_PENDING": "This request was already decided or withdrawn.",
+      "PAYMENT_NOT_IN_REVIEW": "This payment is not waiting for a decision any more.",
+      "AMOUNT_MISMATCH": "The gateway amount doesn't match — reject it and refund from the SSLCommerz panel.",
+      "PAYMENT_BUSY": "The payment changed meanwhile. Reload and check again.",
+      "NOT_ON_A_BOOKING": "Logins are only for buyers on an active booking.",
+      "PORTAL_NOT_INVITED": "This customer has no login yet — send an invite first.",
+      "ALREADY_REMINDED_TODAY": "A reminder was already sent for this booking today.",
+      "NOTHING_DUE": "Nothing is due on this booking.",
+      "GATEWAY_ERROR": "SSLCommerz did not answer. Try again shortly.",
+      "BOOKING_NOT_ACTIVE": "The booking is no longer active.",
+      "SLIP_DATE_FUTURE": "The payment date can't be in the future."
+    },
+    "cancel": "Cancel",
+    "reason": "Reason",
+    "reasonHint": "The customer receives this by SMS and e-mail — write it plainly.",
+    "reasonShort": "Write at least a few words.",
+    "slips": {
+      "eyebrow": "Customer portal",
+      "title": "Bank slips",
+      "description": "Slips customers uploaded. Match each with the bank statement, then approve (a receipt is made) or reject with a reason.",
+      "viewsLabel": "Filter slips",
+      "views": {
+        "pending": "To check",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "withdrawn": "Withdrawn",
+        "all": "All"
+      },
+      "loadFailed": "Slips could not be loaded",
+      "emptyPending": "No slip waiting",
+      "emptyPendingBody": "New slips appear here (and in the bell) as customers send them.",
+      "empty": "No slip here",
+      "cols": {
+        "customer": "Customer",
+        "paid": "Paid",
+        "amount": "Amount",
+        "sent": "Sent",
+        "status": "Status"
+      },
+      "loadMore": "Load more",
+      "drawerTitle": "Check bank slip",
+      "fileMissing": "The file is missing.",
+      "openFull": "Open full size",
+      "fileAlt": "Bank slip",
+      "warnings": {
+        "SAME_FILE": "The same file was sent with another slip:",
+        "SAME_REFERENCE": "The same reference number is on another slip:",
+        "MORE_THAN_OUTSTANDING": "The amount is more than the balance ({outstanding})."
+      },
+      "statusShort": {
+        "pending": "waiting",
+        "approved": "approved",
+        "rejected": "rejected",
+        "withdrawn": "withdrawn"
+      },
+      "fields": {
+        "status": "Status",
+        "booking": "Booking",
+        "channel": "Paid by",
+        "payerBank": "Payer's bank",
+        "sent": "Sent",
+        "amount": "Amount (per statement)",
+        "paidOn": "Date (per statement)",
+        "account": "Received in",
+        "reference": "Reference",
+        "note": "Note on the receipt"
+      },
+      "outstanding": "Balance {amount}",
+      "checkHint": "Correct anything to what the bank statement shows — the receipt uses these values.",
+      "clientSaid": "Customer wrote {value}",
+      "noAccount": "— not set —",
+      "optional": "Optional",
+      "approve": "Approve & make receipt",
+      "approveCorrected": "Approve corrected",
+      "reject": "Reject",
+      "approveNote": "Makes a money receipt of {amount} (mode: bank slip) and sends it to the customer.",
+      "receiptMade": "Receipt {no} was made.",
+      "rejectedBecause": "Rejected: {reason}",
+      "reviewedBy": "{name} · {date}",
+      "noVerify": "A manager verifies slips.",
+      "rejectTitle": "Reject this slip?",
+      "rejectBody": "{name} is told the reason and can send a new slip.",
+      "needAmount": "Enter the amount.",
+      "approved": "Approved — receipt made",
+      "rejected": "Slip rejected"
+    },
+    "online": {
+      "eyebrow": "Customer portal",
+      "title": "Online payments",
+      "description": "SSLCommerz payments. Validated ones become receipts by themselves; held ones wait here for a manager.",
+      "viewsLabel": "Filter payments",
+      "views": {
+        "review": "Held for review",
+        "paid": "Paid",
+        "initiated": "In progress",
+        "failed": "Failed",
+        "cancelled": "Cancelled",
+        "expired": "Expired",
+        "rejected": "Rejected",
+        "all": "All"
+      },
+      "loadFailed": "Payments could not be loaded",
+      "emptyReview": "Nothing held for review",
+      "empty": "No payment here",
+      "cols": {
+        "customer": "Customer",
+        "tran": "Transaction",
+        "amount": "Amount",
+        "time": "Time",
+        "status": "Status"
+      },
+      "reasons": {
+        "RISK": "High risk",
+        "AMOUNT_MISMATCH": "Amount mismatch",
+        "OVERPAYMENT": "More than the balance",
+        "BOOKING_NOT_ACTIVE": "Booking not active",
+        "RECEIPT_FAILED": "Receipt failed"
+      },
+      "reasonHelp": {
+        "RISK": "SSLCommerz marked the card as risky. Check with the customer (and the card owner) before approving.",
+        "AMOUNT_MISMATCH": "The bank's amount differs from what was asked. Reject and refund from the SSLCommerz panel.",
+        "OVERPAYMENT": "The booking's balance dropped meanwhile (another payment). Approve only if the balance allows, otherwise reject and refund.",
+        "BOOKING_NOT_ACTIVE": "The booking was cancelled or transferred. Reject and refund.",
+        "RECEIPT_FAILED": "The money is in, but the receipt step failed. Approve to make the receipt."
+      },
+      "loadMore": "Load more",
+      "drawerTitle": "Online payment",
+      "fields": {
+        "tranId": "Our transaction",
+        "bankTranId": "Bank transaction",
+        "valId": "Validation id",
+        "method": "Paid with",
+        "validated": "Validated",
+        "risk": "Risk",
+        "tranDate": "Gateway time",
+        "receipt": "Receipt"
+      },
+      "decided": {
+        "approved": "Approved by {name} · {date}",
+        "rejected": "Rejected by {name} · {date}"
+      },
+      "note": "Note",
+      "optional": "Optional",
+      "approve": "Approve & make receipt",
+      "reject": "Reject",
+      "rejectNote": "Rejecting does not refund the money — refund it in the SSLCommerz merchant panel.",
+      "recheck": "Ask SSLCommerz again",
+      "events": "History",
+      "sources": {
+        "init": "Started",
+        "success": "Success page",
+        "fail": "Fail page",
+        "cancel": "Cancel page",
+        "ipn": "IPN",
+        "reconcile": "Reconcile",
+        "staff": "Staff"
+      },
+      "rejectTitle": "Reject this payment?",
+      "rejectBody": "The customer gets an SMS. Refund the money in the SSLCommerz panel.",
+      "done": {
+        "approve": "Approved — receipt made",
+        "reject": "Payment rejected",
+        "recheck": "Checked with SSLCommerz"
+      }
+    },
+    "profile": {
+      "eyebrow": "Customer portal",
+      "title": "Profile requests",
+      "description": "Customers asking to change their contact details. Approving updates the customer record and their login.",
+      "viewsLabel": "Filter requests",
+      "views": {
+        "pending": "Waiting",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "withdrawn": "Withdrawn",
+        "all": "All"
+      },
+      "loadFailed": "Requests could not be loaded",
+      "emptyPending": "No request waiting",
+      "empty": "No request here",
+      "cols": {
+        "customer": "Customer",
+        "fields": "Changes",
+        "sent": "Sent",
+        "status": "Status",
+        "field": "Field",
+        "before": "Before",
+        "requested": "Requested"
+      },
+      "loadMore": "Load more",
+      "drawerTitle": "Contact change request",
+      "approved": "Approved — customer updated",
+      "rejected": "Request rejected",
+      "openCustomer": "Open the customer",
+      "changedSince": "Changed since the request: now {value}",
+      "cleared": "(remove)",
+      "sentAt": "Sent {date}",
+      "phoneWarning": "The mobile number is also the customer's login — after approval they sign in with the new number and are signed out everywhere.",
+      "rejectedBecause": "Rejected: {reason}",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectTitle": "Reject this request?",
+      "rejectBody": "The customer gets the reason by SMS."
+    },
+    "access": {
+      "title": "Portal login",
+      "label": "Customer portal",
+      "status": {
+        "none": "No login",
+        "invited": "Invited",
+        "active": "Active",
+        "disabled": "Switched off"
+      },
+      "lastLogin": "Last sign-in {date}",
+      "inviteSent": "Invite sent {date}",
+      "inviteExpires": "Link valid until {date}",
+      "noneHint": "Holders get a login automatically after booking. Co-applicants: send an invite.",
+      "noBookingHint": "A login is only for a buyer on an active booking.",
+      "invite": "Send invite",
+      "resend": "Resend invite",
+      "sendAnyway": "Send again anyway",
+      "disable": "Switch off",
+      "enable": "Switch on",
+      "recent": "An invite went out in the last 10 minutes. Press again to send anyway.",
+      "noChannel": "No mobile number or e-mail to send the link to.",
+      "alreadyActive": "This customer already uses the portal.",
+      "isDisabled": "The login is switched off — switch it on first.",
+      "viaSms": "SMS",
+      "viaEmail": "e-mail",
+      "created": "Login created — link sent by {via}",
+      "resent": "Invite sent again by {via}",
+      "enabled": "Login switched on",
+      "disabledDone": "Login switched off — signed out everywhere"
+    },
+    "remind": {
+      "label": "Remind now",
+      "hint": "SMS + e-mail to the holder for what is due (once a day)",
+      "doneToday": "Reminded today",
+      "sms": "SMS",
+      "email": "e-mail",
+      "sent": "Reminder for {amount} sent by {via}",
+      "nothingSent": "Logged, but nothing was sent ({reason})"
     }
   }
 }

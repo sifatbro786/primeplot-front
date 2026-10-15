@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/Input";
 import { Link, useRouter } from "@/i18n/navigation";
 import { api } from "@/lib/api/client";
 import { homeFor, safeNext } from "@/lib/auth/paths";
+import { isIdentifier } from "@/lib/auth/identifier";
 import { errorMessage, ME_KEY } from "@/lib/auth/session";
 
 const NOTICES = { expired: "info", reset: "success", setup: "success" };
@@ -28,7 +29,8 @@ export function LoginForm() {
   const notice = params.get("reason");
 
   const schema = z.object({
-    email: z.string().trim().min(1, tv("required")).pipe(z.email(tv("email"))),
+    // E-mail (staff, most clients) or mobile number (B5: clients may have no e-mail).
+    identifier: z.string().trim().min(1, tv("required")).max(254).refine(isIdentifier, tv("identifier")),
     password: z.string().min(1, tv("required")),
     remember: z.boolean(),
   });
@@ -38,7 +40,7 @@ export function LoginForm() {
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(schema), defaultValues: { email: "", password: "", remember: false } });
+  } = useForm({ resolver: zodResolver(schema), defaultValues: { identifier: "", password: "", remember: false } });
 
   const onSubmit = async (values) => {
     try {
@@ -72,8 +74,8 @@ export function LoginForm() {
       <FormAlert>{errors.root?.message}</FormAlert>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
-        <Field label={t("email")} error={errors.email?.message}>
-          <Input type="email" autoComplete="username" inputMode="email" autoFocus {...register("email")} />
+        <Field label={t("identifier")} hint={t("identifierHint")} error={errors.identifier?.message}>
+          <Input type="text" autoComplete="username" autoCapitalize="none" spellCheck={false} autoFocus {...register("identifier")} />
         </Field>
         <Field label={t("password")} error={errors.password?.message}>
           <PasswordInput autoComplete="current-password" {...register("password")} />

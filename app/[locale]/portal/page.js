@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { PortalHome } from "@/components/dashboard/PortalHome";
+import { PortalHome } from "@/components/portal/PortalHome";
 
 export async function generateMetadata() {
   const t = await getTranslations("portalNav");

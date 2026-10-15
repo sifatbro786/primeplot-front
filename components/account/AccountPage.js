@@ -21,7 +21,7 @@ import { formatDate } from "@/lib/format";
 
 const SESSIONS_KEY = ["auth", "sessions"];
 
-function Panel({ title, description, children }) {
+export function Panel({ title, description, children }) {
   return (
     <section className="grid gap-6 border-t border-line py-10 first:border-t-0 first:pt-0 lg:grid-cols-[260px_1fr]">
       <header>
@@ -213,8 +213,11 @@ function Sessions() {
   );
 }
 
-/** Shared by /dashboard/account and /portal/account. */
-export function AccountPage() {
+/**
+ * Shared by /dashboard/account and /portal/account. The portal passes its own `profile` panel:
+ * a client's name and phone belong to the customer record (changed by request, B5).
+ */
+export function AccountPage({ profile } = {}) {
   const t = useTranslations("account");
   const { user, isPending } = useSession();
 
@@ -224,9 +227,11 @@ export function AccountPage() {
         <span className="eyebrow">{t("eyebrow")}</span>
         <h2 className="mt-4 font-display text-4xl">{t("title")}</h2>
       </header>
-      <Panel title={t("profile.title")} description={t("profile.description")}>
-        {isPending || !user ? <Skeleton className="h-64 w-full" /> : <ProfileForm user={user} />}
-      </Panel>
+      {profile ?? (
+        <Panel title={t("profile.title")} description={t("profile.description")}>
+          {isPending || !user ? <Skeleton className="h-64 w-full" /> : <ProfileForm user={user} />}
+        </Panel>
+      )}
       <Panel title={t("password.title")} description={t("password.description")}>
         <PasswordForm />
       </Panel>

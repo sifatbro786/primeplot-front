@@ -21,6 +21,7 @@ import { formatPhone } from "@/lib/format";
 import { useSalesError } from "@/lib/sales/errors";
 import { salesKeys, useBooking, useDocuments, useLedger, useSalesRefresh } from "@/lib/sales/queries";
 import { useSearchState } from "@/lib/sales/url";
+import { RemindButton } from "@/components/review/RemindButton";
 import { BookingActionsMenu, CancellationPanel, StageTimeline, useScheduleActions } from "./BookingActions";
 import { PriceLines, ScheduleTable } from "./BookingParts";
 import { ChequesTable } from "./ChequesPage";
@@ -130,6 +131,7 @@ function Detail({ b }) {
               {t("takePayment")}
             </Button>
           )}
+          <RemindButton b={b} />
           <BookingActionsMenu b={b} />
         </div>
       </header>

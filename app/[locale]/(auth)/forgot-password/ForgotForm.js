@@ -12,6 +12,7 @@ import { Field } from "@/components/ui/Field";
 import { Input } from "@/components/ui/Input";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api/client";
+import { isIdentifier, isPhone } from "@/lib/auth/identifier";
 import { errorMessage } from "@/lib/auth/session";
 
 export function ForgotForm() {
@@ -20,19 +21,19 @@ export function ForgotForm() {
   const te = useTranslations("errors");
   const [sentTo, setSentTo] = useState(null);
 
-  const schema = z.object({ email: z.string().trim().min(1, tv("required")).pipe(z.email(tv("email"))) });
+  const schema = z.object({ identifier: z.string().trim().min(1, tv("required")).max(254).refine(isIdentifier, tv("identifier")) });
   const {
     register,
     handleSubmit,
     setError,
     getValues,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(schema), defaultValues: { email: "" } });
+  } = useForm({ resolver: zodResolver(schema), defaultValues: { identifier: "" } });
 
-  const send = async ({ email }) => {
+  const send = async ({ identifier }) => {
     try {
-      await api.post("/auth/password/forgot", { email });
-      setSentTo(email); // same screen whether or not the account exists
+      await api.post("/auth/password/forgot", { identifier });
+      setSentTo(identifier); // same screen whether or not the account exists
     } catch (err) {
       setError("root", { message: errorMessage(te, err) });
     }
@@ -51,9 +52,9 @@ export function ForgotForm() {
         <span className="grid size-11 place-items-center rounded-md border border-line bg-surface">
           <MailCheck aria-hidden className="size-5 text-accent" strokeWidth={1.5} />
         </span>
-        <AuthHeading title={t("sentTitle")} subtitle={t("sentBody", { email: sentTo })} />
-        <p className="text-xs text-ink-muted">{t("sentHint")}</p>
-        <Button variant="secondary" className="mt-6" loading={isSubmitting} onClick={() => send({ email: getValues("email") })}>
+        <AuthHeading title={isPhone(sentTo) ? t("sentTitleSms") : t("sentTitle")} subtitle={isPhone(sentTo) ? t("sentBodySms", { phone: sentTo }) : t("sentBody", { email: sentTo })} />
+        <p className="text-xs text-ink-muted">{isPhone(sentTo) ? t("sentHintSms") : t("sentHint")}</p>
+        <Button variant="secondary" className="mt-6" loading={isSubmitting} onClick={() => send({ identifier: getValues("identifier") })}>
           {t("resend")}
         </Button>
         <div>{back}</div>
@@ -66,8 +67,8 @@ export function ForgotForm() {
       <AuthHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} />
       <FormAlert>{errors.root?.message}</FormAlert>
       <form onSubmit={handleSubmit(send)} noValidate className="space-y-5">
-        <Field label={t("email")} error={errors.email?.message}>
-          <Input type="email" autoComplete="email" inputMode="email" autoFocus {...register("email")} />
+        <Field label={t("identifier")} error={errors.identifier?.message}>
+          <Input type="text" autoComplete="username" autoCapitalize="none" spellCheck={false} autoFocus {...register("identifier")} />
         </Field>
         <Button type="submit" size="lg" className="w-full" loading={isSubmitting}>
           {t("submit")}

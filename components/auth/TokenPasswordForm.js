@@ -70,7 +70,9 @@ export function TokenPasswordForm({ purpose }) {
   const onSubmit = async ({ password }) => {
     try {
       await api.post(cfg.endpoint, { token, password });
-      router.replace({ pathname: "/login", query: { reason: cfg.done } });
+      // Clients land in the portal after signing in (login sends each role home; `next` is a hint).
+      const next = inspect.data?.role === "client" ? { next: "/portal" } : {};
+      router.replace({ pathname: "/login", query: { reason: cfg.done, ...next } });
     } catch (err) {
       if (err?.code === "INVALID_TOKEN") return setDead(true);
       if (err?.code === "VALIDATION_ERROR") return setError("password", { message: ta("rules.weak") });
@@ -106,8 +108,9 @@ export function TokenPasswordForm({ purpose }) {
     <>
       <AuthHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} />
       <div className="mb-6 flex h-10 items-center rounded-md border border-line bg-surface-2 px-3 font-mono text-sm text-ink-muted">
-        {inspect.isPending ? <Skeleton className="h-3 w-40" /> : inspect.data?.email}
+        {inspect.isPending ? <Skeleton className="h-3 w-40" /> : (inspect.data?.email ?? inspect.data?.phone)}
       </div>
+      {inspect.data?.role === "client" && <p className="-mt-4 mb-6 text-xs text-ink-muted">{t("clientHint")}</p>}
       <FormAlert>{errors.root?.message}</FormAlert>
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
         <Field label={t("password")} error={errors.password?.message}>
