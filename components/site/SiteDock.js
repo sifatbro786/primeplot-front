@@ -176,9 +176,9 @@ function WhatsAppButton({ phone }) {
       className="pointer-events-auto inline-flex h-14 items-center gap-2.5 rounded-full bg-success px-4 text-primary-ink shadow-[0_12px_28px_-12px_rgb(35_39_31/0.7)] ring-4 ring-paper/90 transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary sm:pr-5"
     >
       <MessageCircle aria-hidden className="size-6" strokeWidth={1.75} />
-      <span aria-hidden className="hidden text-sm font-semibold sm:inline">
+      {/* <span aria-hidden className="hidden text-sm font-semibold sm:inline">
         WhatsApp
-      </span>
+      </span> */}
     </a>
   );
 }

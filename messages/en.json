@@ -1628,7 +1628,27 @@
       "email": "Email",
       "office": "Office",
       "soon": "Contact details are coming soon.",
-      "formTitle": "Enquiry form"
+      "formTitle": "Send us an enquiry",
+      "reachTitle": "Reach us directly",
+      "directions": "Get directions",
+      "formEyebrow": "Enquiry",
+      "formIntro": "Tell us the size, area and budget you have in mind — we reply with the homes that fit, not a sales script.",
+      "nextEyebrow": "After you write",
+      "nextTitle": "What happens next",
+      "next": {
+        "reply": {
+          "title": "We reply the same day",
+          "body": "A sales executive answers by phone or WhatsApp, usually within a few working hours."
+        },
+        "call": {
+          "title": "A short call",
+          "body": "We confirm what you need and send prices, floor plans and the payment schedule in writing."
+        },
+        "visit": {
+          "title": "Visit the site",
+          "body": "We arrange a visit at a time that suits you and hold the unit you like while you decide."
+        }
+      }
     },
     "legal": {
       "updated": "Last updated: {date}",
@@ -2478,7 +2498,12 @@
         "allPurposes": "All",
         "purposes": {
           "lead_auto_reply": "Auto-reply",
-          "test": "Test"
+          "test": "Test",
+          "receipt": "Money receipt",
+          "account_setup": "Portal invite",
+          "password_reset": "Password reset",
+          "reminder": "Installment reminder",
+          "portal": "Portal update"
         },
         "loadFailed": "Couldn't load the SMS log",
         "empty": "No SMS yet",

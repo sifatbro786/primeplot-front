@@ -24,6 +24,8 @@ import { useLeadParam } from "@/lib/crm/url";
 import { LeadDrawer } from "./LeadDrawer";
 import { useNum } from "./parts";
 
+// Mirrors SMS_PURPOSES in primeplot-back/src/modules/sms/smsMessage.model.js
+const SMS_PURPOSES = ["lead_auto_reply", "reminder", "receipt", "portal", "account_setup", "password_reset", "test"];
 const SMS_TONE = { sent: "success", queued: "info", failed: "danger", skipped: "neutral" };
 const META_TONE = { imported: "success", duplicate: "accent", received: "info", processing: "info", failed: "danger" };
 
@@ -141,7 +143,7 @@ function SmsLog({ onOpenLead }) {
           </Select>
           <Select value={purpose} onChange={(e) => setPurpose(e.target.value)} aria-label={t("purpose")}>
             <option value="">{t("allPurposes")}</option>
-            {["lead_auto_reply", "test"].map((s) => (
+            {SMS_PURPOSES.map((s) => (
               <option key={s} value={s}>
                 {t(`purposes.${s}`)}
               </option>
@@ -181,7 +183,7 @@ function SmsLog({ onOpenLead }) {
                       formatPhone(m.to, locale)
                     )}
                   </TD>
-                  <TD className="hidden text-sm md:table-cell">{t(`purposes.${m.purpose}`)}</TD>
+                  <TD className="hidden text-sm md:table-cell">{t.has(`purposes.${m.purpose}`) ? t(`purposes.${m.purpose}`) : m.purpose}</TD>
                   <TD className="hidden max-w-72 truncate text-xs text-ink-muted lg:table-cell" title={m.body}>
                     {m.body}
                   </TD>
