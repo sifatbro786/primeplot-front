@@ -204,7 +204,9 @@
     "cheques": "Cheques",
     "paymentSlips": "Bank slips",
     "onlinePayments": "Online payments",
-    "profileRequests": "Profile requests"
+    "profileRequests": "Profile requests",
+    "analytics": "Analytics",
+    "reminders": "Reminders"
   },
   "portalNav": {
     "label": "Portal navigation",
@@ -3518,6 +3520,24 @@
           "emailHint": "To the customer's e-mail, if there is one.",
           "sms": "Send a receipt SMS",
           "smsHint": "Short confirmation with the amount and receipt number (SMS costs apply)."
+        },
+        "portal": {
+          "title": "Customer portal",
+          "body": "Logins for buyers, bank slips and online payment.",
+          "autoInvite": "Create a login for the holder after a booking or transfer",
+          "autoInviteHint": "A one-time setup link goes out (valid 72 hours).",
+          "autoInviteCoApplicants": "Also invite co-applicants automatically",
+          "autoInviteCoApplicantsHint": "Off: staff invite them from the customer page.",
+          "inviteSms": "Setup link by SMS",
+          "inviteEmail": "Setup link by e-mail",
+          "slipUpload": "Buyers can upload bank slips",
+          "slipUploadHint": "Slips wait in Customer portal › Bank slips until someone checks them.",
+          "onlinePayment": "Online payment (SSLCommerz)",
+          "onlinePaymentHint": "Shown only when the SSLCommerz store keys are set on the server.",
+          "onlineMin": "Minimum online payment",
+          "onlineMinHint": "If less than this is left to pay, the buyer can pay the rest.",
+          "minInvalid": "Between ৳1 and ৳10,00,000.",
+          "resultSms": "SMS the buyer when a slip, request or online payment is decided"
         }
       },
       "banks": {
@@ -4569,6 +4589,215 @@
       "email": "e-mail",
       "sent": "Reminder for {amount} sent by {via}",
       "nothingSent": "Logged, but nothing was sent ({reason})"
+    },
+    "reminders": {
+      "eyebrow": "Customer portal",
+      "title": "Installment reminders",
+      "description": "SMS and e-mail to buyers before and after each due date — what goes out today, what went out, and the rules.",
+      "status": {
+        "on": "Reminders go out every day after {hour} (Dhaka time).",
+        "off": "Automatic reminders are switched off."
+      },
+      "tabsLabel": "Reminders",
+      "tabs": {
+        "today": "Today",
+        "log": "Delivery log",
+        "rules": "Rules"
+      },
+      "loadFailed": "Couldn't load the reminders.",
+      "loadMore": "Load more",
+      "email": "E-mail",
+      "noChannel": "No mobile / e-mail",
+      "cancel": "Cancel",
+      "rule": {
+        "before": "{n} days before",
+        "onDay": "On the due date",
+        "after": "{n} days after",
+        "manual": "Sent by hand"
+      },
+      "cols": {
+        "customer": "Buyer",
+        "rule": "Rule",
+        "due": "Due date",
+        "amount": "Amount",
+        "channels": "Goes by",
+        "sent": "Sent",
+        "delivery": "Delivery"
+      },
+      "today": {
+        "date": "Today",
+        "toSend": "To send",
+        "already": "Already sent",
+        "silent": "No channel",
+        "emptyTitle": "Nothing to send today",
+        "emptyBody": "No installment hits a reminder day today — or today's reminders already went."
+      },
+      "run": {
+        "button": "Send now",
+        "title": "Send today's reminders now?",
+        "body": "{n} reminders go out by SMS and e-mail now instead of at the send hour.",
+        "note": "Each booking still gets each reminder only once; anything already sent is skipped.",
+        "confirm": "Send now",
+        "done": "{sent} sent · {already} had already gone",
+        "disabled": "Automatic reminders are switched off — turn them on under Rules."
+      },
+      "delivery": {
+        "queued": "Sent",
+        "skipped": "Skipped",
+        "off": "Off"
+      },
+      "log": {
+        "rule": "Rule",
+        "allRules": "All rules",
+        "from": "From",
+        "to": "To",
+        "empty": "No reminder in this range",
+        "by": "by {name}",
+        "due": "Due {date}",
+        "overdue": "{amount} overdue in all"
+      },
+      "rules": {
+        "title": "When to remind",
+        "timeline": "Reminder days around a due date",
+        "timelineNote": "Every installment gets these messages, counted from its own due date. Red = after the due date.",
+        "dueDate": "Due date",
+        "enabled": "Send reminders automatically",
+        "enabledHint": "Off: nothing goes out by itself (\"Remind now\" on a booking still works).",
+        "sendHour": "Send after",
+        "sendHourHint": "Dhaka time, once a day.",
+        "days": "Days",
+        "when": "When",
+        "before": "days before",
+        "on": "on the due date",
+        "after": "days after",
+        "active": "On",
+        "remove": "Remove this rule",
+        "add": "Add a reminder day",
+        "note": "Several installments due on the same day are summed into one message. A reminder still goes up to 2 days late if a run was missed, never after the next rule's day. Message texts are fixed BN/EN templates in the buyer's language.",
+        "badDays": "Enter whole days.",
+        "range": "Between 60 days before and 120 days after.",
+        "duplicate": "Two reminders on the same day.",
+        "saved": "Reminder rules saved",
+        "unsaved": "Unsaved changes",
+        "discard": "Discard",
+        "readOnly": "Only managers and admins change the reminder rules."
+      }
+    }
+  },
+  "analytics": {
+    "eyebrow": "Reports",
+    "title": "Analytics",
+    "description": "Sales, money in, money owed, stock and leads — for the period you pick.",
+    "range": "Period",
+    "ranges": {
+      "12m": "12 months",
+      "6m": "6 months",
+      "fy": "This fiscal year",
+      "custom": "Custom"
+    },
+    "from": "From",
+    "to": "To",
+    "project": "Project",
+    "allProjects": "All projects",
+    "loadFailed": "Couldn't load the analytics.",
+    "emptyTitle": "Nothing to show yet",
+    "emptyBody": "Bookings, receipts and leads appear here as they are recorded.",
+    "view": "View",
+    "views": {
+      "chart": "Chart",
+      "table": "Table"
+    },
+    "tiles": {
+      "label": "Headline figures",
+      "sales": "Sales",
+      "salesSub": "{n} bookings",
+      "collected": "Collected",
+      "collectedSub": "{n} receipts",
+      "outstanding": "Still owed",
+      "overdueSub": "{amount} overdue",
+      "noOverdue": "Nothing overdue",
+      "sold": "Units sold",
+      "soldSub": "{sold} of {units}",
+      "winRate": "Lead win rate",
+      "winSub": "{won} won · {lost} lost"
+    },
+    "cols": {
+      "month": "Month",
+      "bookings": "Bookings",
+      "value": "Value",
+      "bucket": "Overdue for",
+      "amount": "Amount",
+      "project": "Project",
+      "units": "Units",
+      "sold": "Sold",
+      "availableValue": "Unsold value",
+      "stage": "Stage",
+      "leads": "Leads",
+      "source": "Source",
+      "seller": "Sold by",
+      "mode": "Paid by",
+      "receipts": "Receipts"
+    },
+    "sales": {
+      "title": "Sales by month",
+      "note": "Contract value of bookings, {from} – {to}",
+      "value": "Sales value"
+    },
+    "collections": {
+      "title": "Money in",
+      "note": "Collected each month, and {amount} due in the next 3 months",
+      "collected": "Collected",
+      "expected": "Expected (due)"
+    },
+    "aging": {
+      "title": "Overdue by age",
+      "note": "{amount} overdue on {n} bookings",
+      "report": "Dues report",
+      "none": "Nothing is overdue.",
+      "buckets": {
+        "d1_30": "1–30 days",
+        "d31_60": "31–60 days",
+        "d61_90": "61–90 days",
+        "d90_plus": "Over 90 days"
+      }
+    },
+    "inventory": {
+      "title": "Stock sold by project",
+      "note": "{sold} of {units} units sold (all time)",
+      "none": "No units yet.",
+      "left": "{amount} unsold"
+    },
+    "pipeline": {
+      "title": "Open leads by stage",
+      "note": "{n} open buyer leads now",
+      "none": "No open lead.",
+      "lostReasons": "Why {n} were lost",
+      "noReason": "No reason"
+    },
+    "leads": {
+      "title": "New leads by source",
+      "note": "{n} new buyer leads in the period",
+      "none": "No new lead in this period."
+    },
+    "sellers": {
+      "title": "Top sellers",
+      "none": "No sale in this period.",
+      "bookings": "{n} bookings"
+    },
+    "modes": {
+      "title": "How buyers paid",
+      "none": "No receipt in this period.",
+      "count": "{n} receipts",
+      "refunds": "Refunds in the period: {amount}"
+    },
+    "portal": {
+      "title": "Customer portal",
+      "clients": "Active logins",
+      "clientsSub": "{invited} invited · {off} off",
+      "slipsPending": "Slips to check",
+      "slipsApproved": "Slips approved",
+      "onlinePaid": "Paid online",
+      "onlineReview": "Held for review"
     }
   }
 }

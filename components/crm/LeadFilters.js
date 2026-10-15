@@ -18,7 +18,7 @@ export function ViewChips({ filters, setFilters }) {
   const current = filters.view ?? "all";
   const views = PRESET_VIEWS.filter((v) => !v.needs || can(v.needs));
   return (
-    <div role="tablist" aria-label={t("label")} className="-mx-1 mb-4 flex gap-1.5 overflow-x-auto px-1 pb-1">
+    <div role="tablist" aria-label={t("label")} className="-mx-1 mb-4 flex gap-1.5 scroll-x px-1 pb-1">
       {views.map((v) => (
         <button
           key={v.key}

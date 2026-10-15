@@ -214,7 +214,7 @@ export function PipelineBoard({ query, onOpen }) {
     const current = columns.find((c) => c.id === tab) ?? columns.find((c) => c.count > 0) ?? columns[0];
     return (
       <div>
-        <div role="tablist" aria-label={t("columns")} className="-mx-4 mb-4 flex gap-1.5 overflow-x-auto px-4 pb-1">
+        <div role="tablist" aria-label={t("columns")} className="-mx-4 mb-4 flex gap-1.5 scroll-x px-4 pb-1">
           {columns.map((c) => (
             <button
               key={c.id}

@@ -26,6 +26,17 @@ const toForm = (s) => ({
   bounceFee: poishaToTaka(s.chequeBounceFee ?? 0),
   receiptEmail: s.notify?.receiptEmail ?? true,
   receiptSms: s.notify?.receiptSms ?? false,
+  // B5.1 customer portal (F6.3)
+  portal: {
+    autoInvite: s.portal?.autoInvite ?? true,
+    autoInviteCoApplicants: s.portal?.autoInviteCoApplicants ?? false,
+    inviteSms: s.portal?.inviteSms ?? true,
+    inviteEmail: s.portal?.inviteEmail ?? true,
+    slipUpload: s.portal?.slipUpload ?? true,
+    onlinePayment: s.portal?.onlinePayment ?? true,
+    resultSms: s.portal?.resultSms ?? true,
+  },
+  onlineMin: poishaToTaka(s.portal?.onlineMinAmount ?? 100_000),
 });
 
 /** Accounts settings (API.md › B4.1 Accounts settings): discount caps, booking money, back-dating, notices. */
@@ -54,6 +65,7 @@ function SettingsForm({ settings }) {
   const [errors, setErrors] = useState({});
   const [busy, setBusy] = useState(false);
   const set = (k) => (v) => setF((o) => ({ ...o, [k]: v?.target ? (v.target.type === "checkbox" ? v.target.checked : v.target.value) : v }));
+  const setPortal = (k) => (e) => setF((o) => ({ ...o, portal: { ...o.portal, [k]: e.target.checked } }));
   const dirty = JSON.stringify(f) !== JSON.stringify(initial);
 
   const save = async (e) => {
@@ -67,6 +79,8 @@ function SettingsForm({ settings }) {
     if (manager == null || manager > 10_000) err.manager = tv("percent");
     if (backdate == null || backdate > 366) err.backdate = tv("days366");
     if (fee == null || fee < 0 || fee > 10_000_000) err.bounceFee = tv("bounceFee");
+    const onlineMin = takaToPoisha(f.onlineMin);
+    if (onlineMin == null || onlineMin < 100 || onlineMin > 100_000_000) err.onlineMin = t("portal.minInvalid");
     setErrors(err);
     if (Object.keys(err).length) return;
     const patch = { version: settings.version };
@@ -77,6 +91,9 @@ function SettingsForm({ settings }) {
     if (backdate !== settings.receiptBackdateDays) patch.receiptBackdateDays = backdate;
     if (fee !== (settings.chequeBounceFee ?? 0)) patch.chequeBounceFee = fee;
     if (f.receiptEmail !== initial.receiptEmail || f.receiptSms !== initial.receiptSms) patch.notify = { receiptEmail: f.receiptEmail, receiptSms: f.receiptSms };
+    const portalPatch = Object.fromEntries(Object.entries(f.portal).filter(([k, v]) => v !== initial.portal[k]));
+    if (onlineMin !== (settings.portal?.onlineMinAmount ?? 100_000)) portalPatch.onlineMinAmount = onlineMin;
+    if (Object.keys(portalPatch).length) patch.portal = portalPatch;
     if (Object.keys(patch).length === 1) return;
     setBusy(true);
     try {
@@ -121,6 +138,23 @@ function SettingsForm({ settings }) {
               <MoneyInput value={f.bounceFee} onChange={set("bounceFee")} />
             </div>
           </Field>
+        </Section>
+
+        <Section title={t("portal.title")} description={t("portal.body")}>
+          <Checkbox label={t("portal.autoInvite")} description={t("portal.autoInviteHint")} checked={f.portal.autoInvite} onChange={setPortal("autoInvite")} />
+          <Checkbox label={t("portal.autoInviteCoApplicants")} description={t("portal.autoInviteCoApplicantsHint")} checked={f.portal.autoInviteCoApplicants} onChange={setPortal("autoInviteCoApplicants")} />
+          <div className="flex flex-wrap gap-x-8 gap-y-3 pl-6">
+            <Checkbox label={t("portal.inviteSms")} checked={f.portal.inviteSms} onChange={setPortal("inviteSms")} />
+            <Checkbox label={t("portal.inviteEmail")} checked={f.portal.inviteEmail} onChange={setPortal("inviteEmail")} />
+          </div>
+          <Checkbox label={t("portal.slipUpload")} description={t("portal.slipUploadHint")} checked={f.portal.slipUpload} onChange={setPortal("slipUpload")} />
+          <Checkbox label={t("portal.onlinePayment")} description={t("portal.onlinePaymentHint")} checked={f.portal.onlinePayment} onChange={setPortal("onlinePayment")} />
+          <Field label={t("portal.onlineMin")} hint={t("portal.onlineMinHint")} error={errors.onlineMin}>
+            <div className="sm:max-w-64">
+              <MoneyInput value={f.onlineMin} onChange={set("onlineMin")} disabled={!f.portal.onlinePayment} />
+            </div>
+          </Field>
+          <Checkbox label={t("portal.resultSms")} checked={f.portal.resultSms} onChange={setPortal("resultSms")} />
         </Section>
 
         <Section title={t("notify.title")} description={t("notify.body")}>

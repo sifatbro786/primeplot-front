@@ -141,7 +141,7 @@ export function ChequesPage() {
   return (
     <div className="mx-auto max-w-7xl">
       <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
-      <nav aria-label={t("viewsLabel")} className="mb-5 flex gap-2 overflow-x-auto pb-1">
+      <nav aria-label={t("viewsLabel")} className="mb-5 flex gap-2 scroll-x pb-1">
         {VIEWS.map((v) => (
           <button
             key={v}

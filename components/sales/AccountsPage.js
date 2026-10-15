@@ -22,7 +22,7 @@ export function AccountsPage() {
   return (
     <div className="mx-auto max-w-6xl">
       <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
-      <nav aria-label={t("tabsLabel")} className="mb-8 flex gap-6 overflow-x-auto border-b border-line">
+      <nav aria-label={t("tabsLabel")} className="mb-8 flex gap-6 scroll-x border-b border-line">
         {TABS.filter((k) => k === "plans" || canBanks).map((k) => (
           <button
             key={k}

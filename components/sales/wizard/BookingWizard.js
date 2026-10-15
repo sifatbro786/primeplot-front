@@ -306,7 +306,7 @@ function Wizard({ initial, locale }) {
   return (
     <div ref={top} className="grid scroll-mt-6 grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
       <nav aria-label={t("stepsLabel")} className="min-w-0 lg:sticky lg:top-6 lg:self-start">
-        <ol className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible">
+        <ol className="flex gap-2 scroll-x pb-1 lg:flex-col lg:gap-1 lg:overflow-visible">
           {STEPS.map((s, i) => {
             const done = i < draft.step;
             const current = i === draft.step;

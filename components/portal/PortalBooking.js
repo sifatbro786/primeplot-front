@@ -136,7 +136,7 @@ function Passbook({ b }) {
       )}
 
       <div>
-        <nav aria-label={t("tabsLabel")} className="mb-5 flex gap-5 overflow-x-auto border-b border-ink/15">
+        <nav aria-label={t("tabsLabel")} className="mb-5 flex gap-5 scroll-x border-b border-ink/15">
           {TABS.map((k) => (
             <button
               key={k}

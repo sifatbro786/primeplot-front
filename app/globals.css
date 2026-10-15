@@ -64,6 +64,18 @@
   color: var(--pp-accent);
 }
 
+/* Horizontal strip that may scroll (tab bars, chip rows): never a vertical scrollbar (a tab's
+   -1px underline would otherwise make overflow-x:auto grow one), and no visible bar — it still
+   scrolls by swipe, trackpad and keyboard focus. */
+@utility scroll-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Faint drafting grid — sections that echo floor-plan / blueprint paper. */
 @utility blueprint {
   background-image:

@@ -88,7 +88,7 @@ export function ProjectShell({ children }) {
         )}
       </header>
 
-      <nav aria-label={t("tabsLabel")} className="mb-8 flex gap-6 overflow-x-auto border-b border-line">
+      <nav aria-label={t("tabsLabel")} className="mb-8 flex gap-6 scroll-x border-b border-line">
         {TABS.map((tab) => {
           const href = `${base}${tab.path}`;
           const active = tab.path ? pathname.startsWith(href) : pathname === href;

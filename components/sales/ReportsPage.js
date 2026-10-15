@@ -48,7 +48,7 @@ export function ReportsPage() {
           </Button>
         }
       />
-      <nav aria-label={t("tabsLabel")} className="mb-6 flex gap-6 overflow-x-auto border-b border-line print:hidden">
+      <nav aria-label={t("tabsLabel")} className="mb-6 flex gap-6 scroll-x border-b border-line print:hidden">
         {TABS.map((k) => (
           <button
             key={k}

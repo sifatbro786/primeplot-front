@@ -30,7 +30,7 @@ export function useReviewError() {
 /** Horizontal view chips (same look as the cheque register). */
 export function ViewChips({ views, value, onChange, label, labelOf }) {
   return (
-    <nav aria-label={label} className="mb-5 flex gap-2 overflow-x-auto pb-1">
+    <nav aria-label={label} className="mb-5 flex gap-2 scroll-x pb-1">
       {views.map((v) => (
         <button
           key={v}

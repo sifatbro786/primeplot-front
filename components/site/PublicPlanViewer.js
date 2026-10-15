@@ -116,7 +116,7 @@ export function PublicPlanViewer({ project, initialPlan }) {
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         {plan.kind === "floor" && plan.floors.length > 1 ? (
-          <div role="group" aria-label={t("floors")} className="flex max-w-full gap-1 overflow-x-auto pb-1">
+          <div role="group" aria-label={t("floors")} className="flex max-w-full gap-1 scroll-x pb-1">
             {plan.floors.map((f) => (
               <button
                 key={f}
