@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowLeft, Copy, Download, ExternalLink, FilePlus2, FileText, Printer } from "lucide-react";
+import { ArrowLeft, Ban, Copy, Download, ExternalLink, FilePlus2, FileText, Printer } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { ReasonDialog } from "@/components/review/parts";
 import { Button } from "@/components/ui/Button";
 import { Segmented } from "@/components/ui/Segmented";
 import { EmptyState, ErrorState, Skeleton } from "@/components/ui/States";
@@ -11,12 +13,12 @@ import { Table, TBody, TD, TH, THead, TR } from "@/components/ui/Table";
 import { Tag } from "@/components/ui/Tag";
 import { toast } from "@/components/ui/Toast";
 import { Link, useRouter } from "@/i18n/navigation";
-import { apiRequest } from "@/lib/api/client";
+import { api, apiRequest } from "@/lib/api/client";
 import { toApiError } from "@/lib/api/errors";
 import { useSession } from "@/lib/auth/session";
 import { useSalesError } from "@/lib/sales/errors";
-import { useDocument, useDocuments, useSalesRefresh } from "@/lib/sales/queries";
-import { useDay } from "./parts";
+import { salesKeys, useDocument, useDocuments, useSalesRefresh } from "@/lib/sales/queries";
+import { useDate, useDay } from "./parts";
 
 const pdfUrl = (id, locale, download) => `/api/v1/documents/${id}/pdf?locale=${locale}${download ? "&download=1" : ""}`;
 
@@ -45,6 +47,50 @@ export function useDownloadPdf() {
 export function DocStatusTag({ doc }) {
   const t = useTranslations("sales.documents");
   return doc.status === "void" ? <Tag tone="danger">{t("void")}</Tag> : <Tag tone="success">{t("valid")}</Tag>;
+}
+
+/**
+ * "Void" for a valid paper (admin, `documents:void`): asks why, voids it (the QR check then says
+ * cancelled, with the reason) and the API issues a corrected copy from today's records when the
+ * paper still applies. `onDone(result)` gets { document, reissued }.
+ */
+export function VoidDocumentButton({ doc, onDone, size = "sm", variant = "ghost", label = true }) {
+  const t = useTranslations("sales.documents");
+  const locale = useLocale();
+  const salesError = useSalesError();
+  const qc = useQueryClient();
+  const { can } = useSession();
+  const [open, setOpen] = useState(false);
+  if (doc.status !== "valid" || !can("documents:void")) return null;
+  const confirm = async (reason) => {
+    try {
+      const r = await api.post(`/documents/${doc.id}/void`, { reason });
+      qc.invalidateQueries({ queryKey: salesKeys.documents(doc.bookingId) });
+      qc.setQueryData(salesKeys.document(doc.id), r.document);
+      setOpen(false);
+      toast.success(r.reissued ? t("voidDoneReissued") : t("voidDone"));
+      onDone?.(r);
+    } catch (err) {
+      throw new Error(salesError(err, locale));
+    }
+  };
+  return (
+    <>
+      <Button size={size} variant={variant} onClick={() => setOpen(true)} aria-label={label ? undefined : t("voidAction")} title={label ? undefined : t("voidAction")}>
+        <Ban aria-hidden className="size-3.5" />
+        {label && t("voidAction")}
+      </Button>
+      <ReasonDialog
+        open={open}
+        title={t("voidTitle", { number: doc.number })}
+        description={doc.type === "statement" ? t("voidBodyStatement") : t("voidBody")}
+        confirm={t("voidConfirm")}
+        hint={t("voidReasonHint")}
+        onClose={() => setOpen(false)}
+        onConfirm={confirm}
+      />
+    </>
+  );
 }
 
 /** Booking › Documents: every issued paper (receipts, letters, statements), newest first. */
@@ -122,6 +168,7 @@ export function DocumentsTab({ booking }) {
                     <Button size="sm" variant="ghost" onClick={() => download(d)} aria-label={t("downloadPdf")}>
                       <Download aria-hidden className="size-4" />
                     </Button>
+                    <VoidDocumentButton doc={d} label={false} />
                   </div>
                 </TD>
               </TR>
@@ -142,6 +189,8 @@ export function DocumentViewer() {
   const day = useDay();
   const salesError = useSalesError();
   const doc = useDocument(id);
+  const date = useDate();
+  const router = useRouter();
   const download = useDownloadPdf();
   const frame = useRef(null);
   const [lang, setLang] = useState(null);
@@ -230,13 +279,22 @@ export function DocumentViewer() {
             <Download aria-hidden className="size-3.5" />
             {t("downloadPdf")}
           </Button>
+          <VoidDocumentButton doc={d} variant="secondary" onDone={(r) => r.reissued && router.push(`/dashboard/documents/${r.reissued.id}`)} />
         </div>
       </header>
 
       {d.status === "void" && (
-        <p role="status" className="mb-4 rounded-md border border-danger/30 bg-danger-bg px-4 py-3 text-sm">
-          {t("voidNote", { reason: d.voidReason ?? "—" })}
-        </p>
+        <div role="status" className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-md border border-danger/30 bg-danger-bg px-4 py-3 text-sm">
+          <p>
+            {t("voidNote", { reason: d.voidReason ?? "—" })}
+            {d.voidedBy?.name && <span className="text-ink-muted"> {t("voidedBy", { name: d.voidedBy.name, date: date(d.voidedAt) })}</span>}
+          </p>
+          {d.replacedBy && (
+            <Button as={Link} href={`/dashboard/documents/${d.replacedBy}`} size="sm" variant="secondary">
+              {t("openReplacement")}
+            </Button>
+          )}
+        </div>
       )}
       <div className="mb-4 flex flex-wrap items-center gap-2 rounded-md border border-line bg-surface px-4 py-2.5 text-xs text-ink-muted">
         <span>{t("verifyLink")}</span>

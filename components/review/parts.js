@@ -50,7 +50,7 @@ export function ViewChips({ views, value, onChange, label, labelOf }) {
 }
 
 /** "Why?" dialog for rejections — the reason goes to the client by SMS / e-mail. */
-export function ReasonDialog({ open, title, description, confirm, onClose, onConfirm }) {
+export function ReasonDialog({ open, title, description, confirm, hint, onClose, onConfirm }) {
   const t = useTranslations("review");
   const [reason, setReason] = useState("");
   const [busy, setBusy] = useState(false);
@@ -85,7 +85,7 @@ export function ReasonDialog({ open, title, description, confirm, onClose, onCon
         </>
       }
     >
-      <Field label={t("reason")} hint={t("reasonHint")} error={error}>
+      <Field label={t("reason")} hint={hint ?? t("reasonHint")} error={error}>
         <Textarea rows={3} value={reason} onChange={(e) => setReason(e.target.value)} maxLength={500} autoFocus />
       </Field>
     </Dialog>

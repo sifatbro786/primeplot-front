@@ -1841,7 +1841,8 @@
       },
       "void": {
         "title": "This document is void",
-        "body": "It was issued by the company but later cancelled: {reason}. Do not accept it."
+        "body": "It was issued by the company but later cancelled: {reason}. Do not accept it.",
+        "replaced": "A corrected copy of this document was issued. Ask the holder for the newer paper and check its QR code."
       },
       "unknown": {
         "title": "No such document",
@@ -3036,7 +3037,8 @@
       "BOOKING_NOT_CANCELLED": "Refunds are only for cancelled bookings.",
       "REFUND_EXCEEDS_DUE": "That is more than the refund due ({refundDue}).",
       "PDF_UNAVAILABLE": "PDF printing is not available on the server right now (Chrome missing). Use Print instead.",
-      "PROJECT_CODE_LOCKED": "Numbers were already issued with this code — it can no longer change."
+      "PROJECT_CODE_LOCKED": "Numbers were already issued with this code — it can no longer change.",
+      "DOCUMENT_ALREADY_VOID": "This document is already void."
     },
     "validation": {
       "amount": "Enter an amount in taka (up to 2 decimals).",
@@ -3958,7 +3960,17 @@
       "voidNote": "This document is void: {reason}. It verifies as invalid.",
       "verifyLink": "QR / verification link",
       "copy": "Copy",
-      "copied": "Link copied."
+      "copied": "Link copied.",
+      "voidAction": "Void",
+      "voidTitle": "Void {number}?",
+      "voidBody": "The QR check will show this paper as cancelled, with your reason. Correct the customer or booking details first — a corrected copy is then issued right away from today's records. Money stays as it is: to undo a payment, reverse the receipt instead.",
+      "voidBodyStatement": "The QR check will show this statement as cancelled, with your reason. Issue a new statement afterwards if needed.",
+      "voidConfirm": "Void document",
+      "voidDone": "Document voided.",
+      "voidDoneReissued": "Document voided — a corrected copy was issued.",
+      "voidedBy": "(by {name}, {date})",
+      "openReplacement": "Open corrected copy",
+      "voidReasonHint": "Shown on the public QR check and kept in the audit log. At least 5 characters."
     },
     "reports": {
       "eyebrow": "Accounts",
@@ -4382,7 +4394,9 @@
       "NOTHING_DUE": "Nothing is due on this booking.",
       "GATEWAY_ERROR": "SSLCommerz did not answer. Try again shortly.",
       "BOOKING_NOT_ACTIVE": "The booking is no longer active.",
-      "SLIP_DATE_FUTURE": "The payment date can't be in the future."
+      "SLIP_DATE_FUTURE": "The payment date can't be in the future.",
+      "REMINDER_TEXT_TOO_LONG": "A reminder text is longer than 6 SMS with long values — shorten it.",
+      "UNKNOWN_PLACEHOLDER": "A text uses a placeholder that doesn't exist. Use only the ones listed above."
     },
     "cancel": "Cancel",
     "reason": "Reason",
@@ -4627,7 +4641,8 @@
       "tabs": {
         "today": "Today",
         "log": "Delivery log",
-        "rules": "Rules"
+        "rules": "Rules",
+        "texts": "Message text"
       },
       "loadFailed": "Couldn't load the reminders.",
       "loadMore": "Load more",
@@ -4698,14 +4713,54 @@
         "active": "On",
         "remove": "Remove this rule",
         "add": "Add a reminder day",
-        "note": "Several installments due on the same day are summed into one message. A reminder still goes up to 2 days late if a run was missed, never after the next rule's day. Message texts are fixed BN/EN templates in the buyer's language.",
+        "note": "Several installments due on the same day are summed into one message. A reminder still goes up to 2 days late if a run was missed, never after the next rule's day. The SMS wording is set under \"Message text\".",
         "badDays": "Enter whole days.",
         "range": "Between 60 days before and 120 days after.",
         "duplicate": "Two reminders on the same day.",
         "saved": "Reminder rules saved",
         "unsaved": "Unsaved changes",
         "discard": "Discard",
-        "readOnly": "Only managers and admins change the reminder rules."
+        "readOnly": "Only managers and admins change the reminder rules.",
+        "coApplicants": "Remind co-applicants too",
+        "coApplicantsHint": "Joint buyers get the same message in their own language. A phone or e-mail already used for the holder is not messaged twice."
+      },
+      "withCo": "also to {names}",
+      "texts": {
+        "intro": "Write the SMS in your own words, in Bangla and English — each buyer gets their own language. Leave a box empty to keep the built-in text (shown in grey). The e-mail keeps its standard layout.",
+        "tokens": {
+          "name": "buyer's first name",
+          "amount": "amount due (taka)",
+          "date": "due date",
+          "unit": "unit and project",
+          "company": "your company name",
+          "link": "booking in the customer portal"
+        },
+        "kinds": {
+          "upcoming": {
+            "title": "Before the due date",
+            "when": "rules counted in days before"
+          },
+          "today": {
+            "title": "On the due date",
+            "when": "the due day itself"
+          },
+          "overdue": {
+            "title": "Overdue",
+            "when": "rules after the due date, and late \"Remind now\""
+          }
+        },
+        "builtIn": "Built-in text",
+        "useBuiltIn": "Use built-in text",
+        "insert": "Insert:",
+        "preview": "Preview with sample values",
+        "length": "{chars} characters · {segments} SMS (max {max})",
+        "cost": "≈ ৳{taka} each",
+        "tooLong": "too long — shorten it",
+        "unknown": "unknown {list}",
+        "tooShort": "At least 10 characters, or leave it empty.",
+        "fix": "Some texts need a fix.",
+        "note": "The preview uses a long name, unit and amount, so real messages are usually shorter. Every SMS segment is charged by your SMS provider.",
+        "saved": "Reminder texts saved"
       }
     }
   },

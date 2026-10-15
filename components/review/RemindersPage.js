@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { BellRing, Mail, MessageSquare, Plus, Send, Trash2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { BellRing, Mail, MessageSquare, Plus, RotateCcw, Send, Trash2, Users } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
 import { FormAlert } from "@/components/auth/AuthParts";
@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/Button";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Dialog } from "@/components/ui/Dialog";
 import { Field } from "@/components/ui/Field";
-import { Input } from "@/components/ui/Input";
+import { Input, Textarea } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { EmptyState, ErrorState, Skeleton } from "@/components/ui/States";
 import { Table, TBody, TD, TH, THead, TR } from "@/components/ui/Table";
@@ -22,12 +22,14 @@ import { api } from "@/lib/api/client";
 import { useSession } from "@/lib/auth/session";
 import { cn } from "@/lib/cn";
 import { formatNumber } from "@/lib/format";
+import { useDebounced } from "@/lib/hooks/useDebounced";
 import { reminderKeys, useReminderLog, useReminderPreview } from "@/lib/review/queries";
+import { fieldErrorsOf } from "@/lib/sales/errors";
 import { salesKeys, useAccountSettings } from "@/lib/sales/queries";
 import { useSearchState } from "@/lib/sales/url";
 import { useReviewError } from "./parts";
 
-const TABS = ["today", "log", "rules"];
+const TABS = ["today", "log", "rules", "texts"];
 const MAX_RULES = 8;
 
 /** offsetDays → stable rule key (the API's dedupe key: one message per booking/rule/due date). */
@@ -87,6 +89,7 @@ export function RemindersPage() {
       {tab === "today" && <Today />}
       {tab === "log" && <Log rules={r?.rules ?? []} />}
       {tab === "rules" && <Rules settings={settings} />}
+      {tab === "texts" && <Texts settings={settings} />}
     </div>
   );
 }
@@ -182,6 +185,7 @@ function Today() {
               <TR key={`${i.bookingId}:${i.rule}:${i.dueDate}`}>
                 <TD>
                   <span className="text-sm font-medium">{i.customer?.name ?? "—"}</span>
+                  <CoApplicants people={i.coApplicants} />
                   <Link href={`/dashboard/bookings/${i.bookingId}`} className="block font-mono text-[11px] text-ink-subtle hover:underline">
                     {i.bookingNo} · {i.unitCode}
                   </Link>
@@ -232,6 +236,25 @@ function Stat({ label, value, mono, warn }) {
 }
 
 const DELIVERY_TONE = { queued: "success", skipped: "warning", off: "neutral" };
+
+/** "+ Farzana Alam" — joint buyers who get the same reminder (setting `coApplicants`). */
+function CoApplicants({ people }) {
+  const t = useTranslations("review.reminders");
+  if (!people?.length) return null;
+  const title = people
+    .map((p) => {
+      const sms = p.sms?.status ?? (p.channels?.sms ? "queued" : "off");
+      const email = p.email?.status ?? (p.channels?.email ? "queued" : "off");
+      return `${p.name} — SMS: ${t(`delivery.${sms}`)}, ${t("email")}: ${t(`delivery.${email}`)}`;
+    })
+    .join("\n");
+  return (
+    <span className="flex items-center gap-1 text-[11px] text-ink-muted" title={title}>
+      <Users aria-hidden className="size-3" />
+      {t("withCo", { names: people.map((p) => p.name).join(", ") })}
+    </span>
+  );
+}
 
 function Delivery({ c, kind }) {
   const t = useTranslations("review.reminders.delivery");
@@ -300,6 +323,7 @@ function Log({ rules }) {
                   </TD>
                   <TD>
                     <span className="text-sm font-medium">{r.customer?.name ?? "—"}</span>
+                    <CoApplicants people={r.coApplicants} />
                     <Link href={`/dashboard/bookings/${r.bookingId}`} className="block font-mono text-[11px] text-ink-subtle hover:underline">
                       {r.bookingNo} · {r.unitCode}
                     </Link>
@@ -354,7 +378,7 @@ function RulesForm({ s }) {
   const reviewError = useReviewError();
   const { can } = useSession();
   const editable = can("reminders:manage", "accounts:settings");
-  const initial = { enabled: s.reminders.enabled, sendHour: s.reminders.sendHour, rows: toRows(s.reminders.rules) };
+  const initial = { enabled: s.reminders.enabled, sendHour: s.reminders.sendHour, coApplicants: Boolean(s.reminders.coApplicants), rows: toRows(s.reminders.rules) };
   const [f, setF] = useState(initial);
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -381,7 +405,7 @@ function RulesForm({ s }) {
     setBusy(true);
     try {
       const rules = f.rows.map((r) => ({ key: ruleKeyOf(offsetOf(r)), offsetDays: offsetOf(r), enabled: r.enabled, sms: r.sms, email: r.email })).sort((a, b) => a.offsetDays - b.offsetDays);
-      const saved = await api.patch("/accounts/settings", { version: s.version, reminders: { enabled: f.enabled, sendHour: Number(f.sendHour), rules } });
+      const saved = await api.patch("/accounts/settings", { version: s.version, reminders: { enabled: f.enabled, sendHour: Number(f.sendHour), coApplicants: f.coApplicants, rules } });
       qc.setQueryData(salesKeys.settings, saved);
       qc.invalidateQueries({ queryKey: reminderKeys.preview });
       toast.success(t("rules.saved"));
@@ -417,6 +441,12 @@ function RulesForm({ s }) {
               ))}
             </Select>
           </Field>
+          <Checkbox
+            label={t("rules.coApplicants")}
+            description={t("rules.coApplicantsHint")}
+            checked={f.coApplicants}
+            onChange={(e) => setF((o) => ({ ...o, coApplicants: e.target.checked }))}
+          />
         </div>
 
         <div>
@@ -504,5 +534,192 @@ function RuleTimeline({ rows }) {
       </div>
       <figcaption className="mt-2 text-xs text-ink-muted">{t("rules.timelineNote")}</figcaption>
     </figure>
+  );
+}
+
+// ── Message texts (owner request 2026-10-16) ───────────────────────────────────
+
+const KINDS = ["upcoming", "today", "overdue"];
+const LANGS = [
+  ["bn", "বাংলা"],
+  ["en", "English"],
+];
+const TOKENS = ["{name}", "{amount}", "{date}", "{unit}", "{company}", "{link}"];
+const KIND_DOT = { upcoming: "bg-info", today: "bg-warning", overdue: "bg-danger" };
+
+function Texts({ settings }) {
+  const t = useTranslations("review.reminders");
+  const tc = useTranslations("common");
+  const reviewError = useReviewError();
+  if (settings.isError) return <ErrorState title={t("loadFailed")} description={reviewError(settings.error)} requestId={settings.error?.requestId} requestIdLabel={tc("requestId")} />;
+  if (settings.isPending) return <Skeleton className="h-80 w-full" />;
+  return <TextsForm key={settings.data.version} s={settings.data} />;
+}
+
+const textsOf = (s) => Object.fromEntries(KINDS.map((k) => [k, { bn: s.reminders.texts?.[k]?.bn ?? "", en: s.reminders.texts?.[k]?.en ?? "" }]));
+
+/** Own SMS text per kind and language; empty = the built-in text (shown as the placeholder). */
+function TextsForm({ s }) {
+  const t = useTranslations("review.reminders");
+  const tc = useTranslations("common");
+  const qc = useQueryClient();
+  const reviewError = useReviewError();
+  const { can } = useSession();
+  const editable = can("reminders:manage", "accounts:settings");
+  const defaults = s.reminders.defaultTexts ?? {};
+  const initial = textsOf(s);
+  const [f, setF] = useState(initial);
+  const [error, setError] = useState(null);
+  const [fieldErr, setFieldErr] = useState({});
+  const [busy, setBusy] = useState(false);
+  const dirty = JSON.stringify(f) !== JSON.stringify(initial);
+  const set = (k, l, v) => {
+    setF((o) => ({ ...o, [k]: { ...o[k], [l]: v } }));
+    setFieldErr((e) => ({ ...e, [`${k}.${l}`]: undefined }));
+  };
+  const insert = (k, l, token) => {
+    const cur = f[k][l] || defaults[k]?.[l] || "";
+    set(k, l, `${cur}${cur.endsWith(" ") || !cur ? "" : " "}${token}`);
+  };
+
+  const save = async (e) => {
+    e.preventDefault();
+    const local = {};
+    for (const k of KINDS) for (const [l] of LANGS) if (f[k][l].trim() && f[k][l].trim().length < 10) local[`${k}.${l}`] = t("texts.tooShort");
+    if (Object.keys(local).length) return (setFieldErr(local), setError(t("texts.fix")));
+    setError(null);
+    setBusy(true);
+    try {
+      const texts = Object.fromEntries(KINDS.map((k) => [k, { bn: f[k].bn.trim() || null, en: f[k].en.trim() || null }]));
+      const saved = await api.patch("/accounts/settings", { version: s.version, reminders: { texts } });
+      qc.setQueryData(salesKeys.settings, saved);
+      toast.success(t("texts.saved"));
+    } catch (err) {
+      if (err?.code === "STALE_VERSION") qc.invalidateQueries({ queryKey: salesKeys.settings });
+      // details[].path = "reminders.texts.overdue.bn" → "overdue.bn"
+      setFieldErr(Object.fromEntries(Object.entries(fieldErrorsOf(err)).map(([p, m]) => [p.replace(/^.*texts\./, ""), m])));
+      setError(reviewError(err));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <form onSubmit={save} noValidate className="space-y-8">
+      <FormAlert>{error}</FormAlert>
+      {!editable && <p className="rounded-md bg-surface-2 px-4 py-3 text-sm text-ink-muted">{t("rules.readOnly")}</p>}
+      <div className="grid gap-4 rounded-lg border border-line bg-surface p-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <p className="text-sm leading-relaxed text-ink-muted">{t("texts.intro")}</p>
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-2 text-xs sm:grid-cols-3">
+          {TOKENS.map((tok) => (
+            <div key={tok}>
+              <dt className="font-mono text-[11px] text-ink">{tok}</dt>
+              <dd className="text-ink-muted">{t(`texts.tokens.${tok.slice(1, -1)}`)}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <fieldset disabled={!editable || busy} className="space-y-6">
+        {KINDS.map((k) => (
+          <section key={k} aria-labelledby={`rt-${k}`} className="rounded-lg border border-line bg-surface">
+            <header className="flex items-center gap-2.5 border-b border-line px-5 py-3.5">
+              <span aria-hidden className={cn("size-2 rounded-full", KIND_DOT[k])} />
+              <h3 id={`rt-${k}`} className="text-sm font-semibold">
+                {t(`texts.kinds.${k}.title`)}
+              </h3>
+              <span className="text-xs text-ink-muted">· {t(`texts.kinds.${k}.when`)}</span>
+            </header>
+            <div className="grid gap-6 p-5 lg:grid-cols-2">
+              {LANGS.map(([l, langLabel]) => {
+                const own = f[k][l].trim().length > 0;
+                return (
+                  <div key={l} className="space-y-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-medium tracking-wide text-ink-muted uppercase">{langLabel}</span>
+                      {own ? (
+                        <button type="button" onClick={() => set(k, l, "")} className="inline-flex items-center gap-1 text-xs text-ink-muted hover:text-ink">
+                          <RotateCcw aria-hidden className="size-3" />
+                          {t("texts.useBuiltIn")}
+                        </button>
+                      ) : (
+                        <Tag tone="neutral">{t("texts.builtIn")}</Tag>
+                      )}
+                    </div>
+                    <Field label={<span className="sr-only">{`${t(`texts.kinds.${k}.title`)} — ${langLabel}`}</span>} error={fieldErr[`${k}.${l}`]}>
+                      <Textarea rows={4} maxLength={480} lang={l} value={f[k][l]} placeholder={defaults[k]?.[l] ?? ""} onChange={(e) => set(k, l, e.target.value)} />
+                    </Field>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="text-xs text-ink-muted">{t("texts.insert")}</span>
+                      {TOKENS.map((tok) => (
+                        <button
+                          key={tok}
+                          type="button"
+                          onClick={() => insert(k, l, tok)}
+                          className="h-6 rounded-sm border border-line bg-surface px-1.5 font-mono text-[11px] hover:border-line-strong disabled:opacity-50"
+                        >
+                          {tok}
+                        </button>
+                      ))}
+                    </div>
+                    <ReminderSmsPreview kind={k} locale={l} text={f[k][l]} />
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+        <p className="text-xs leading-relaxed text-ink-muted">{t("texts.note")}</p>
+      </fieldset>
+
+      {editable && dirty && (
+        <div className="toast-in sticky bottom-4 z-20 mx-auto flex max-w-xl items-center justify-between gap-3 rounded-lg border border-primary bg-primary px-4 py-3 text-primary-ink">
+          <span className="text-sm">{t("rules.unsaved")}</span>
+          <div className="flex gap-2">
+            <Button size="sm" variant="ghost" className="text-primary-ink hover:bg-white/10" onClick={() => (setF(initial), setError(null), setFieldErr({}))}>
+              {t("rules.discard")}
+            </Button>
+            <Button size="sm" variant="accent" type="submit" loading={busy}>
+              {tc("save")}
+            </Button>
+          </div>
+        </div>
+      )}
+    </form>
+  );
+}
+
+/** The text filled with sample values + its SMS length and cost (POST /reminders/sms-preview). */
+function ReminderSmsPreview({ kind, locale, text }) {
+  const t = useTranslations("review.reminders.texts");
+  const ui = useLocale();
+  const settle = useDebounced(text, 400);
+  const [p, setP] = useState(null);
+  useEffect(() => {
+    let alive = true;
+    api
+      .post("/reminders/sms-preview", { kind, locale, text: settle })
+      .then((r) => alive && setP(r))
+      .catch(() => alive && setP(null));
+    return () => {
+      alive = false;
+    };
+  }, [kind, locale, settle]);
+  if (!p) return null;
+  const n = (v) => formatNumber(v, ui);
+  const tooLong = p.segments > p.maxSegments;
+  return (
+    <div className="rounded-md border border-dashed border-line-strong/60 bg-surface-2 px-3 py-2.5">
+      <p className="text-[11px] tracking-wide text-ink-subtle uppercase">{t("preview")}</p>
+      <p lang={locale} className="mt-1 text-sm break-words whitespace-pre-line">
+        {p.rendered}
+      </p>
+      <p className={cn("mt-2 text-xs", tooLong || p.unknown?.length ? "font-semibold text-danger" : "text-ink-muted")}>
+        {t("length", { chars: n(p.chars), segments: n(p.segments), max: n(p.maxSegments) })}
+        {p.costPoisha != null && ` · ${t("cost", { taka: n(p.costPoisha / 100) })}`}
+        {tooLong && ` · ${t("tooLong")}`}
+        {p.unknown?.length > 0 && ` · ${t("unknown", { list: p.unknown.map((x) => `{${x}}`).join(", ") })}`}
+      </p>
+    </div>
   );
 }

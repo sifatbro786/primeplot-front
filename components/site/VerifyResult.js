@@ -37,6 +37,7 @@ export async function VerifyResult({ params }) {
           <div>
             <h1 className="font-display text-3xl leading-tight">{t(`${state}.title`)}</h1>
             <p className="mt-2 text-sm leading-relaxed text-ink-muted">{state === "void" ? t("void.body", { reason: r.voidReason ?? "—" }) : t(`${state}.body`)}</p>
+            {state === "void" && r.replaced && <p className="mt-3 rounded-md bg-warning-bg px-3 py-2 text-sm leading-relaxed text-ink">{t("void.replaced")}</p>}
           </div>
         </div>
 
